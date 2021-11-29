@@ -22,7 +22,7 @@ public class ConfigDiagramm {
     /**
      * setzt neue Anzahl der Felder.
      *
-     * @param amountAreas neue Anzahl der Felder
+     * @param amountAreas - neue Anzahl der Felder
      * @return
      *         true, falls neue Anzahl erfolgreich gesetzt wurde;
      *         false, falls neue Anzahl nicht gesetzt wurde
@@ -48,8 +48,8 @@ public class ConfigDiagramm {
     /**
      * setzt neue minimale und maximale Zeit.
      *
-     * @param minTime neue minimale Zeit
-     * @param maxTime neue maximale Zeit
+     * @param minTime - neue minimale Zeit
+     * @param maxTime - neue maximale Zeit
      * @return
      *         true, falls neue min. und max. Zeit erfolgreich gesetzt wurden;
      *         false, falls neue min. und max. Zeit nicht gesetzt wurden
@@ -88,7 +88,7 @@ public class ConfigDiagramm {
     /**
      * setzt neue Anzahl an Zwischenschritten.
      *
-     * @param stepsBetween neue Anzahl Zwischenschritte
+     * @param stepsBetween - neue Anzahl Zwischenschritte
      * @return
      *         true, falls neue Anzahl an Zwischenschritten erfolgreich gesetzt
      *         wurde;

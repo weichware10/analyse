@@ -26,7 +26,7 @@ public class ConfigHeatmap {
     /**
      * setzt neue minimale Farbe.
      *
-     * @param minColor neue minimale Farbe
+     * @param minColor - neue minimale Farbe
      * @return
      *         true, falls neue minimale Farbe erfolgreich gesetzt wird;
      *         false, falls neue minimale Farbe nicht gesetzt wird
@@ -53,7 +53,7 @@ public class ConfigHeatmap {
     /**
      * setzt neue maximale Farbe.
      *
-     * @param maxColor neue maximale Farbe
+     * @param maxColor - neue maximale Farbe
      * @return
      *         true, falls neue maximale Farbe erfolgreich gesetzt wird;
      *         false, falls neue maximale Farbe nicht gesetzt wird
@@ -80,7 +80,7 @@ public class ConfigHeatmap {
     /**
      * aktiviert bzw. deaktiviert die Anzeige des Rasters.
      *
-     * @param grid Anzeige Raster aktivieren bzw. deaktivieren
+     * @param grid - Anzeige Raster aktivieren bzw. deaktivieren
      */
     public void setGrid(boolean grid) {
         this.grid = grid;
@@ -98,7 +98,7 @@ public class ConfigHeatmap {
     /**
      * aktiviert bzw. deaktiviert die Anzeige des Bildes.
      *
-     * @param image Anzeige Bild aktivieren bzw. deaktivieren
+     * @param image - Anzeige Bild aktivieren bzw. deaktivieren
      */
     public void setImage(boolean image) {
         this.image = image;
@@ -116,7 +116,7 @@ public class ConfigHeatmap {
     /**
      * setzt neue minimale Farbe für Vergleich.
      *
-     * @param minDiff neue minimale Farbe für Vergleich
+     * @param minDiff - neue minimale Farbe für Vergleich
      * @return
      *         true, falls neue minimale Farbe für Vergleich erfolgreich gesetzt
      *         wird;
@@ -144,7 +144,7 @@ public class ConfigHeatmap {
     /**
      * setzt neue maximale Farbe für Vergleich.
      *
-     * @param maxDiff neue maximale Farbe für Vergleich
+     * @param maxDiff - neue maximale Farbe für Vergleich
      * @return
      *         true, falls neue maximale Farbe für Vergleich erfolgreich gesetzt
      *         wird;

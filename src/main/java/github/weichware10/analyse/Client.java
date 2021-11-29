@@ -25,7 +25,7 @@ public class Client {
     /**
      * setzt die ausgewählten Analyse-Typen.
      *
-     * @param selectedAnalyseTypes die ausgewählten Analyse-Typen
+     * @param selectedAnalyseTypes - die ausgewählten Analyse-Typen
      * @return
      *         true, falls Analyse-Typen gesetzt wurden;
      *         false, falls keine Analyse-Typen gesetzt wurden
@@ -46,9 +46,9 @@ public class Client {
     /**
      * holt die angeforderten Daten vom Speichermedium, falls diese existieren.
      *
-     * @param start    Startzeitpunkt der benötigten Daten
-     * @param end      Endzeitpunkt der benötigten Daten
-     * @param dataType Tool-Typ der benötigten Daten
+     * @param start    - Startzeitpunkt der benötigten Daten
+     * @param end      - Endzeitpunkt der benötigten Daten
+     * @param dataType - Tool-Typ der benötigten Daten
      * @return
      *         true, falls benötigte Daten gefunden und gesetzt wurden;
      *         false, falls benötigte Daten nicht gefunden wurden
@@ -60,7 +60,7 @@ public class Client {
     /**
      * verändert die Standard-Konfiguration für die Heatmap-Analyse.
      *
-     * @param confHm Konfiguration der Heatmap-Analyse
+     * @param confHm - Konfiguration der Heatmap-Analyse
      */
     public void setConfigAnalyseHm(ConfigHeatmap confHm) {
         this.confHm = confHm;
@@ -69,7 +69,7 @@ public class Client {
     /**
      * verändert die Standard-Konfiguration für die Diagramm-Analyse.
      *
-     * @param confDia Konfiguration der Diagramm-Analyse
+     * @param confDia - Konfiguration der Diagramm-Analyse
      */
     public void setConfigAnalyseDia(ConfigDiagramm confDia) {
         this.confDia = confDia;
