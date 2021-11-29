@@ -5,8 +5,8 @@ package github.weichware10.analyse;
  */
 public class ConfigDiagramm {
     private int amountAreas; // * 2,4,6,8
-    private float minTime; // * >= 0s
-    private float maxTime; // * <= 10s
+    private float minTime; // * >= 0 Länge | Zoomstufe
+    private float maxTime; // * <= 10 Länge | Zoomstufe
     private int stepsBetween; // * [1,10], minTime=maxTime: steps = 0
 
     /**
