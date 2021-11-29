@@ -1,6 +1,8 @@
 package github.weichware10.analyse;
 
 import github.weichware10.util.Data;
+
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +30,7 @@ public class Diagramm extends Analyse {
      * @return Pfad des Bildes des erstellten Diagramms
      */
     public String createRelFreqImgArea() {
-        return null;
+        return drawDiagramm(null, DiagrammType.RELFRQIMGAREA);
     }
 
     /**
@@ -38,7 +40,7 @@ public class Diagramm extends Analyse {
      * @return Pfad des Bildes des erstellten Diagramms
      */
     public String createViewTimeDistr() {
-        return null;
+        return drawDiagramm(null, DiagrammType.VIEWTIMEDISTR);
     }
 
     /**
@@ -60,7 +62,8 @@ public class Diagramm extends Analyse {
      * @return Pfad des Bildes des erstellten Diagramms
      */
     private String drawDiagramm(List<Float> diagrammData, DiagrammType type) {
-        return null;
+        return ".../diagramm/" + type + "_" + this.data.tooltype.toString()
+            + "_" + this.data.configId + ".jpg";
     }
 
 }

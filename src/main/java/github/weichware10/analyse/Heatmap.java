@@ -29,7 +29,8 @@ public class Heatmap extends Analyse {
      * @return Pfad des Bildes der erstellten Heatmap
      */
     public String createHeatmap() {
-        return null;
+        return ".../heatmap/HEATMAP_" + this.data.tooltype.toString()
+            + "_" + this.data.configId + ".jpg";
     }
 
     /**
@@ -40,6 +41,8 @@ public class Heatmap extends Analyse {
      * @return Pfad des Bildes der erstellten Heatmap
      */
     public static String compHeatmaps(Heatmap heatmap1, Heatmap heatmap2) {
-        return null;
+        return ".../heatmap/COMPHEATMAP_" + heatmap1.data.tooltype.toString()
+            + "_" + heatmap1.data.configId + "_" + heatmap2.data.tooltype.toString()
+            + "_" + heatmap2.data.configId + ".jpg";
     }
 }

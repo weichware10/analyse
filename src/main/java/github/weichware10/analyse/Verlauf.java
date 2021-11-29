@@ -25,7 +25,7 @@ public class Verlauf extends Analyse {
      * @return Pfad des Bildes des erstellten Diagramms
      */
     public String createVerlauf() {
-        return null;
+        return drawDiagramm(null);
     }
 
     /**
@@ -35,7 +35,8 @@ public class Verlauf extends Analyse {
      * @return Pfad des Bildes des erstellten Diagramms
      */
     private String drawDiagramm(List<List<Float>> diagrammData) {
-        return null;
+        return ".../verlauf/VERLAUF_" + this.data.tooltype.toString()
+            + "_" + this.data.configId + ".jpg";
     }
 
 }
