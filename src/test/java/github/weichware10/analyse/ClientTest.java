@@ -114,6 +114,55 @@ public class ClientTest {
                 DateTime.now().plusMinutes(10), ToolType.EYETRACKING));
     }
 
+    /**
+     * Testet, ob Daten gesetzt werden.
+     */
+    @Test
+    public void dataForCompShouldBeSet() {
+        // * Korrekte Zeiteingabe und Daten zu Tool-Typ vorhanden
+        Client client1 = new Client();
+        assertTrue("getDataForComp sollte True zurückgeben", client1.getDataForComp(
+                new DateTime(2021, 11, 28, 16, 0, 0),
+                new DateTime(2021, 11, 28, 19, 0, 0)));
+
+        Client client2 = new Client();
+        assertTrue("getDataForComp sollte True zurückgeben", client2.getDataForComp(
+                new DateTime(2021, 11, 28, 15, 0, 0),
+                new DateTime(2021, 11, 28, 18, 0, 0)));
+
+        Client client3 = new Client();
+        assertTrue("getDataForComp sollte True zurückgeben", client3.getDataForComp(
+                new DateTime(2021, 11, 28, 19, 0, 0),
+                new DateTime(2021, 11, 28, 20, 0, 0)));
+
+        // * Falsche Zeiteingabe
+        Client client7 = new Client();
+        assertFalse("getDataForComp sollte False zurückgeben", client7.getDataForComp(
+                new DateTime(2021, 11, 28, 18, 0, 0),
+                new DateTime(2021, 11, 28, 17, 0, 0)));
+
+        Client client8 = new Client();
+        assertFalse("getDataForComp sollte False zurückgeben", client8.getDataForComp(
+                new DateTime(2021, 11, 28, 18, 0, 0),
+                new DateTime(2021, 11, 28, 17, 0, 0)));
+
+        Client client9 = new Client();
+        assertFalse("getDataForComp sollte False zurückgeben", client9.getDataForComp(
+                new DateTime(2021, 11, 28, 18, 0, 0),
+                new DateTime(2021, 11, 28, 17, 0, 0)));
+
+        // * Zeitpunkt in der Zunkunft
+        Client client10 = new Client();
+        assertFalse("getDataForComp sollte False zurückgeben", client10.getDataForComp(
+                new DateTime(2021, 11, 28, 18, 0, 0),
+                DateTime.now().plusMinutes(5)));
+
+        Client client11 = new Client();
+        assertFalse("getDataForComp sollte False zurückgeben", client11.getDataForComp(
+                DateTime.now().plusMinutes(5),
+                DateTime.now().plusMinutes(10)));
+    }
+
     // ? Woher kommen Daten für den Export?
     /**
      * Testet, ob Export der analysierten Daten funktioniert.

@@ -84,6 +84,24 @@ public class Client {
     }
 
     /**
+     * holt die angeforderten Daten zum Vergleich vom Speichermedium, falls diese
+     * existieren.
+     *
+     * @param start - Startzeitpunkt der benötigten Daten zum Vergleich
+     * @param end   - Endzeitpunkt der benötigten Daten zum Vergleich
+     * @return
+     *         true, falls benötigte Daten zum Vergleich gefunden und gesetzt
+     *         wurden;
+     *         false, falls benötigte Daten zum Vergleich nicht gefunden wurden
+     */
+    public boolean getDataForComp(DateTime start, DateTime end) {
+        if (start.isAfter(end) || start.isAfter(DateTime.now()) || end.isAfter(DateTime.now())) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * verändert die Standard-Konfiguration für die Heatmap-Analyse.
      *
      * @param confHm - Konfiguration der Heatmap-Analyse
