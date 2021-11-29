@@ -51,8 +51,8 @@ public class Client {
     /**
      * holt die angeforderten Daten vom Speichermedium, falls diese existieren.
      *
-     * @param start - Startzeitpunkt der benötigten Daten
-     * @param end - Endzeitpunkt der benötigten Daten
+     * @param start    - Startzeitpunkt der benötigten Daten
+     * @param end      - Endzeitpunkt der benötigten Daten
      * @param dataType - Tool-Typ der benötigten Daten
      * @return
      *         true, falls benötigte Daten gefunden und gesetzt wurden;
@@ -66,17 +66,17 @@ public class Client {
         // * Provisorische Lösung für Test, da er sonst nicht funktionieren würde
         int amountData = 3;
         List<DateTime> dataStart = new ArrayList<DateTime>(Arrays.asList(
-            new DateTime(2021, 11, 28, 16, 0, 0), new DateTime(2021, 11, 28, 15, 0, 0),
-            new DateTime(2021, 11, 28, 19, 0, 0)));
+                new DateTime(2021, 11, 28, 16, 0, 0), new DateTime(2021, 11, 28, 15, 0, 0),
+                new DateTime(2021, 11, 28, 19, 0, 0)));
         List<DateTime> dataEnd = new ArrayList<DateTime>(Arrays.asList(
-            new DateTime(2021, 11, 28, 19, 0, 0), new DateTime(2021, 11, 28, 18, 0, 0),
-            new DateTime(2021, 11, 28, 20, 0, 0)));
+                new DateTime(2021, 11, 28, 19, 0, 0), new DateTime(2021, 11, 28, 18, 0, 0),
+                new DateTime(2021, 11, 28, 20, 0, 0)));
         List<ToolType> dataToolType = new ArrayList<ToolType>(Arrays.asList(
-            ToolType.ZOOM, ToolType.EYETRACKING, ToolType.CODECHARTS));
+                ToolType.ZOOM, ToolType.EYETRACKING, ToolType.CODECHARTS));
 
         for (int id = 0; id < amountData; id++) {
             if (dataStart.get(id).equals(start) && dataEnd.get(id).equals(end)
-                && dataToolType.get(id).equals(dataType)) {
+                    && dataToolType.get(id).equals(dataType)) {
                 return true;
             }
         }
