@@ -17,28 +17,34 @@ public class ConfigHeatmapTest {
     public void minColorShouldBeSet() {
         ConfigHeatmap confHm1 = new ConfigHeatmap();
         // assertEquals(new float[] { 1, 0, 0 }, confHm1.getMinColor());
-        assertEquals(0, confHm1.getMinColor()[0], 0.0001f);
-        assertEquals(0, confHm1.getMinColor()[1], 0.0001f);
-        assertEquals(1, confHm1.getMinColor()[2], 0.0001f);
+        assertEquals("getMinColor[0] sollte 0 zurückgeben", 0, confHm1.getMinColor()[0], 0.0001f);
+        assertEquals("getMinColor[1] sollte 0 zurückgeben", 0, confHm1.getMinColor()[1], 0.0001f);
+        assertEquals("getMinColor[2] sollte 1 zurückgeben", 1, confHm1.getMinColor()[2], 0.0001f);
 
         ConfigHeatmap confHm2 = new ConfigHeatmap();
-        assertTrue(confHm2.setMinColor(new float[] { 0, 1, 0.5f }));
+        assertTrue("setMinColor sollte True zurückgeben",
+            confHm2.setMinColor(new float[] { 0, 1, 0.5f }));
 
         ConfigHeatmap confHm3 = new ConfigHeatmap();
         confHm3.setMinColor(new float[] { 0.25f, 0.1f, 1 });
-        // assertEquals(new float[] { 0.25f, 0.1f, 1 }, confHm3.getMinColor());
-        assertEquals(0.25f, confHm3.getMinColor()[0], 0.0001f);
-        assertEquals(0.1f, confHm3.getMinColor()[1], 0.0001f);
-        assertEquals(1, confHm3.getMinColor()[2], 0.0001f);
+        assertEquals("getMinColor[0] sollte 0.25 zurückgeben",
+            0.25f, confHm3.getMinColor()[0], 0.0001f);
+        assertEquals("getMinColor[1] sollte 0.1 zurückgeben",
+            0.1f, confHm3.getMinColor()[1], 0.0001f);
+        assertEquals("getMinColor[2] sollte 1 zurückgeben",
+            1, confHm3.getMinColor()[2], 0.0001f);
 
         ConfigHeatmap confHm4 = new ConfigHeatmap();
-        assertFalse(confHm4.setMinColor(new float[] { -1, 0, 1 }));
+        assertFalse("setMinColor sollte False zurückgeben",
+            confHm4.setMinColor(new float[] { -1, 0, 1 }));
 
         ConfigHeatmap confHm5 = new ConfigHeatmap();
-        assertFalse(confHm5.setMinColor(new float[] { 0.5f, 1.3f, 1 }));
+        assertFalse("setMinColor sollte False zurückgeben",
+            confHm5.setMinColor(new float[] { 0.5f, 1.3f, 1 }));
 
         ConfigHeatmap confHm6 = new ConfigHeatmap();
-        assertFalse(confHm6.setMinColor(new float[] { 0.5f, 1.3f, -1 }));
+        assertFalse("setMinColor sollte False zurückgeben",
+            confHm6.setMinColor(new float[] { 0.5f, 1.3f, -1 }));
     }
 
     /**
@@ -47,27 +53,34 @@ public class ConfigHeatmapTest {
     @Test
     public void maxColorShouldBeSet() {
         ConfigHeatmap confHm1 = new ConfigHeatmap();
-        assertEquals(1, confHm1.getMaxColor()[0], 0.0001f);
-        assertEquals(0, confHm1.getMaxColor()[1], 0.0001f);
-        assertEquals(0, confHm1.getMaxColor()[2], 0.0001f);
+        assertEquals("getMaxColor[0] sollte 1 zurückgeben", 1, confHm1.getMaxColor()[0], 0.0001f);
+        assertEquals("getMaxColor[1] sollte 0 zurückgeben", 0, confHm1.getMaxColor()[1], 0.0001f);
+        assertEquals("getMaxColor[2] sollte 0 zurückgeben", 0, confHm1.getMaxColor()[2], 0.0001f);
 
         ConfigHeatmap confHm2 = new ConfigHeatmap();
-        assertTrue(confHm2.setMaxColor(new float[] { 0.6f, 0.15f, 1.0f }));
+        assertTrue("setMaxColor sollte True zurückgeben",
+            confHm2.setMaxColor(new float[] { 0.6f, 0.15f, 1.0f }));
 
         ConfigHeatmap confHm3 = new ConfigHeatmap();
         confHm3.setMaxColor(new float[] { 0.1f, 1.0f, 0.45f });
-        assertEquals(0.1f, confHm3.getMaxColor()[0], 0.0001f);
-        assertEquals(1.0f, confHm3.getMaxColor()[1], 0.0001f);
-        assertEquals(0.45f, confHm3.getMaxColor()[2], 0.0001f);
+        assertEquals("getMaxColor[0] sollte 0.1 zurückgeben",
+            0.1f, confHm3.getMaxColor()[0], 0.0001f);
+        assertEquals("getMaxColor[1] sollte 1.0 zurückgeben",
+            1.0f, confHm3.getMaxColor()[1], 0.0001f);
+        assertEquals("getMaxColor[2] sollte 0.45 zurückgeben",
+            0.45f, confHm3.getMaxColor()[2], 0.0001f);
 
         ConfigHeatmap confHm4 = new ConfigHeatmap();
-        assertFalse(confHm4.setMaxColor(new float[] { 0.2f, -0.85f, 0.0f }));
+        assertFalse("setMaxColor sollte False zurückgeben",
+            confHm4.setMaxColor(new float[] { 0.2f, -0.85f, 0.0f }));
 
         ConfigHeatmap confHm5 = new ConfigHeatmap();
-        assertFalse(confHm5.setMaxColor(new float[] { 0.2f, 0.16f, 3.0f }));
+        assertFalse("setMaxColor sollte False zurückgeben",
+            confHm5.setMaxColor(new float[] { 0.2f, 0.16f, 3.0f }));
 
         ConfigHeatmap confHm6 = new ConfigHeatmap();
-        assertFalse(confHm6.setMaxColor(new float[] { 1.2f, 0.16f, -3.0f }));
+        assertFalse("setMaxColor sollte False zurückgeben",
+            confHm6.setMaxColor(new float[] { 1.2f, 0.16f, -3.0f }));
     }
 
     /**
@@ -76,15 +89,15 @@ public class ConfigHeatmapTest {
     @Test
     public void gridShouldBeSet() {
         ConfigHeatmap confHm1 = new ConfigHeatmap();
-        assertTrue(confHm1.isGrid());
+        assertTrue("isGrid sollte true zurückgeben", confHm1.isGrid());
 
         ConfigHeatmap confHm2 = new ConfigHeatmap();
         confHm2.setGrid(false);
-        assertFalse(confHm2.isGrid());
+        assertFalse("isGrid sollte false zurückgeben", confHm2.isGrid());
 
         ConfigHeatmap confHm3 = new ConfigHeatmap();
         confHm3.setGrid(true);
-        assertTrue(confHm3.isGrid());
+        assertTrue("isGrid sollte true zurückgeben", confHm3.isGrid());
     }
 
     /**
@@ -93,15 +106,15 @@ public class ConfigHeatmapTest {
     @Test
     public void imageShouldBeSet() {
         ConfigHeatmap confHm1 = new ConfigHeatmap();
-        assertTrue(confHm1.isImage());
+        assertTrue("isImage sollte true zurückgeben", confHm1.isImage());
 
         ConfigHeatmap confHm2 = new ConfigHeatmap();
         confHm2.setImage(false);
-        assertFalse(confHm2.isImage());
+        assertFalse("isImage sollte false zurückgeben", confHm2.isImage());
 
         ConfigHeatmap confHm3 = new ConfigHeatmap();
         confHm3.setImage(true);
-        assertTrue(confHm3.isImage());
+        assertTrue("isImage sollte true zurückgeben", confHm3.isImage());
     }
 
     /**
@@ -110,27 +123,34 @@ public class ConfigHeatmapTest {
     @Test
     public void minDiffShouldBeSet() {
         ConfigHeatmap confHm1 = new ConfigHeatmap();
-        assertEquals(1, confHm1.getMinDiff()[0], 0.0001f);
-        assertEquals(0, confHm1.getMinDiff()[1], 0.0001f);
-        assertEquals(1, confHm1.getMinDiff()[2], 0.0001f);
+        assertEquals("getMinDiff[0] sollte 1 zurückgeben", 1, confHm1.getMinDiff()[0], 0.0001f);
+        assertEquals("getMinDiff[1] sollte 0 zurückgeben", 0, confHm1.getMinDiff()[1], 0.0001f);
+        assertEquals("getMinDiff[2] sollte 1 zurückgeben", 1, confHm1.getMinDiff()[2], 0.0001f);
 
         ConfigHeatmap confHm2 = new ConfigHeatmap();
-        assertTrue(confHm2.setMinDiff(new float[] { 0.5f, 0.3f, 1.0f }));
+        assertTrue("setMinDiff sollte True zurückgeben",
+            confHm2.setMinDiff(new float[] { 0.5f, 0.3f, 1.0f }));
 
         ConfigHeatmap confHm3 = new ConfigHeatmap();
         confHm3.setMinDiff(new float[] { 0.75f, 0.2f, 0.5f });
-        assertEquals(0.75f, confHm3.getMinDiff()[0], 0.0001f);
-        assertEquals(0.2f, confHm3.getMinDiff()[1], 0.0001f);
-        assertEquals(0.5f, confHm3.getMinDiff()[2], 0.0001f);
+        assertEquals("getMinDiff[0] sollte 0.75 zurückgeben",
+            0.75f, confHm3.getMinDiff()[0], 0.0001f);
+        assertEquals("getMinDiff[1] sollte 0.2 zurückgeben",
+            0.2f, confHm3.getMinDiff()[1], 0.0001f);
+        assertEquals("getMinDiff[2] sollte 0.5 zurückgeben",
+            0.5f, confHm3.getMinDiff()[2], 0.0001f);
 
         ConfigHeatmap confHm4 = new ConfigHeatmap();
-        assertFalse(confHm4.setMinDiff(new float[] { -1, 0, 1 }));
+        assertFalse("setMinDiff sollte False zurückgeben",
+            confHm4.setMinDiff(new float[] { -1, 0, 1 }));
 
         ConfigHeatmap confHm5 = new ConfigHeatmap();
-        assertFalse(confHm5.setMinDiff(new float[] { 0.5f, 1.3f, 1 }));
+        assertFalse("setMinDiff sollte False zurückgeben",
+            confHm5.setMinDiff(new float[] { 0.5f, 1.3f, 1 }));
 
         ConfigHeatmap confHm6 = new ConfigHeatmap();
-        assertFalse(confHm6.setMinDiff(new float[] { 0.5f, 1.3f, -1 }));
+        assertFalse("setMinDiff sollte False zurückgeben",
+            confHm6.setMinDiff(new float[] { 0.5f, 1.3f, -1 }));
     }
 
     /**
@@ -139,26 +159,34 @@ public class ConfigHeatmapTest {
     @Test
     public void maxDiffShouldBeSet() {
         ConfigHeatmap confHm1 = new ConfigHeatmap();
-        assertEquals(1, confHm1.getMaxDiff()[0], 0.0001f);
-        assertEquals(1, confHm1.getMaxDiff()[1], 0.0001f);
-        assertEquals(0, confHm1.getMaxDiff()[2], 0.0001f);
+        assertEquals("getMaxDiff[0] sollte 1 zurückgeben", 1, confHm1.getMaxDiff()[0], 0.0001f);
+        assertEquals("getMaxDiff[1] sollte 1 zurückgeben", 1, confHm1.getMaxDiff()[1], 0.0001f);
+        assertEquals("getMaxDiff[2] sollte 0 zurückgeben", 0, confHm1.getMaxDiff()[2], 0.0001f);
 
         ConfigHeatmap confHm2 = new ConfigHeatmap();
-        assertTrue(confHm2.setMaxDiff(new float[] { 0.0f, 0.65f, 0.2f }));
+        assertTrue("setMaxDiff sollte True zurückgeben",
+            confHm2.setMaxDiff(new float[] { 0.0f, 0.65f, 0.2f }));
 
         ConfigHeatmap confHm3 = new ConfigHeatmap();
         confHm3.setMaxDiff(new float[] { 0.2f, 1.0f, 0.5f });
-        assertEquals(0.2f, confHm3.getMaxDiff()[0], 0.0001f);
-        assertEquals(1.0f, confHm3.getMaxDiff()[1], 0.0001f);
-        assertEquals(0.5f, confHm3.getMaxDiff()[2], 0.0001f);
+        assertEquals("getMaxDiff[0] sollte 0.2 zurückgeben",
+            0.2f, confHm3.getMaxDiff()[0], 0.0001f);
+        assertEquals("getMaxDiff[1] sollte 1 zurückgeben",
+            1.0f, confHm3.getMaxDiff()[1], 0.0001f);
+        assertEquals("getMaxDiff[2] sollte 0.5 zurückgeben",
+            0.5f, confHm3.getMaxDiff()[2], 0.0001f);
 
         ConfigHeatmap confHm4 = new ConfigHeatmap();
-        assertFalse(confHm4.setMaxDiff(new float[] { -1, 0, 1 }));
+        assertFalse("setMaxDiff sollte False zurückgeben",
+            confHm4.setMaxDiff(new float[] { -1, 0, 1 }));
 
         ConfigHeatmap confHm5 = new ConfigHeatmap();
-        assertFalse(confHm5.setMaxDiff(new float[] { 0.5f, 1.3f, 1 }));
+        assertFalse("setMaxDiff sollte False zurückgeben",
+            confHm5.setMaxDiff(new float[] { 0.5f, 1.3f, 1 }));
 
         ConfigHeatmap confHm6 = new ConfigHeatmap();
-        assertFalse(confHm6.setMaxDiff(new float[] { 0.5f, 1.3f, -1 }));
+        assertFalse("setMaxDiff sollte False zurückgeben",
+            confHm6.setMaxDiff(new float[] { 0.5f, 1.3f, -1 }));
     }
+
 }
