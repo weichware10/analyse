@@ -1,5 +1,6 @@
 package github.weichware10.analyse;
 
+import github.weichware10.util.Data;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public abstract class Analyse {
      *
      * @return Liste mit den relativen Häufigkeiten der Bildkoordinaten
      */
-    protected List<List<Float>> calcRelFreq() {
+    protected List<List<Float>> calcRelFreq(Data data) {
         return null;
     }
 
@@ -23,7 +24,7 @@ public abstract class Analyse {
      * @return Tabelle mit Zeitpunkten und dazugehörigen Bildkoordinaten bzw.
      *         Zoomstärken
      */
-    protected List<List<Float>> createTimeTable() {
+    protected List<List<Float>> createTimeTable(Data data) {
         return null;
     }
 
