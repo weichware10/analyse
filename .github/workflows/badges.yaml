@@ -38,3 +38,4 @@ jobs:
             .github/badges/jacoco.svg
             .github/badges/tests.svg
           ref: refs/heads/main
+          commit-message: updated badges
