@@ -1,8 +1,6 @@
 package github.weichware10.analyse;
 
 import github.weichware10.util.Data;
-
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -63,7 +61,7 @@ public class Diagramm extends Analyse {
      */
     private String drawDiagramm(List<Float> diagrammData, DiagrammType type) {
         return ".../diagramm/" + type + "_" + this.data.tooltype.toString()
-            + "_" + this.data.configId + ".jpg";
+                + "_" + this.data.configId + ".jpg";
     }
 
 }
