@@ -14,7 +14,7 @@ public class Heatmap extends Analyse {
     /**
      * verantwortlich für die Erstellung der Heatmap.
      *
-     * @param data   - Daten die zur Erstellung der Heatmps benötigt werden
+     * @param data   - Daten die zur Erstellung der Heatmaps benötigt werden
      * @param confHm - Konfiguration der Heatmap
      */
     public Heatmap(Data data, ConfigHeatmap confHm) {
