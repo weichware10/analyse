@@ -61,7 +61,7 @@ public class ClientTest {
         Client client1 = new Client();
         assertTrue("getData sollte True zurückgeben", client1.getData(
                 new DateTime(2021, 11, 28, 16, 0, 0),
-                new DateTime(2021, 11, 28, 19, 0, 0), ToolType.ZOOM));
+                new DateTime(2021, 11, 28, 19, 0, 0), ToolType.ZOOMMAPS));
 
         Client client2 = new Client();
         assertTrue("getData sollte True zurückgeben", client2.getData(
@@ -76,7 +76,7 @@ public class ClientTest {
         // * Korrekte Zeiteingabe, aber Daten zu Tool-Typ nicht vorhanden
         Client client4 = new Client();
         assertFalse(client4.getData(new DateTime(2021, 11, 28, 15, 0, 0),
-                new DateTime(2021, 11, 28, 16, 0, 0), ToolType.ZOOM));
+                new DateTime(2021, 11, 28, 16, 0, 0), ToolType.ZOOMMAPS));
 
         Client client5 = new Client();
         assertFalse(client5.getData(new DateTime(2021, 11, 28, 15, 0, 0),
@@ -90,7 +90,7 @@ public class ClientTest {
         Client client7 = new Client();
         assertFalse("getData sollte False zurückgeben", client7.getData(
                 new DateTime(2021, 11, 28, 18, 0, 0),
-                new DateTime(2021, 11, 28, 17, 0, 0), ToolType.ZOOM));
+                new DateTime(2021, 11, 28, 17, 0, 0), ToolType.ZOOMMAPS));
 
         Client client8 = new Client();
         assertFalse("getData sollte False zurückgeben", client8.getData(
@@ -106,7 +106,7 @@ public class ClientTest {
         Client client10 = new Client();
         assertFalse("getData sollte False zurückgeben", client10.getData(
                 new DateTime(2021, 11, 28, 18, 0, 0),
-                DateTime.now().plusMinutes(5), ToolType.ZOOM));
+                DateTime.now().plusMinutes(5), ToolType.ZOOMMAPS));
 
         Client client11 = new Client();
         assertFalse("getData sollte False zurückgeben", client11.getData(
