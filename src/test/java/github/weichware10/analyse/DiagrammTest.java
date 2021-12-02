@@ -15,10 +15,10 @@ public class DiagrammTest {
      */
     @Test
     public void createRelFreqImgAreaShouldWork() {
-        Diagramm dia1 = new Diagramm(new Data(ToolType.ZOOM, 1), new ConfigDiagramm());
+        Diagramm dia1 = new Diagramm(new Data(ToolType.ZOOMMAPS, 1), new ConfigDiagramm());
         assertEquals(
-                "createRelFreqImgAre sollte .../diagramm/RELFRQIMGAREA_ZOOM_1 zurückgeben",
-                ".../diagramm/RELFRQIMGAREA_ZOOM_1.jpg",
+                "createRelFreqImgAre sollte .../diagramm/RELFRQIMGAREA_ZOOMMAPS_1 zurückgeben",
+                ".../diagramm/RELFRQIMGAREA_ZOOMMAPS_1.jpg",
                 dia1.createRelFreqImgArea());
 
         Diagramm dia2 = new Diagramm(new Data(ToolType.EYETRACKING, 5), new ConfigDiagramm());
@@ -39,9 +39,9 @@ public class DiagrammTest {
      */
     @Test
     public void createViewTimeDistrSouldWork() {
-        Diagramm dia1 = new Diagramm(new Data(ToolType.ZOOM, 1), new ConfigDiagramm());
-        assertEquals("createViewTimeDistr sollte .../diagramm/VIEWTIMEDISTR_ZOOM_1 zurückgeben",
-                ".../diagramm/VIEWTIMEDISTR_ZOOM_1.jpg",
+        Diagramm dia1 = new Diagramm(new Data(ToolType.ZOOMMAPS, 1), new ConfigDiagramm());
+        assertEquals("createViewTimeDistr sollte .../diagramm/VIEWTIMEDISTR_ZOOMMAPS_1 zurückgeben",
+                ".../diagramm/VIEWTIMEDISTR_ZOOMMAPS_1.jpg",
                 dia1.createViewTimeDistr());
 
         Diagramm dia2 = new Diagramm(new Data(ToolType.EYETRACKING, 5), new ConfigDiagramm());

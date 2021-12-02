@@ -15,9 +15,9 @@ public class VerlaufTest {
      */
     @Test
     public void createVerlaufShouldWork() {
-        Verlauf verlauf1 = new Verlauf(new Data(ToolType.ZOOM, 1));
-        assertEquals("createVerlauf sollte .../verlauf/VERLAUF_ZOOM_1.jpg ausgeben",
-                ".../verlauf/VERLAUF_ZOOM_1.jpg", verlauf1.createVerlauf());
+        Verlauf verlauf1 = new Verlauf(new Data(ToolType.ZOOMMAPS, 1));
+        assertEquals("createVerlauf sollte .../verlauf/VERLAUF_ZOOMMAPS_1.jpg ausgeben",
+                ".../verlauf/VERLAUF_ZOOMMAPS_1.jpg", verlauf1.createVerlauf());
 
         Verlauf verlauf2 = new Verlauf(new Data(ToolType.EYETRACKING, 6));
         assertEquals("createVerlauf sollte .../verlauf/VERLAUF_EYETRACKING_6.jpg ausgeben",

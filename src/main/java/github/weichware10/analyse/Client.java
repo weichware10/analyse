@@ -72,7 +72,7 @@ public class Client {
                 new DateTime(2021, 11, 28, 19, 0, 0), new DateTime(2021, 11, 28, 18, 0, 0),
                 new DateTime(2021, 11, 28, 20, 0, 0)));
         List<ToolType> dataToolType = new ArrayList<ToolType>(Arrays.asList(
-                ToolType.ZOOM, ToolType.EYETRACKING, ToolType.CODECHARTS));
+                ToolType.ZOOMMAPS, ToolType.EYETRACKING, ToolType.CODECHARTS));
 
         for (int id = 0; id < amountData; id++) {
             if (dataStart.get(id).equals(start) && dataEnd.get(id).equals(end)
