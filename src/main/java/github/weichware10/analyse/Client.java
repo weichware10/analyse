@@ -94,7 +94,7 @@ public class Client {
      *         wurden;
      *         false, falls benötigte Daten zum Vergleich nicht gefunden wurden
      */
-    public boolean getDataForComp(DateTime start, DateTime end) {
+    public boolean getDataForComp(DateTime start, DateTime end, ToolType dataType) {
         if (start.isAfter(end) || start.isAfter(DateTime.now()) || end.isAfter(DateTime.now())) {
             return false;
         }
