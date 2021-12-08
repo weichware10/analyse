@@ -1,7 +1,7 @@
 package github.weichware10.analyse;
 
-import github.weichware10.util.data.TrialData;
 import github.weichware10.util.Enums.ToolType;
+import github.weichware10.util.data.TrialData;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
