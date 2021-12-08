@@ -1,6 +1,6 @@
 package github.weichware10.analyse;
 
-import github.weichware10.util.Data;
+import github.weichware10.util.data.TrialData;
 import github.weichware10.util.Enums.ToolType;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +11,8 @@ import org.joda.time.DateTime;
  * Grundlegende Klasse für den Analyse-Client.
  */
 public class Client {
-    private Data data;
-    private Data dataForComp;
+    private TrialData data;
+    private TrialData dataForComp;
     private List<AnalyseType> analyseTypes;
     private List<String> analyzedData;
     private ConfigHeatmap confHm;

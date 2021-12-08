@@ -1,13 +1,13 @@
 package github.weichware10.analyse;
 
-import github.weichware10.util.Data;
+import github.weichware10.util.data.TrialData;
 import java.util.List;
 
 /**
  * verantwortlich für die Erstellung der Heatmap.
  */
 public class Heatmap extends Analyse {
-    private final Data data;
+    private final TrialData data;
     private final ConfigHeatmap confHm;
     private List<List<Float>> heatmap;
 
@@ -17,7 +17,7 @@ public class Heatmap extends Analyse {
      * @param data   - Daten die zur Erstellung der Heatmaps benötigt werden
      * @param confHm - Konfiguration der Heatmap
      */
-    public Heatmap(Data data, ConfigHeatmap confHm) {
+    public Heatmap(TrialData data, ConfigHeatmap confHm) {
         this.data = data;
         this.confHm = confHm;
     }
@@ -29,7 +29,7 @@ public class Heatmap extends Analyse {
      * @return Pfad des Bildes der erstellten Heatmap
      */
     public String createHeatmap() {
-        return ".../heatmap/HEATMAP_" + this.data.tooltype.toString()
+        return ".../heatmap/HEATMAP_" + this.data.toolType.toString()
             + "_" + this.data.configId + ".jpg";
     }
 
@@ -41,8 +41,8 @@ public class Heatmap extends Analyse {
      * @return Pfad des Bildes der erstellten Heatmap
      */
     public static String compHeatmaps(Heatmap heatmap1, Heatmap heatmap2) {
-        return ".../heatmap/COMPHEATMAP_" + heatmap1.data.tooltype.toString()
-            + "_" + heatmap1.data.configId + "_" + heatmap2.data.tooltype.toString()
+        return ".../heatmap/COMPHEATMAP_" + heatmap1.data.toolType.toString()
+            + "_" + heatmap1.data.configId + "_" + heatmap2.data.toolType.toString()
             + "_" + heatmap2.data.configId + ".jpg";
     }
 }
