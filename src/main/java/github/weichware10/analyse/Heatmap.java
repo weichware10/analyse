@@ -30,7 +30,7 @@ public class Heatmap extends Analyse {
      */
     public String createHeatmap() {
         return ".../heatmap/HEATMAP_" + this.data.toolType.toString()
-            + "_" + this.data.configId + ".jpg";
+            + "_" + this.data.trialId + ".jpg";
     }
 
     /**
@@ -42,7 +42,7 @@ public class Heatmap extends Analyse {
      */
     public static String compHeatmaps(Heatmap heatmap1, Heatmap heatmap2) {
         return ".../heatmap/COMPHEATMAP_" + heatmap1.data.toolType.toString()
-            + "_" + heatmap1.data.configId + "_" + heatmap2.data.toolType.toString()
-            + "_" + heatmap2.data.configId + ".jpg";
+            + "_" + heatmap1.data.trialId + "_" + heatmap2.data.toolType.toString()
+            + "_" + heatmap2.data.trialId + ".jpg";
     }
 }

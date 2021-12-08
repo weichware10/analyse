@@ -36,7 +36,7 @@ public class Verlauf extends Analyse {
      */
     private String drawDiagramm(List<List<Float>> diagrammData) {
         return ".../verlauf/VERLAUF_" + this.data.toolType.toString()
-            + "_" + this.data.configId + ".jpg";
+            + "_" + this.data.trialId + ".jpg";
     }
 
 }

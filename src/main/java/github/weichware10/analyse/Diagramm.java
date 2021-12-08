@@ -61,7 +61,7 @@ public class Diagramm extends Analyse {
      */
     private String drawDiagramm(List<Float> diagrammData, DiagrammType type) {
         return ".../diagramm/" + type + "_" + this.data.toolType.toString()
-                + "_" + this.data.configId + ".jpg";
+                + "_" + this.data.trialId + ".jpg";
     }
 
 }
