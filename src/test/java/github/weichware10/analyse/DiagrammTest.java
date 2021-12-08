@@ -16,7 +16,7 @@ public class DiagrammTest {
     @Test
     public void createRelFreqImgAreaShouldWork() {
         Diagramm dia1 = new Diagramm(
-                new TrialData(ToolType.ZOOMMAPS, "1", "3"), 
+                new TrialData(ToolType.ZOOMMAPS, "1", "3"),
                 new ConfigDiagramm());
         assertEquals(
                 "createRelFreqImgAre sollte .../diagramm/RELFRQIMGAREA_ZOOMMAPS_1 zurückgeben",
@@ -24,7 +24,7 @@ public class DiagrammTest {
                 dia1.createRelFreqImgArea());
 
         Diagramm dia2 = new Diagramm(
-                new TrialData(ToolType.EYETRACKING, "5", "3"), 
+                new TrialData(ToolType.EYETRACKING, "5", "3"),
                 new ConfigDiagramm());
         assertEquals(
                 "createRelFreqImgAre sollte .../diagramm/RELFRQIMGAREA_EYETRACKING_5 zurückgeben",
@@ -32,7 +32,7 @@ public class DiagrammTest {
                 dia2.createRelFreqImgArea());
 
         Diagramm dia3 = new Diagramm(
-                new TrialData(ToolType.CODECHARTS, "132", "3"), 
+                new TrialData(ToolType.CODECHARTS, "132", "3"),
                 new ConfigDiagramm());
         assertEquals(
                 "createRelFreqImgAre sollte .../diagramm/RELFRQIMGAREA_CODECHARTS_132 zurückgeben",
@@ -46,14 +46,14 @@ public class DiagrammTest {
     @Test
     public void createViewTimeDistrSouldWork() {
         Diagramm dia1 = new Diagramm(
-                new TrialData(ToolType.ZOOMMAPS, "1", "3"), 
+                new TrialData(ToolType.ZOOMMAPS, "1", "3"),
                 new ConfigDiagramm());
         assertEquals("createViewTimeDistr sollte .../diagramm/VIEWTIMEDISTR_ZOOMMAPS_1 zurückgeben",
                 ".../diagramm/VIEWTIMEDISTR_ZOOMMAPS_1.jpg",
                 dia1.createViewTimeDistr());
 
         Diagramm dia2 = new Diagramm(
-                new TrialData(ToolType.EYETRACKING, "5", "3"), 
+                new TrialData(ToolType.EYETRACKING, "5", "3"),
                 new ConfigDiagramm());
         assertEquals(
                 "createViewTimeDistr sollte .../diagramm/VIEWTIMEDISTR_EYETRACKING_5 zurückgeben",
@@ -61,7 +61,7 @@ public class DiagrammTest {
                 dia2.createViewTimeDistr());
 
         Diagramm dia3 = new Diagramm(
-                new TrialData(ToolType.CODECHARTS, "132", "3"), 
+                new TrialData(ToolType.CODECHARTS, "132", "3"),
                 new ConfigDiagramm());
         assertEquals(
                 "createViewTimeDistr sollte .../diagramm/VIEWTIMEDISTR_CODECHARTS_132 zurückgeben",
