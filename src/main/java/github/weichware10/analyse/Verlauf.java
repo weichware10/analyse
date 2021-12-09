@@ -1,20 +1,20 @@
 package github.weichware10.analyse;
 
-import github.weichware10.util.Data;
+import github.weichware10.util.data.TrialData;
 import java.util.List;
 
 /**
  * verantwortlich für die Erstellung des Verlauf-Diagramms.
  */
 public class Verlauf extends Analyse {
-    private final Data data;
+    private final TrialData data;
 
     /**
      * verantwortlich für die Erstellung des Verlauf-Diagramms.
      *
      * @param data - Daten die zur Erstellung des Diagramms benötigt werden
      */
-    public Verlauf(Data data) {
+    public Verlauf(TrialData data) {
         this.data = data;
     }
 
@@ -35,8 +35,8 @@ public class Verlauf extends Analyse {
      * @return Pfad des Bildes des erstellten Diagramms
      */
     private String drawDiagramm(List<List<Float>> diagrammData) {
-        return ".../verlauf/VERLAUF_" + this.data.tooltype.toString()
-            + "_" + this.data.configId + ".jpg";
+        return ".../verlauf/VERLAUF_" + this.data.toolType.toString()
+            + "_" + this.data.trialId + ".jpg";
     }
 
 }

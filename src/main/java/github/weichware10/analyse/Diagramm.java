@@ -1,13 +1,13 @@
 package github.weichware10.analyse;
 
-import github.weichware10.util.Data;
+import github.weichware10.util.data.TrialData;
 import java.util.List;
 
 /**
  * verantwortlich für die Erstellung der Diagramm-Diagramme.
  */
 public class Diagramm extends Analyse {
-    private final Data data;
+    private final TrialData data;
     private final ConfigDiagramm confDia;
 
     /**
@@ -16,7 +16,7 @@ public class Diagramm extends Analyse {
      * @param data    - Daten die zur Erstellung der Diagramme benötigt werden
      * @param confDia - Konfigurationen für die Diagrammarten
      */
-    public Diagramm(Data data, ConfigDiagramm confDia) {
+    public Diagramm(TrialData data, ConfigDiagramm confDia) {
         this.data = data;
         this.confDia = confDia;
     }
@@ -60,8 +60,8 @@ public class Diagramm extends Analyse {
      * @return Pfad des Bildes des erstellten Diagramms
      */
     private String drawDiagramm(List<Float> diagrammData, DiagrammType type) {
-        return ".../diagramm/" + type + "_" + this.data.tooltype.toString()
-                + "_" + this.data.configId + ".jpg";
+        return ".../diagramm/" + type + "_" + this.data.toolType.toString()
+                + "_" + this.data.trialId + ".jpg";
     }
 
 }
