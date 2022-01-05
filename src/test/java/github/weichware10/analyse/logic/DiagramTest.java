@@ -1,9 +1,8 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.logic;
 
 import static org.junit.Assert.assertEquals;
 
 import github.weichware10.analyse.config.DiagramConfig;
-import github.weichware10.analyse.logic.Diagram;
 import github.weichware10.util.Enums.ToolType;
 import github.weichware10.util.data.TrialData;
 import org.junit.Test;
@@ -11,7 +10,7 @@ import org.junit.Test;
 /**
  * Unit Test für Klasse Diagramm.
  */
-public class DiagrammTest {
+public class DiagramTest {
     /**
      * Testet, ob String erstellt und ausgegeben wird.
      */

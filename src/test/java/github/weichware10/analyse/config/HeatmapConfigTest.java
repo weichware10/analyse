@@ -1,4 +1,4 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.config;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -6,12 +6,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import github.weichware10.analyse.config.HeatmapConfig;
-
 /**
  * Unit Test für Klasse ConfigHeatmap.
  */
-public class ConfigHeatmapTest {
+public class HeatmapConfigTest {
     /**
      * Testet, ob minimale Farbe gesetzt wird.
      */

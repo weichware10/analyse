@@ -1,4 +1,4 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.config;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -6,12 +6,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import github.weichware10.analyse.config.DiagramConfig;
-
 /**
  * Unit Test für Klasse ConfigDiagramm.
  */
-public class ConfigDiagrammTest {
+public class DiagramConfigTest {
     /**
      * Testet, ob Anzahl Felder gesetzt wird.
      */
