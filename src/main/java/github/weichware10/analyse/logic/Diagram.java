@@ -1,14 +1,17 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.logic;
 
+import github.weichware10.analyse.config.DiagramConfig;
+import github.weichware10.analyse.enums.DiagrammType;
 import github.weichware10.util.data.TrialData;
 import java.util.List;
 
 /**
  * verantwortlich für die Erstellung der Diagramm-Diagramme.
  */
-public class Diagramm extends Analyse {
+@SuppressWarnings("unused")
+public class Diagram extends Analyse {
     private final TrialData data;
-    private final ConfigDiagramm confDia;
+    private final DiagramConfig confDia;
 
     /**
      * verantwortlich für die Erstellung der Diagramm-Diagramme.
@@ -16,7 +19,7 @@ public class Diagramm extends Analyse {
      * @param data    - Daten die zur Erstellung der Diagramme benötigt werden
      * @param confDia - Konfigurationen für die Diagrammarten
      */
-    public Diagramm(TrialData data, ConfigDiagramm confDia) {
+    public Diagram(TrialData data, DiagramConfig confDia) {
         this.data = data;
         this.confDia = confDia;
     }

@@ -1,9 +1,9 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.config;
 
 /**
  * Speicherung der Konfiguration der Diagramm-Analysemethoden.
  */
-public class ConfigDiagramm {
+public class DiagramConfig {
     private int amountAreas; // * 2,4,6,8
     private float minTime; // * >= 0 Länge | Zoomstufe
     private float maxTime; // * <= 10 Länge | Zoomstufe
@@ -12,7 +12,7 @@ public class ConfigDiagramm {
     /**
      * Speicherung der Konfiguration der Diagramm-Analysemethoden.
      */
-    public ConfigDiagramm() {
+    public DiagramConfig() {
         this.amountAreas = 4;
         this.minTime = 0.5f;
         this.maxTime = 2.5f;

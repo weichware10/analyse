@@ -2,6 +2,7 @@ package github.weichware10.analyse;
 
 import static org.junit.Assert.assertEquals;
 
+import github.weichware10.analyse.logic.Verlauf;
 import github.weichware10.util.Enums.ToolType;
 import github.weichware10.util.data.TrialData;
 import org.junit.Test;

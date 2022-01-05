@@ -1,9 +1,9 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.config;
 
 /**
  * Speicherung der Konfiguration der Heatmap-Analysemethoden.
  */
-public class ConfigHeatmap {
+public class HeatmapConfig {
     private float[] minColor;
     private float[] maxColor;
     private boolean grid;
@@ -14,7 +14,7 @@ public class ConfigHeatmap {
     /**
      * Speicherung der Konfiguration der Heatmap-Analysemethoden.
      */
-    public ConfigHeatmap() {
+    public HeatmapConfig() {
         this.minColor = new float[] { 0, 0, 1 };
         this.maxColor = new float[] { 1, 0, 0 };
         this.grid = true;

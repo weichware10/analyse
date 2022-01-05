@@ -1,5 +1,8 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.logic;
 
+import github.weichware10.analyse.config.DiagramConfig;
+import github.weichware10.analyse.config.HeatmapConfig;
+import github.weichware10.analyse.enums.AnalyseType;
 import github.weichware10.util.Enums.ToolType;
 import github.weichware10.util.data.TrialData;
 import java.util.ArrayList;
@@ -10,13 +13,14 @@ import org.joda.time.DateTime;
 /**
  * Grundlegende Klasse für den Analyse-Client.
  */
+@SuppressWarnings("unused")
 public class Client {
     private TrialData data;
     private TrialData dataForComp;
     private List<AnalyseType> analyseTypes;
     private List<String> analyzedData;
-    private ConfigHeatmap confHm;
-    private ConfigDiagramm confDia;
+    private HeatmapConfig confHm;
+    private DiagramConfig confDia;
 
     public Client() {
         analyseTypes = new ArrayList<AnalyseType>();
@@ -106,7 +110,7 @@ public class Client {
      *
      * @param confHm - Konfiguration der Heatmap-Analyse
      */
-    public void setConfigAnalyseHm(ConfigHeatmap confHm) {
+    public void setConfigAnalyseHm(HeatmapConfig confHm) {
         this.confHm = confHm;
     }
 
@@ -115,7 +119,7 @@ public class Client {
      *
      * @param confDia - Konfiguration der Diagramm-Analyse
      */
-    public void setConfigAnalyseDia(ConfigDiagramm confDia) {
+    public void setConfigAnalyseDia(DiagramConfig confDia) {
         this.confDia = confDia;
     }
 
