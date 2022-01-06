@@ -15,25 +15,16 @@ import javafx.stage.Stage;
 public abstract class AbsScene {
 
     /**
-     * URL der FXML-Datei.
-     */
-    protected static URL fxml;
-    private static Scene scene = null;
-    private static Parent root = null;
-    private static boolean initialized = false;
-
-    /**
-     * lädt die Szene intern und gibt die Instanz der Controller-Klasse zurück.
-     * Falls diese benötigt wird, kann also manuell initialize() aufgerufen werden.
-     * Das sollte jedoch in der Regel nicht nötig sein.
+     * lädt die Szene intern und gibt die root-Instanz zurück.
      *
      * @param fxml - URL der FXML-Datei
      * @return das Controller-Objekt.
      */
-    protected static AbsSceneController initialize(URL fxml) {
+    protected static Parent initialize(URL fxml) {
 
         FXMLLoader loader = new FXMLLoader(fxml);
 
+        Parent root = null;
         try {
             root = loader.load();
         } catch (Exception e) {
@@ -41,10 +32,7 @@ public abstract class AbsScene {
             System.exit(-1);
         }
 
-        scene = new Scene(root);
-
-        initialized = true;
-        return loader.getController();
+        return root;
     }
 
     /**
@@ -52,8 +40,8 @@ public abstract class AbsScene {
      *
      * @param menuBar - die zu setzende Menüleiste
      */
-    public static void setMenuBar(MenuBar menuBar) {
-        if (root != null && root.getClass().isInstance(BorderPane.class)) {
+    public static void setMenuBar(MenuBar menuBar, Parent root) {
+        if (root != null && root instanceof BorderPane) {
             BorderPane borderPane = (BorderPane) root;
             borderPane.setTop(menuBar);
         }
@@ -64,24 +52,24 @@ public abstract class AbsScene {
      *
      * @param primaryStage - das Hauptfenster
      */
-    public static void start(Stage primaryStage, URL fxml, String title, MenuBar menuBar,
+    public static Parent start(Stage primaryStage, URL fxml, Parent root,
+            String title, MenuBar menuBar,
             Integer width, Integer height) {
         if (primaryStage == null || title == null || fxml == null) {
             throw new NullPointerException(
                     String.format("Stage primaryStage (%s), ",
                             (primaryStage != null) ? primaryStage.toString() : "null")
-                    + String.format("String title (%s) ",
-                            (title != null) ? title : "null")
-                    + String.format("and URL fxml (%s) are required",
-                            (fxml != null) ? fxml.toString() : "null"));
+                            + String.format("String title (%s), ",
+                                    (title != null) ? title : "null")
+                            + String.format("and URL fxml (%s) are required",
+                                    (fxml != null) ? fxml.toString() : "null"));
         }
-        // aus FXML laden
-        if (!initialized) {
-            initialize(fxml);
+        if (root == null) {
+            root = initialize(fxml);
         }
         // Menüleiste setzen
         if (menuBar != null) {
-            setMenuBar(menuBar);
+            setMenuBar(menuBar, root);
         }
         // Größe einstellen
         if (width != null && height != null) {
@@ -89,7 +77,8 @@ public abstract class AbsScene {
             primaryStage.setHeight(height);
         }
         // auf primaryStage setzen
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(root));
         primaryStage.setTitle(title);
+        return root;
     }
 }
