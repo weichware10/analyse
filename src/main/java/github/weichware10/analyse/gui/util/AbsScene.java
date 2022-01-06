@@ -33,7 +33,6 @@ public abstract class AbsScene {
     protected static AbsSceneController initialize(URL fxml) {
 
         FXMLLoader loader = new FXMLLoader(fxml);
-        Logger.debug(fxml.toString());
 
         try {
             root = loader.load();
