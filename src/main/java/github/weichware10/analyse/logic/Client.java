@@ -3,7 +3,7 @@ package github.weichware10.analyse.logic;
 import github.weichware10.analyse.config.DiagramConfig;
 import github.weichware10.analyse.config.HeatmapConfig;
 import github.weichware10.analyse.enums.AnalyseType;
-import github.weichware10.util.Enums.ToolType;
+import github.weichware10.util.ToolType;
 import github.weichware10.util.data.TrialData;
 import java.util.ArrayList;
 import java.util.Arrays;
