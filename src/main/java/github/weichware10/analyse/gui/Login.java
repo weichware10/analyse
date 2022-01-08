@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
 /**
- * Der Hauptbildschirm der App.
+ * Der Loginbildschirm der App.
  */
 public class Login extends AbsScene {
     public static DataBaseClient dataBaseClient;
