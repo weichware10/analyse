@@ -1,8 +1,6 @@
 package github.weichware10.analyse.gui;
 
 import github.weichware10.analyse.gui.util.AbsSceneController;
-import github.weichware10.analyse.gui.util.Log;
-import github.weichware10.util.Logger;
 import github.weichware10.util.ToolType;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -10,6 +8,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
+/**
+ * Kontroller für {@link TrialSelector}.
+ */
 public class TrialSelectorController extends AbsSceneController {
 
     private final int minAmount = 1;
