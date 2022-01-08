@@ -21,6 +21,9 @@ public class Main extends Application {
         Main.primaryStage = primaryStage;
         Login.start();
         primaryStage.getIcons().add(new Image("app-icon.png"));
+        // FENSTERGRÖẞE
+        primaryStage.setMinHeight(300);
+        primaryStage.setMinWidth(300);
         primaryStage.show();
     }
 }
