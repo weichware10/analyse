@@ -74,6 +74,9 @@ public class Login extends AbsScene {
             errorText.setPrefHeight(50);
             errorText.setPrefWidth(Region.USE_COMPUTED_SIZE);
         }
+        if (dataBaseClient != null) {
+            FunctionChooser.start();
+        }
     }
 
 }
