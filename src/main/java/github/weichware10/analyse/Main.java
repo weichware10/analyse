@@ -1,11 +1,14 @@
 package github.weichware10.analyse;
 
 import github.weichware10.analyse.gui.Login;
+import github.weichware10.analyse.gui.TrialSelector;
 import github.weichware10.analyse.gui.util.Log;
 import github.weichware10.util.Logger;
 import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Application;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.joda.time.DateTime;
 
@@ -39,5 +42,12 @@ public class Main extends Application {
         primaryStage.setMinHeight(300);
         primaryStage.setMinWidth(300);
         primaryStage.show();
+        primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, e -> keyBindings(e));
+    }
+
+    private void keyBindings(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.K) && keyEvent.isControlDown()) {
+            TrialSelector.getTrialId();
+        }
     }
 }
