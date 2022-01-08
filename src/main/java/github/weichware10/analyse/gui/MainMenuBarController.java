@@ -42,7 +42,7 @@ public class MainMenuBarController extends AbsSceneController {
 
     @FXML
     protected static void setDataBaseUrl() {
-
+        ;
     }
 
     @Override
