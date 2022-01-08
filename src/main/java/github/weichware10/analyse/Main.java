@@ -1,6 +1,6 @@
 package github.weichware10.analyse;
 
-import github.weichware10.analyse.gui.App;
+import github.weichware10.analyse.gui.LoginWindow;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -19,7 +19,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Main.primaryStage = primaryStage;
-        App.start();
+        LoginWindow.start();
         primaryStage.getIcons().add(new Image("app-icon.png"));
         primaryStage.show();
     }

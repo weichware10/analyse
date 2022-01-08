@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 /**
  * Der Hauptbildschirm der App.
  */
-public class App extends AbsScene {
+public class LoginWindow extends AbsScene {
 
     private static Parent root;
 
@@ -16,7 +16,7 @@ public class App extends AbsScene {
      */
     public static void start() {
         root = start(Main.primaryStage,
-                App.class.getResource("App.fxml"),
+                LoginWindow.class.getResource("LoginWindow.fxml"),
                 root,
                 "Analyse",
                 MainMenuBar.getMenuBar(),
