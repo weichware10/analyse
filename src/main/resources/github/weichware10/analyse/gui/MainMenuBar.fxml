@@ -4,21 +4,18 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 
-<MenuBar xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
+<MenuBar xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.MainMenuBarController">
   <menus>
     <Menu mnemonicParsing="false" text="File">
       <items>
-        <MenuItem mnemonicParsing="false" text="Close" />
-      </items>
-    </Menu>
-    <Menu mnemonicParsing="false" text="Edit">
-      <items>
-        <MenuItem mnemonicParsing="false" text="Delete" />
+            <MenuItem fx:id="databaseChange" mnemonicParsing="false" onAction="#setDataBaseUrl" text="Datenbank ändern" />
+            <MenuItem fx:id="databaseUrlReset" mnemonicParsing="false" text="Datenbank URL reset" />
+        <MenuItem fx:id="logOutMenu" disable="true" mnemonicParsing="false" onAction="#logOut" text="Ausloggen" />
       </items>
     </Menu>
     <Menu mnemonicParsing="false" text="Help">
       <items>
-        <MenuItem mnemonicParsing="false" text="About" />
+        <MenuItem mnemonicParsing="false" onAction="#openDocumentation" text="About" />
       </items>
     </Menu>
   </menus>

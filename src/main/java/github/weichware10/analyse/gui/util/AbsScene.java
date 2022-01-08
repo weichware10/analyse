@@ -77,7 +77,12 @@ public abstract class AbsScene {
             primaryStage.setHeight(height);
         }
         // auf primaryStage setzen
-        primaryStage.setScene(new Scene(root));
+        Scene existingScene = root.getScene();
+        if (existingScene != null) {
+            primaryStage.setScene(existingScene);
+        } else {
+            primaryStage.setScene(new Scene(root));
+        }
         primaryStage.setTitle(title);
         return root;
     }
