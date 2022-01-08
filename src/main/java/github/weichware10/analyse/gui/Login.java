@@ -5,10 +5,12 @@ import github.weichware10.analyse.gui.util.AbsScene;
 import github.weichware10.util.Logger;
 import github.weichware10.util.db.DataBaseClient;
 import io.github.cdimascio.dotenv.Dotenv;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
@@ -52,30 +54,52 @@ public class Login extends AbsScene {
      * Stellt die Verbindung zur Datenbank her.
      */
     public static void connectToDatabase(String username, String password, String schema,
-            Text warnText, TextArea errorText) {
-        if (databaseUrl == null) {
-            Dotenv dotenv = Dotenv.load();
-            databaseUrl = dotenv.get("DB_URL");
-        }
-        try {
-            dataBaseClient = new DataBaseClient(databaseUrl, username, password, schema);
-            connection.set(true);
+            Text warnText, TextArea errorText, ProgressIndicator indicator) {
+        setError(warnText, errorText, indicator, true, null);
+
+        Thread loginThread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                if (databaseUrl == null) {
+                    Dotenv dotenv = Dotenv.load();
+                    databaseUrl = dotenv.get("DB_URL");
+                }
+                try {
+                    dataBaseClient = new DataBaseClient(databaseUrl, username, password, schema);
+                    connection.set(true);
+                    Platform.runLater(() -> setError(warnText, errorText, indicator, false, null));
+                } catch (IllegalArgumentException e) {
+                    Logger.error("login:content error when loggin in", e);
+                    dataBaseClient = null;
+                    connection.set(false);
+                    Platform.runLater(() -> setError(warnText, errorText, indicator, false, e));
+                }
+                if (dataBaseClient != null) {
+                    Platform.runLater(() -> FunctionChooser.start());
+                }
+            }
+        });
+        loginThread.start();
+    }
+
+    private static void setError(Text warnText, TextArea errorText,
+            ProgressIndicator indicator, boolean loading, Exception e) {
+        if (e == null) {
             warnText.setVisible(false);
             errorText.setVisible(false);
             errorText.setText("");
-        } catch (IllegalArgumentException e) {
-            Logger.error("error when loading env", e);
-            dataBaseClient = null;
-            connection.set(false);
+            if (indicator != null) {
+                indicator.setVisible(loading);
+            }
+        } else {
             warnText.setVisible(true);
             errorText.setVisible(true);
             warnText.setText("Couldn't log into database");
             errorText.setText(e.getMessage());
             errorText.setPrefHeight(50);
             errorText.setPrefWidth(Region.USE_COMPUTED_SIZE);
-        }
-        if (dataBaseClient != null) {
-            FunctionChooser.start();
+            indicator.setVisible(loading);
         }
     }
 

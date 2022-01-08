@@ -4,6 +4,7 @@ import github.weichware10.analyse.Main;
 import github.weichware10.analyse.gui.util.AbsSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -23,6 +24,8 @@ public class LoginController extends AbsSceneController {
     private Text warnText;
     @FXML
     private TextArea errorText;
+    @FXML
+    private ProgressIndicator indicator;
 
     @Override
     protected void initialize() {
@@ -35,7 +38,9 @@ public class LoginController extends AbsSceneController {
         assert warnText != null
                 : "fx:id=\"warnText\" not injected: check 'LoginWindow.fxml'.";
         assert errorText != null
-                : "fx:id=\"errorText\" not injected: check 'LoginWindow.fxml'.";
+                        : "fx:id=\"errorText\" not injected: check 'LoginWindow.fxml'.";
+        assert indicator != null
+                        : "fx:id=\"loadingIndicator\" not injected: check 'Login.fxml'.";
     }
 
     @FXML
@@ -44,7 +49,8 @@ public class LoginController extends AbsSceneController {
                 passwortId.getText(),
                 schemaId.getText(),
                 warnText,
-                errorText);
+                errorText,
+                indicator);
     }
 
     @FXML
