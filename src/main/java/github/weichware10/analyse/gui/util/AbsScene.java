@@ -18,7 +18,7 @@ public abstract class AbsScene {
      * lädt die Szene intern und gibt die root-Instanz zurück.
      *
      * @param fxml - URL der FXML-Datei
-     * @return das Controller-Objekt.
+     * @return das geladene Parent Objekt.
      */
     protected static Parent initialize(URL fxml) {
 
