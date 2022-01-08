@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 
 <MenuBar xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.MainMenuBarController">
   <menus>
@@ -10,6 +11,9 @@
       <items>
             <MenuItem fx:id="databaseChange" mnemonicParsing="false" text="Datenbank ändern" />
             <MenuItem fx:id="databaseUrlReset" mnemonicParsing="false" text="Datenbank URL reset" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="logsMenu" mnemonicParsing="false" onAction="#toggleLogs" text="show Logs" />
+            <SeparatorMenuItem mnemonicParsing="false" />
         <MenuItem fx:id="logOutMenu" disable="true" mnemonicParsing="false" onAction="#logOut" text="Ausloggen" />
       </items>
     </Menu>
