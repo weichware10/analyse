@@ -69,8 +69,8 @@ public class Analyzer extends AbsScene {
      * @param analyseButton - MenuButton für Analyse-Typ
      */
     public static void setTrialIdComp(Button analyseButton) {
-        String trialId = TrialSelector.getTrialId();
-        if (trialId != null) {
+        String trialIdComp = TrialSelector.getTrialId();
+        if (trialIdComp != null) {
             analyseButton.setDisable(false);
         } else {
             analyseButton.setDisable(true);
