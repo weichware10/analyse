@@ -2,6 +2,7 @@ package github.weichware10.analyse.gui;
 
 import github.weichware10.analyse.gui.util.AbsSceneController;
 import github.weichware10.util.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -17,6 +18,11 @@ public class FunctionChooserController extends AbsSceneController {
     void logOut() {
         Logger.info(":FunctionChooser Logging out");
         Login.logOut();
+    }
+
+    @FXML
+    void startAnalyzer(ActionEvent event) {
+        Analyzer.start();
     }
 
     @Override
