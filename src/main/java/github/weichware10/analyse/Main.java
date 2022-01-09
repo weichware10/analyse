@@ -49,7 +49,7 @@ public class Main extends Application {
 
     private void keyBindings(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.K) && keyEvent.isControlDown()) {
-            TrialSelector.getTrialId();
+            TrialSelector.getTrialData();
         }
     }
 }

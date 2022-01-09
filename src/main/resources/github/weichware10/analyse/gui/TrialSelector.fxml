@@ -5,11 +5,12 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 
@@ -22,8 +23,9 @@
                   <Label text="Bitte filtern Sie die Versuchsliste, um Ergebnisse zu finden." HBox.hgrow="ALWAYS" />
                   <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <ComboBox fx:id="amountBox" editable="true" onAction="#checkAmountInput" onKeyPressed="#checkAmountInput" prefWidth="150.0" promptText="Anzahl" />
-                        <Button mnemonicParsing="false" text="Suchen" />
+                        <TextField prefWidth="174.0" promptText="Versuchs-ID" />
+                        <ComboBox fx:id="amountBox" editable="true" onAction="#checkAmountInput" onKeyPressed="#checkAmountInput" prefWidth="112.0" promptText="Anzahl" />
+                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" text="Suchen" />
                      </children>
                   </HBox>
                </children>
@@ -36,21 +38,35 @@
                   <DatePicker fx:id="endPicker" promptText="End-Datum" />
                </children>
             </HBox>
-            <TableView fx:id="resultTable" focusTraversable="false" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn editable="false" prefWidth="75.0" text="Versuchs-ID" />
-                <TableColumn prefWidth="75.0" text="Konfigurations-ID" />
-                  <TableColumn prefWidth="75.0" text="Zeit" />
-                  <TableColumn prefWidth="75.0" text="Antwort" />
-              </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
+            <StackPane VBox.vgrow="ALWAYS">
+               <children>
+                  <TableView fx:id="resultTable" focusTraversable="false" prefHeight="200.0" prefWidth="200.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <ProgressIndicator fx:id="indicator" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" translateY="-15.0" visible="false" StackPane.alignment="CENTER" />
+               </children>
+            </StackPane>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
    </center>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER_RIGHT">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+         <children>
+            <Button mnemonicParsing="false" text="reset" />
+            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="warnLabel" textFill="#da3633" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

@@ -4,6 +4,7 @@ import github.weichware10.analyse.Main;
 import github.weichware10.analyse.enums.AnalyseType;
 import github.weichware10.analyse.gui.util.AbsScene;
 import github.weichware10.util.Logger;
+import github.weichware10.util.data.TrialData;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -17,8 +18,8 @@ public class Analyzer extends AbsScene {
 
     private static Parent root;
     private static AnalyseType analyseType;
-    private static String trialId;
-    private static String trialIdComp;
+    private static TrialData trial;
+    private static TrialData trialComp;
 
     /**
      * Startet die App.
@@ -44,38 +45,38 @@ public class Analyzer extends AbsScene {
         Analyzer.analyseType = analyseType;
 
         if (Analyzer.analyseType != AnalyseType.COMPHEATMAP) {
-            trialIdComp = null;
+            trialComp = null;
         }
 
         Logger.info("analyseType set to " + analyseType);
     }
 
     /**
-     * Setzt die ausgewählte TrialID.
+     * Setzt das ausgewählte Trial.
      *
      * @param analyseTypMenuButton - MenuButton für Analyse-Typ
      */
     public static void setTrialId(MenuButton analyseTypMenuButton) {
-        String trialId = TrialSelector.getTrialId();
-        if (trialId != null) {
+        trial = TrialSelector.getTrialData();
+        if (trial != null) {
             analyseTypMenuButton.setDisable(false);
         }
-        Logger.info("trialId set to " + trialId);
+        Logger.info("trialId set to " + trial.trialId);
     }
 
     /**
-     *  Setzt die ausgewählte TrialID für Vergleichs Trial.
+     *  Setzt das ausgewählte Vergleichs Trial.
      *
      * @param analyseButton - MenuButton für Analyse-Typ
      */
     public static void setTrialIdComp(Button analyseButton) {
-        String trialIdComp = TrialSelector.getTrialId();
-        if (trialIdComp != null) {
+        trialComp = TrialSelector.getTrialData();
+        if (trialComp != null) {
             analyseButton.setDisable(false);
         } else {
             analyseButton.setDisable(true);
         }
-        Logger.info("trialIdComp set to " + trialIdComp);
+        Logger.info("trialIdComp set to " + trialComp.trialId);
     }
 
 }
