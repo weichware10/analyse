@@ -20,7 +20,7 @@ public class HeatmapConfigurator extends AbsScene {
     /**
      * Startet die App.
      *
-     * @return - Erstellte Konfiguration
+     * @param hmConfig - aktuelle Konfiguration
      */
     public static void start(HeatmapConfig hmConfig) {
         Dialog<String> configDialog = new Dialog<>();
@@ -29,7 +29,8 @@ public class HeatmapConfigurator extends AbsScene {
 
         configDialog.setTitle("Konfiguration Heatmap");
 
-        InitResult ir = initialize(HeatmapConfigurator.class.getResource("HeatmapConfigurator.fxml"));
+        InitResult ir =
+                initialize(HeatmapConfigurator.class.getResource("HeatmapConfigurator.fxml"));
         root = (VBox) ir.root;
         controller = (HeatmapConfiguratorController) ir.controller;
 
