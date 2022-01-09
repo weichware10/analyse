@@ -24,15 +24,17 @@ public class AnalyzerController extends AbsSceneController {
     @FXML
     void analyze(ActionEvent event) {
         // TODO: Start Analyse
+        Analyzer.analyse();
     }
 
     @FXML
     void selectTrial(ActionEvent event) {
-        analyseTypMenuButton.setDisable(true);
-        configButton.setDisable(true);
-        analyseButton.setDisable(true);
-        selectCompTrialButton.setVisible(false);
-        Analyzer.setTrialId(analyseTypMenuButton);
+        // analyseTypMenuButton.setDisable(true);
+        // configButton.setDisable(true);
+        // analyseButton.setDisable(true);
+        // selectCompTrialButton.setVisible(false);
+        Analyzer.setTrialId(analyseTypMenuButton, configButton,
+                analyseButton, selectCompTrialButton);
     }
 
     @FXML
@@ -50,7 +52,7 @@ public class AnalyzerController extends AbsSceneController {
 
     @FXML
     void setConfig(ActionEvent event) {
-        // TODO: KonfigDialog erstellen
+        Analyzer.setConfig();
     }
 
     @FXML
@@ -71,7 +73,7 @@ public class AnalyzerController extends AbsSceneController {
 
     @FXML
     void setVerlauf(ActionEvent event) {
-        configButton.setDisable(false);
+        configButton.setDisable(true);
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
         Analyzer.setAnalyseType(AnalyseType.VERLAUF);
@@ -88,13 +90,13 @@ public class AnalyzerController extends AbsSceneController {
     @FXML
     protected void initialize() {
         assert analyseButton != null :
-            "fx:id=\"analyseButton\" not injected: check  'Analyzer.fxml'.";
+            "fx:id=\"analyseButton\" not injected: check 'Analyzer.fxml'.";
         assert analyseTypMenuButton != null :
-            "fx:id=\"analyseTypMenuButton\" not injected: check  'Analyzer.fxml'.";
+            "fx:id=\"analyseTypMenuButton\" not injected: check 'Analyzer.fxml'.";
         assert configButton != null :
-            "fx:id=\"configButton\" not injected: check  'Analyzer.fxml'.";
+            "fx:id=\"configButton\" not injected: check 'Analyzer.fxml'.";
         assert selectCompTrialButton != null :
-            "fx:id=\"selectCompTrialButton\" not injected: check  'Analyzer.fxml'.";
+            "fx:id=\"selectCompTrialButton\" not injected: check 'Analyzer.fxml'.";
     }
 
 }
