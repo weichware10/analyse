@@ -38,7 +38,7 @@ public class DiagramConfigTest {
     @Test
     public void minTimeShouldBeSet() {
         DiagramConfig confDia1 = new DiagramConfig();
-        assertEquals("getMinTime sollte 0.5 zurückgeben", 0.5f, confDia1.getMinTime(), 0.00001f);
+        assertEquals("getMinTime sollte 0.0 zurückgeben", 0.0f, confDia1.getMinTime(), 0.00001f);
 
         DiagramConfig confDia2 = new DiagramConfig();
         assertTrue("setNewTime sollte True zurückgeben", confDia2.setNewTime(1.0f, 2.5f));
@@ -60,7 +60,7 @@ public class DiagramConfigTest {
     @Test
     public void maxTimeShouldBeSet() {
         DiagramConfig confDia1 = new DiagramConfig();
-        assertEquals("getMaxTime sollte 2.5 zurückgeben", 2.5f, confDia1.getMaxTime(), 0.00001f);
+        assertEquals("getMaxTime sollte 10.0 zurückgeben", 10.0f, confDia1.getMaxTime(), 0.00001f);
 
         DiagramConfig confDia2 = new DiagramConfig();
         assertTrue("setNewTime sollte True zurückgeben", confDia2.setNewTime(0.5f, 3.0f));
