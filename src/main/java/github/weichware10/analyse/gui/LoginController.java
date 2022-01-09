@@ -7,6 +7,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
 /**
@@ -41,6 +43,13 @@ public class LoginController extends AbsSceneController {
                         : "fx:id=\"errorText\" not injected: check 'LoginWindow.fxml'.";
         assert indicator != null
                         : "fx:id=\"loadingIndicator\" not injected: check 'Login.fxml'.";
+    }
+
+    @FXML
+    private void loginOnEnter(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            loginToDatabase();
+        }
     }
 
     @FXML

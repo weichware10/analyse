@@ -38,11 +38,11 @@
                </rowConstraints>
                <children>
                   <Label text="Benutzername" GridPane.columnIndex="1" />
-                  <TextField fx:id="benutzernameId" prefHeight="25.0" prefWidth="92.0" promptText="Benutzername" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="benutzernameId" onKeyPressed="#loginOnEnter" prefHeight="25.0" prefWidth="92.0" promptText="Benutzername" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Schema" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <PasswordField fx:id="passwortId" promptText="Passwort" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <PasswordField fx:id="passwortId" onKeyPressed="#loginOnEnter" promptText="Passwort" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Passwort" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="schemaId" promptText="Schema" text="public" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="schemaId" onKeyPressed="#loginOnEnter" promptText="Schema" text="public" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
