@@ -9,8 +9,6 @@ import github.weichware10.util.Logger;
 import github.weichware10.util.data.TrialData;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
 import javafx.stage.Screen;
 
 /**
@@ -19,6 +17,7 @@ import javafx.stage.Screen;
 public class Analyzer extends AbsScene {
 
     private static Parent root;
+    private static AnalyzerController controller;
     private static AnalyseType analyseType;
     private static TrialData trial;
     private static TrialData trialComp;
@@ -30,14 +29,16 @@ public class Analyzer extends AbsScene {
      */
     public static void start() {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-        root = start(Main.primaryStage,
+        InitResult ir = start(Main.primaryStage,
                 Login.class.getResource("Analyzer.fxml"),
                 root,
                 null,
                 "Analyse",
                 MainMenuBar.getMenuBar(),
                 (int) screenBounds.getWidth() / 2,
-                (int) screenBounds.getHeight() / 2).root;
+                (int) screenBounds.getHeight() / 2);
+        root = ir.root;
+        controller = (AnalyzerController) ir.controller;
     }
 
     /**
@@ -62,11 +63,8 @@ public class Analyzer extends AbsScene {
 
     /**
      * Setzt das ausgewählte Trial.
-     *
-     * @param analyseTypMenuButton - MenuButton für Analyse-Typ
      */
-    public static void setTrialId(MenuButton analyseTypMenuButton,
-            Button configButton, Button analyseButton, Button selectCompTrialButton) {
+    public static void setTrialId() {
         String oldTrialId = "null";
         if (trial != null) {
             oldTrialId = trial.getTrialId();
@@ -75,31 +73,29 @@ public class Analyzer extends AbsScene {
 
         if (oldTrialId != trial.getTrialId()) {
             // Zurücksetzen bei Änderung des Trials
-            analyseTypMenuButton.setDisable(true);
-            configButton.setDisable(true);
-            analyseButton.setDisable(true);
-            selectCompTrialButton.setVisible(false);
+            controller.analyseTypMenuButton.setDisable(true);
+            controller.configButton.setDisable(true);
+            controller.analyseButton.setDisable(true);
+            controller.selectCompTrialButton.setVisible(false);
             hmConfig = new HeatmapConfig();
             diaConfig = new DiagramConfig();
         }
 
         if (trial != null) {
-            analyseTypMenuButton.setDisable(false);
+            controller.analyseTypMenuButton.setDisable(false);
         }
         Logger.info("trialId set to " + trial.trialId);
     }
 
     /**
      *  Setzt das ausgewählte Vergleichs Trial.
-     *
-     * @param analyseButton - MenuButton für Analyse-Typ
      */
-    public static void setTrialIdComp(Button analyseButton) {
+    public static void setTrialIdComp() {
         trialComp = TrialSelector.getTrialData();
         if (trialComp != null) {
-            analyseButton.setDisable(false);
+            controller.analyseButton.setDisable(false);
         } else {
-            analyseButton.setDisable(true);
+            controller.analyseButton.setDisable(true);
         }
         Logger.info("trialIdComp set to " + trialComp.trialId);
     }
@@ -111,9 +107,11 @@ public class Analyzer extends AbsScene {
         if (analyseType == AnalyseType.COMPHEATMAP
                 || analyseType == AnalyseType.HEATPMAP) {
             HeatmapConfigurator.start(hmConfig);
+            Logger.info("Start Heatmap Configurator");
         } else if (analyseType == AnalyseType.RELFRQIMGAREA
                 || analyseType == AnalyseType.VIEWTIMEDISTR) {
-            // TODO: DiagrammConfigurator
+            DiagramConfigurator.start(diaConfig, analyseType);
+            Logger.info("Start Diagram Configurator");
         }
     }
 

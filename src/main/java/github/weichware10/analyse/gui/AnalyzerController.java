@@ -13,37 +13,32 @@ import javafx.scene.control.MenuButton;
 public class AnalyzerController extends AbsSceneController {
 
     @FXML
-    private Button analyseButton;
+    protected Button analyseButton;
     @FXML
-    private MenuButton analyseTypMenuButton;
+    protected MenuButton analyseTypMenuButton;
     @FXML
-    private Button configButton;
+    protected Button configButton;
     @FXML
-    private Button selectCompTrialButton;
+    protected Button selectCompTrialButton;
 
     @FXML
-    void analyze(ActionEvent event) {
+    protected void analyze(ActionEvent event) {
         // TODO: Start Analyse
         Analyzer.analyse();
     }
 
     @FXML
-    void selectTrial(ActionEvent event) {
-        // analyseTypMenuButton.setDisable(true);
-        // configButton.setDisable(true);
-        // analyseButton.setDisable(true);
-        // selectCompTrialButton.setVisible(false);
-        Analyzer.setTrialId(analyseTypMenuButton, configButton,
-                analyseButton, selectCompTrialButton);
+    protected void selectTrial(ActionEvent event) {
+        Analyzer.setTrialId();
     }
 
     @FXML
-    void selectTrialForComp(ActionEvent event) {
-        Analyzer.setTrialIdComp(analyseButton);
+    protected void selectTrialForComp(ActionEvent event) {
+        Analyzer.setTrialIdComp();
     }
 
     @FXML
-    void setCompHeatmap(ActionEvent event) {
+    protected void setCompHeatmap(ActionEvent event) {
         configButton.setDisable(false);
         analyseButton.setDisable(true);
         selectCompTrialButton.setVisible(true);
@@ -51,12 +46,12 @@ public class AnalyzerController extends AbsSceneController {
     }
 
     @FXML
-    void setConfig(ActionEvent event) {
+    protected void setConfig(ActionEvent event) {
         Analyzer.setConfig();
     }
 
     @FXML
-    void setHeapmap(ActionEvent event) {
+    protected void setHeapmap(ActionEvent event) {
         configButton.setDisable(false);
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
@@ -64,7 +59,7 @@ public class AnalyzerController extends AbsSceneController {
     }
 
     @FXML
-    void setRelFrqImgArea(ActionEvent event) {
+    protected void setRelFrqImgArea(ActionEvent event) {
         configButton.setDisable(false);
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
@@ -72,7 +67,7 @@ public class AnalyzerController extends AbsSceneController {
     }
 
     @FXML
-    void setVerlauf(ActionEvent event) {
+    protected void setVerlauf(ActionEvent event) {
         configButton.setDisable(true);
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
@@ -80,7 +75,7 @@ public class AnalyzerController extends AbsSceneController {
     }
 
     @FXML
-    void setViewTimeDistr(ActionEvent event) {
+    protected void setViewTimeDistr(ActionEvent event) {
         configButton.setDisable(false);
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
