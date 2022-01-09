@@ -1,5 +1,6 @@
 package github.weichware10.analyse.gui;
 
+import github.weichware10.analyse.Main;
 import github.weichware10.analyse.gui.util.AbsSceneController;
 import github.weichware10.util.Logger;
 import javafx.event.ActionEvent;
@@ -29,6 +30,6 @@ public class FunctionChooserController extends AbsSceneController {
     protected void initialize() {
         assert adminButton != null
         : "fx:id=\"adminButton\" was not injected: check your FXML file 'FunctionChooser.fxml'.";
-        adminButton.setDisable(!Login.dataBaseClient.permissions.isAdmin);
+        adminButton.setDisable(!Main.dataBaseClient.permissions.isAdmin);
     }
 }

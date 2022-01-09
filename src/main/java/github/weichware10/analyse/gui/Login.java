@@ -20,7 +20,6 @@ import javafx.stage.Screen;
  * Der Loginbildschirm der App.
  */
 public class Login extends AbsScene {
-    public static DataBaseClient dataBaseClient;
     private static SimpleBooleanProperty connection = new SimpleBooleanProperty(false);
     public static ObservableBooleanValue hasConnection = connection;
     public static String databaseUrl;
@@ -45,7 +44,7 @@ public class Login extends AbsScene {
      * Loggt den Nutzer aus und kehrt zum Login-Bildschirm zurück.
      */
     public static void logOut() {
-        dataBaseClient = null;
+        Main.dataBaseClient = null;
         connection.set(false);
         start();
     }
@@ -66,16 +65,17 @@ public class Login extends AbsScene {
                     databaseUrl = dotenv.get("DB_URL");
                 }
                 try {
-                    dataBaseClient = new DataBaseClient(databaseUrl, username, password, schema);
+                    Main.dataBaseClient = new DataBaseClient(
+                            databaseUrl, username, password, schema);
                     connection.set(true);
                     Platform.runLater(() -> setError(warnText, errorText, indicator, false, null));
                 } catch (IllegalArgumentException e) {
                     Logger.error("login:content error when loggin in", e);
-                    dataBaseClient = null;
+                    Main.dataBaseClient = null;
                     connection.set(false);
                     Platform.runLater(() -> setError(warnText, errorText, indicator, false, e));
                 }
-                if (dataBaseClient != null) {
+                if (Main.dataBaseClient != null) {
                     Platform.runLater(() -> FunctionChooser.start());
                 }
             }

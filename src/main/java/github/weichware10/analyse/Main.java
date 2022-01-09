@@ -4,6 +4,7 @@ import github.weichware10.analyse.gui.Login;
 import github.weichware10.analyse.gui.TrialSelector;
 import github.weichware10.analyse.gui.util.Log;
 import github.weichware10.util.Logger;
+import github.weichware10.util.db.DataBaseClient;
 import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Application;
 import javafx.scene.image.Image;
@@ -18,6 +19,7 @@ import org.joda.time.DateTime;
 public class Main extends Application {
 
     public static Stage primaryStage;
+    public static DataBaseClient dataBaseClient;
 
     /**
      * Einstiegspunkt der Analyse.
