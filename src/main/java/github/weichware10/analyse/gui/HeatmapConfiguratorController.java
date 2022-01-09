@@ -12,13 +12,13 @@ import javafx.scene.paint.Color;
 public class HeatmapConfiguratorController extends AbsSceneController {
 
     @FXML
-    private ColorPicker maxColorDiff;
+    protected ColorPicker maxColorDiff;
     @FXML
-    private ColorPicker minColorDiff;
+    protected ColorPicker minColorDiff;
     @FXML
-    private CheckBox showGrid;
+    protected CheckBox showGrid;
     @FXML
-    private CheckBox showImage;
+    protected CheckBox showImage;
 
     protected Color getMaxColorDiff() {
         return maxColorDiff.getValue();
@@ -36,19 +36,19 @@ public class HeatmapConfiguratorController extends AbsSceneController {
         return showImage.isSelected();
     }
 
-    public void setMaxColorDiff(Color maxColorDiff) {
+    protected void setMaxColorDiff(Color maxColorDiff) {
         this.maxColorDiff.setValue(maxColorDiff);
     }
 
-    public void setMinColorDiff(Color minColorDiff) {
+    protected void setMinColorDiff(Color minColorDiff) {
         this.minColorDiff.setValue(minColorDiff);
     }
 
-    public void setShowGrid(boolean showGrid) {
+    protected void setShowGrid(boolean showGrid) {
         this.showGrid.setSelected(showGrid);
     }
 
-    public void setShowImage(boolean showImage) {
+    protected void setShowImage(boolean showImage) {
         this.showImage.setSelected(showImage);
     }
 
