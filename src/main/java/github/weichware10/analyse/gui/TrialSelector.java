@@ -2,7 +2,6 @@ package github.weichware10.analyse.gui;
 
 import github.weichware10.analyse.Main;
 import github.weichware10.analyse.gui.util.AbsScene;
-import github.weichware10.util.Logger;
 import github.weichware10.util.ToolType;
 import github.weichware10.util.data.TrialData;
 import java.time.LocalDateTime;
@@ -10,7 +9,6 @@ import java.time.ZoneId;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -99,26 +97,14 @@ public class TrialSelector extends AbsScene {
     }
 
     private static BorderPane initialize() {
-        FXMLLoader loader = new FXMLLoader(TrialSelector.class.getResource("TrialSelector.fxml"));
-        try {
-            root = loader.load();
-        } catch (Exception e) {
-            Logger.error("Error when loading TrialSelector", e, true);
-            System.exit(-1);
-        }
-        controller = loader.getController();
-        if (controller == null) {
-            Logger.error("Error when loading TrialSelectorController");
-            System.exit(-1);
-        }
+        InitResult ir = initialize(TrialSelector.class.getResource("TrialSelector.fxml"));
+        root = (BorderPane) ir.root;
+        controller = (TrialSelectorController) ir.controller;
 
         controller.initAmountBox(1, 100, 50);
         controller.initToolTypeBox();
         controller.initResultTable();
         controller.initEndPicker();
-
-        // controller.searchButton.onActionProperty().addListener(e -> Logger.debug("action!"));
-        // controller.searchButton.onActionProperty().addListener(e -> search());
 
         return root;
     }

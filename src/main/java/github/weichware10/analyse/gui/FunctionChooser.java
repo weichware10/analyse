@@ -20,9 +20,10 @@ public class FunctionChooser extends AbsScene {
         root = start(Main.primaryStage,
                 Login.class.getResource("FunctionChooser.fxml"),
                 root,
+                null,
                 "Analyse",
                 MainMenuBar.getMenuBar(),
                 (int) screenBounds.getWidth() / 2,
-                (int) screenBounds.getHeight() / 2);
+                (int) screenBounds.getHeight() / 2).root;
     }
 }

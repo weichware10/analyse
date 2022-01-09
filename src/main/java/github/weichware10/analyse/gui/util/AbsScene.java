@@ -18,9 +18,9 @@ public abstract class AbsScene {
      * lädt die Szene intern und gibt die root-Instanz zurück.
      *
      * @param fxml - URL der FXML-Datei
-     * @return das geladene Parent Objekt.
+     * @return das geladene Parent Objekt und die Controller-Instanz.
      */
-    protected static Parent initialize(URL fxml) {
+    protected static InitResult initialize(URL fxml) {
 
         FXMLLoader loader = new FXMLLoader(fxml);
 
@@ -32,7 +32,9 @@ public abstract class AbsScene {
             System.exit(-1);
         }
 
-        return root;
+        AbsSceneController controller = loader.getController();
+
+        return new InitResult(root, controller);
     }
 
     /**
@@ -51,9 +53,10 @@ public abstract class AbsScene {
      * Zeigt die Szene an.
      *
      * @param primaryStage - das Hauptfenster
+     * @return das Initialisierungsergebniss
      */
-    public static Parent start(Stage primaryStage, URL fxml, Parent root,
-            String title, MenuBar menuBar,
+    public static InitResult start(Stage primaryStage, URL fxml, Parent root,
+            AbsSceneController controller, String title, MenuBar menuBar,
             Integer width, Integer height) {
         if (primaryStage == null || title == null || fxml == null) {
             throw new NullPointerException(
@@ -65,7 +68,9 @@ public abstract class AbsScene {
                                     (fxml != null) ? fxml.toString() : "null"));
         }
         if (root == null) {
-            root = initialize(fxml);
+            InitResult ir = initialize(fxml);
+            root = ir.root;
+            controller = ir.controller;
         }
         // Menüleiste setzen
         if (menuBar != null) {
@@ -84,6 +89,19 @@ public abstract class AbsScene {
             primaryStage.setScene(new Scene(root));
         }
         primaryStage.setTitle(title);
-        return root;
+        return new InitResult(root, controller);
+    }
+
+    /**
+     * root und controller des Lade-Vorgangs.
+     */
+    public static class InitResult {
+        public final Parent root;
+        public final AbsSceneController controller;
+
+        protected InitResult(Parent root, AbsSceneController controller) {
+            this.root = root;
+            this.controller = controller;
+        }
     }
 }

@@ -22,7 +22,7 @@ public class MainMenuBar extends AbsScene {
      */
     public static MenuBar getMenuBar() {
         if (root == null) {
-            root = (MenuBar) initialize(MainMenuBar.class.getResource("MainMenuBar.fxml"));
+            root = (MenuBar) initialize(MainMenuBar.class.getResource("MainMenuBar.fxml")).root;
         }
         return root;
     }
