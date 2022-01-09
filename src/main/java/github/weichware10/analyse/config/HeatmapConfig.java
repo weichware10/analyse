@@ -1,81 +1,46 @@
 package github.weichware10.analyse.config;
 
+import javafx.scene.paint.Color;
+
 /**
  * Speicherung der Konfiguration der Heatmap-Analysemethoden.
  */
 public class HeatmapConfig {
-    private float[] minColor;
-    private float[] maxColor;
+    private Color minColorDiff;
+    private Color maxColorDiff;
     private boolean grid;
     private boolean image;
-    private float[] minDiff;
-    private float[] maxDiff;
 
     /**
      * Speicherung der Konfiguration der Heatmap-Analysemethoden.
      */
     public HeatmapConfig() {
-        this.minColor = new float[] { 0, 0, 1 };
-        this.maxColor = new float[] { 1, 0, 0 };
+        this.minColorDiff = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+        this.maxColorDiff = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         this.grid = true;
         this.image = true;
-        this.minDiff = new float[] { 1, 0, 1 };
-        this.maxDiff = new float[] { 1, 1, 0 };
     }
 
-    /**
-     * setzt neue minimale Farbe.
-     *
-     * @param minColor - neue minimale Farbe
-     * @return
-     *         true, falls neue minimale Farbe erfolgreich gesetzt wird;
-     *         false, falls neue minimale Farbe nicht gesetzt wird
-     */
-    public boolean setMinColor(float[] minColor) {
-        if (minColor[0] > 1 || minColor[0] < 0 || minColor[1] > 1
-                || minColor[1] < 0 || minColor[2] > 1 || minColor[2] < 0) {
-            return false;
-        } else {
-            this.minColor = minColor;
-            return true;
-        }
+
+    public Color getMinColorDiff() {
+        return minColorDiff;
     }
 
-    /**
-     * gibt minimale Farbe zurück.
-     *
-     * @return minimale Farbe
-     */
-    public float[] getMinColor() {
-        return minColor;
+
+    public void setMinColorDiff(Color minColorDiff) {
+        this.minColorDiff = minColorDiff;
     }
 
-    /**
-     * setzt neue maximale Farbe.
-     *
-     * @param maxColor - neue maximale Farbe
-     * @return
-     *         true, falls neue maximale Farbe erfolgreich gesetzt wird;
-     *         false, falls neue maximale Farbe nicht gesetzt wird
-     */
-    public boolean setMaxColor(float[] maxColor) {
-        if (maxColor[0] > 1 || maxColor[0] < 0 || maxColor[1] > 1
-                || maxColor[1] < 0 || maxColor[2] > 1 || maxColor[2] < 0) {
-            return false;
-        } else {
-            this.maxColor = maxColor;
-            return true;
-        }
+
+    public Color getMaxColorDiff() {
+        return maxColorDiff;
     }
 
-    /**
-     * gibt maximale Farbe zurück.
-     *
-     * @return maximale Farbe
-     */
-    public float[] getMaxColor() {
-        return maxColor;
+
+    public void setMaxColorDiff(Color maxColorDiff) {
+        this.maxColorDiff = maxColorDiff;
     }
+
 
     /**
      * aktiviert bzw. deaktiviert die Anzeige des Rasters.
@@ -111,61 +76,5 @@ public class HeatmapConfig {
      */
     public boolean isImage() {
         return image;
-    }
-
-    /**
-     * setzt neue minimale Farbe für Vergleich.
-     *
-     * @param minDiff - neue minimale Farbe für Vergleich
-     * @return
-     *         true, falls neue minimale Farbe für Vergleich erfolgreich gesetzt
-     *         wird;
-     *         false, falls neue minimale Farbe für Vergleich nicht gesetzt wird
-     */
-    public boolean setMinDiff(float[] minDiff) {
-        if (minDiff[0] > 1 || minDiff[0] < 0 || minDiff[1] > 1
-                || minDiff[1] < 0 || minDiff[2] > 1 || minDiff[2] < 0) {
-            return false;
-        } else {
-            this.minDiff = minDiff;
-            return true;
-        }
-    }
-
-    /**
-     * gibt minimale Farbe für Vergleich zurück.
-     *
-     * @return minimale Farbe für Vergleich
-     */
-    public float[] getMinDiff() {
-        return minDiff;
-    }
-
-    /**
-     * setzt neue maximale Farbe für Vergleich.
-     *
-     * @param maxDiff - neue maximale Farbe für Vergleich
-     * @return
-     *         true, falls neue maximale Farbe für Vergleich erfolgreich gesetzt
-     *         wird;
-     *         false, falls neue maximale Farbe für Vergleich nicht gesetzt wird
-     */
-    public boolean setMaxDiff(float[] maxDiff) {
-        if (maxDiff[0] > 1 || maxDiff[0] < 0 || maxDiff[1] > 1
-                || maxDiff[1] < 0 || maxDiff[2] > 1 || maxDiff[2] < 0) {
-            return false;
-        } else {
-            this.maxDiff = maxDiff;
-            return true;
-        }
-    }
-
-    /**
-     * gibt maximale Farbe für Vergleich zurück.
-     *
-     * @return maximale Farbe für Vergleich
-     */
-    public float[] getMaxDiff() {
-        return maxDiff;
     }
 }
