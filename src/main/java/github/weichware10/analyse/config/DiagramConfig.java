@@ -5,8 +5,8 @@ package github.weichware10.analyse.config;
  */
 public class DiagramConfig {
     private int amountAreas; // * 2,4,6,8
-    private float minTime; // * >= 0 Länge | Zoomstufe
-    private float maxTime; // * <= 10 Länge | Zoomstufe
+    private double minTime; // * >= 0 Länge | Zoomstufe
+    private double maxTime; // * <= 10 Länge | Zoomstufe
     private int stepsBetween; // * [1,10], minTime=maxTime: steps = 0
 
     /**
@@ -14,8 +14,8 @@ public class DiagramConfig {
      */
     public DiagramConfig() {
         this.amountAreas = 4;
-        this.minTime = 0.5f;
-        this.maxTime = 2.5f;
+        this.minTime = 0.0f;
+        this.maxTime = 10.0f;
         this.stepsBetween = 4;
     }
 
@@ -54,7 +54,7 @@ public class DiagramConfig {
      *         true, falls neue min. und max. Zeit erfolgreich gesetzt wurden;
      *         false, falls neue min. und max. Zeit nicht gesetzt wurden
      */
-    public boolean setNewTime(float minTime, float maxTime) {
+    public boolean setNewTime(double minTime, double maxTime) {
         if (minTime >= 0.0f && maxTime <= 10.0f && minTime <= maxTime) {
             this.minTime = minTime;
             this.maxTime = maxTime;
@@ -72,7 +72,7 @@ public class DiagramConfig {
      *
      * @return minimale Zeit
      */
-    public float getMinTime() {
+    public double getMinTime() {
         return minTime;
     }
 
@@ -81,7 +81,7 @@ public class DiagramConfig {
      *
      * @return maximale Zeit
      */
-    public float getMaxTime() {
+    public double getMaxTime() {
         return maxTime;
     }
 
