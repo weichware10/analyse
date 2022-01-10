@@ -12,10 +12,6 @@ import javafx.scene.control.MenuItem;
  */
 public class MainMenuBarController extends AbsSceneController {
     @FXML
-    private MenuItem databaseChange;
-    @FXML
-    private MenuItem databaseUrlReset;
-    @FXML
     private MenuItem logOutMenu;
     @FXML
     private MenuItem logsMenu;
@@ -37,13 +33,13 @@ public class MainMenuBarController extends AbsSceneController {
     }
 
     @FXML
-    protected static void resetDataBaseUrl() {
-        Login.databaseUrl = null;
+    protected void resetDataBaseUrl() {
+        MainMenuBar.resetDataBaseUrl();
     }
 
     @FXML
-    protected static void setDataBaseUrl() {
-        ;
+    protected void setDataBaseUrl() {
+        MainMenuBar.changeDataBaseUrl();
     }
 
     @FXML
@@ -66,10 +62,6 @@ public class MainMenuBarController extends AbsSceneController {
 
     @Override
     protected void initialize() {
-        assert databaseChange != null
-                : "fx:id=\"databaseChange\" not injected: check 'MainMenuBar.fxml'.";
-        assert databaseUrlReset != null
-                : "fx:id=\"databaseUrlReset\" not injected: check 'MainMenuBar.fxml'.";
         assert logOutMenu != null
                 : "fx:id=\"logOutMenu\" not injected: check 'MainMenuBar.fxml'.";
         assert logsMenu != null

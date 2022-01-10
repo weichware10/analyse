@@ -1,12 +1,15 @@
 package github.weichware10.analyse.gui;
 
+import github.weichware10.analyse.Main;
 import github.weichware10.analyse.gui.util.AbsScene;
 import github.weichware10.util.Logger;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextInputDialog;
 
 /**
  * Haupt-Menüleiste.
@@ -40,5 +43,20 @@ public class MainMenuBar extends AbsScene {
                 Logger.error("error occured while opening documentation", e);
             }
         }
+    }
+
+    protected static void changeDataBaseUrl() {
+        TextInputDialog tid = new TextInputDialog();
+        tid.setTitle("DATABASE URL CHANGE");
+        tid.setHeaderText("DATABASE URL CHANGE");
+        tid.setContentText("Please input a new URL");
+        Optional<String> res = tid.showAndWait();
+        if (res.isPresent() && res.get().length() > 0) {
+            Main.databaseUrl = res.get();
+        }
+    }
+
+    protected static void resetDataBaseUrl() {
+        Main.databaseUrl = null;
     }
 }

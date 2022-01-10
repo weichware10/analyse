@@ -22,7 +22,6 @@ import javafx.stage.Screen;
 public class Login extends AbsScene {
     private static SimpleBooleanProperty connection = new SimpleBooleanProperty(false);
     public static ObservableBooleanValue hasConnection = connection;
-    public static String databaseUrl;
 
     private static Parent root;
 
@@ -61,13 +60,13 @@ public class Login extends AbsScene {
 
             @Override
             public void run() {
-                if (databaseUrl == null) {
+                if (Main.databaseUrl == null) {
                     Dotenv dotenv = Dotenv.load();
-                    databaseUrl = dotenv.get("DB_URL");
+                    Main.databaseUrl = dotenv.get("DB_URL");
                 }
                 try {
                     Main.dataBaseClient = new DataBaseClient(
-                            databaseUrl, username, password, schema);
+                            Main.databaseUrl, username, password, schema);
                     connection.set(true);
                     Platform.runLater(() -> setError(warnText, errorText, indicator, false, null));
                 } catch (IllegalArgumentException e) {

@@ -20,6 +20,7 @@ public class Main extends Application {
 
     public static Stage primaryStage;
     public static DataBaseClient dataBaseClient;
+    public static String databaseUrl;
 
     /**
      * Einstiegspunkt der Analyse.
@@ -47,6 +48,7 @@ public class Main extends Application {
         primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, e -> keyBindings(e));
     }
 
+    // TODO rausnehmen weil nicht mehr debuggen
     private void keyBindings(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.K) && keyEvent.isControlDown()) {
             TrialSelector.getTrialData();

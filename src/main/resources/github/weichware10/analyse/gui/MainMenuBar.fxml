@@ -9,10 +9,10 @@
   <menus>
     <Menu mnemonicParsing="false" text="File">
       <items>
-            <MenuItem fx:id="databaseChange" mnemonicParsing="false" text="Datenbank ändern" />
-            <MenuItem fx:id="databaseUrlReset" mnemonicParsing="false" text="Datenbank URL reset" />
+            <MenuItem mnemonicParsing="false" onAction="#setDataBaseUrl" text="Datenbank ändern" />
+            <MenuItem mnemonicParsing="false" onAction="#resetDataBaseUrl" text="Datenbank URL reset" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="logsMenu" mnemonicParsing="false" onAction="#toggleLogs" text="show Logs" />
+            <MenuItem mnemonicParsing="false" onAction="#toggleLogs" text="show Logs" />
             <SeparatorMenuItem mnemonicParsing="false" />
         <MenuItem fx:id="logOutMenu" disable="true" mnemonicParsing="false" onAction="#logOut" text="Ausloggen" />
       </items>
