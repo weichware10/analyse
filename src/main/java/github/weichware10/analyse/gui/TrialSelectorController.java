@@ -43,6 +43,10 @@ public class TrialSelectorController extends AbsSceneController {
     protected Label warnLabel;
     @FXML
     protected ProgressIndicator indicator;
+    @FXML
+    protected Button resetButton;
+    @FXML
+    protected TextField trialIdField;
 
     @FXML
     protected Integer checkAmountInput() {
@@ -68,6 +72,11 @@ public class TrialSelectorController extends AbsSceneController {
     @FXML
     private void search() {
         TrialSelector.search();
+    }
+
+    @FXML
+    private void reset() {
+        TrialSelector.reset();
     }
 
     protected void setWarn(String warn) {
@@ -103,6 +112,10 @@ public class TrialSelectorController extends AbsSceneController {
         for (Integer i = minAmount; i <= maxAmount; i++) {
             amountBox.getItems().add(i);
         }
+        initAmountBox();
+    }
+
+    protected void initAmountBox() {
         amountBox.setValue(defaultAmount);
     }
 
@@ -133,7 +146,10 @@ public class TrialSelectorController extends AbsSceneController {
                 : "fx:id=\"warnLabel\" not injected: check 'TrialSelector.fxml'.";
         assert indicator != null
                 : "fx:id=\"indicator\" not injected: check 'TrialSelector.fxml'.";
-
+        assert resetButton != null
+                : "fx:id=\"resetButton\" not injected: check 'TrialSelector.fxml'.";
+        assert trialIdField != null
+                : "fx:id=\"trialIdField\" not injected: check 'TrialSelector.fxml'.";
     }
 
 }

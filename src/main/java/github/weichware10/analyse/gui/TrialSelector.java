@@ -24,30 +24,31 @@ public class TrialSelector extends AbsScene {
     private static BorderPane root;
     private static TrialSelectorController controller;
     private static String trialId;
+    private static String fixedConfigId = null;
 
     /**
      * Auswahldialog für Trial.
      */
-    public static TrialData getTrialData() {
-
+    public static TrialData getTrialData(String fixedConfigId) {
         Dialog<Void> selectorDialog = new Dialog<>();
         ButtonType select = new ButtonType("Trial auswählen", ButtonData.APPLY);
         selectorDialog.getDialogPane().getButtonTypes().addAll(select, ButtonType.CANCEL);
 
         selectorDialog.getDialogPane().setContent((root != null) ? root : initialize());
 
+        TrialSelector.fixedConfigId = fixedConfigId;
+        if (fixedConfigId != null) {
+            controller.configIdField.setText(fixedConfigId);
+            controller.configIdField.setDisable(true);
+            search();
+        } else {
+            controller.configIdField.setText("");
+            controller.configIdField.setDisable(false);
+        }
+
         final Button selectButton = (Button) selectorDialog.getDialogPane().lookupButton(select);
 
-        selectButton.addEventFilter(ActionEvent.ACTION, selectEvent -> {
-            TrialData selected = controller.resultTable.getSelectionModel().getSelectedItem();
-            if (selected == null) {
-                controller.setWarn("Bitte wählen Sie ein Trial aus.");
-                selectEvent.consume();
-                return;
-            }
-            trialId = selected.trialId;
-        });
-
+        selectButton.addEventFilter(ActionEvent.ACTION, e -> selectEventFilter(e));
 
         selectorDialog.showAndWait();
 
@@ -85,6 +86,16 @@ public class TrialSelector extends AbsScene {
         searchThread.start();
     }
 
+    protected static void reset() {
+        controller.initResultTable();
+        controller.initAmountBox();
+        controller.initEndPicker();
+        if (fixedConfigId == null) {
+            controller.configIdField.setText("");
+            controller.configIdField.setDisable(true);
+        }
+    }
+
     private static DateTime localDateToDateTime(java.time.LocalDate localDate, boolean endOfDay) {
         if (localDate == null) {
             return null;
@@ -105,7 +116,16 @@ public class TrialSelector extends AbsScene {
         controller.initToolTypeBox();
         controller.initResultTable();
         controller.initEndPicker();
-
         return root;
+    }
+
+    private static void selectEventFilter(ActionEvent selectEvent) {
+        TrialData selected = controller.resultTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            controller.setWarn("Bitte wählen Sie ein Trial aus.");
+            selectEvent.consume();
+            return;
+        }
+        trialId = selected.trialId;
     }
 }

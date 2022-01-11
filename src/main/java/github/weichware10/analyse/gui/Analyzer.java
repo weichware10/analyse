@@ -69,7 +69,7 @@ public class Analyzer extends AbsScene {
         if (trial != null) {
             oldTrialId = trial.getTrialId();
         }
-        trial = TrialSelector.getTrialData();
+        trial = TrialSelector.getTrialData(null);
 
         if (oldTrialId != trial.getTrialId()) {
             // Zurücksetzen bei Änderung des Trials
@@ -91,7 +91,7 @@ public class Analyzer extends AbsScene {
      *  Setzt das ausgewählte Vergleichs Trial.
      */
     public static void setTrialIdComp() {
-        trialComp = TrialSelector.getTrialData();
+        trialComp = TrialSelector.getTrialData(trial.configId);
         if (trialComp != null) {
             controller.analyseButton.setDisable(false);
         } else {
