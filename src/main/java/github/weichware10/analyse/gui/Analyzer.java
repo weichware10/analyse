@@ -54,6 +54,8 @@ public class Analyzer extends AbsScene {
         hmConfig = new HeatmapConfig();
         diaConfig = new DiagramConfig();
 
+        controller.errorLabel.setVisible(false);
+
         if (Analyzer.analyseType != AnalyseType.COMPHEATMAP) {
             trialComp = null;
         }
@@ -69,23 +71,27 @@ public class Analyzer extends AbsScene {
         if (trial != null) {
             oldTrialId = trial.getTrialId();
         }
-        trial = TrialSelector.getTrialData(null);
-
-        if (oldTrialId != trial.getTrialId()) {
-            // Zurücksetzen bei Änderung des Trials
-            controller.analyseTypMenuButton.setDisable(true);
-            controller.configButton.setDisable(true);
-            controller.analyseButton.setDisable(true);
-            controller.selectCompTrialButton.setVisible(false);
-            controller.analyseTypMenuButton.setText("Analyse-Typ");
-            hmConfig = new HeatmapConfig();
-            diaConfig = new DiagramConfig();
+        try {
+            trial = TrialSelector.getTrialData(null);
+        } catch (NullPointerException e) {
+            Logger.error("Null Trial returned", e, true);
         }
 
         if (trial != null) {
+            if (oldTrialId != trial.getTrialId()) {
+                // Zurücksetzen bei Änderung des Trials
+                controller.analyseTypMenuButton.setDisable(true);
+                controller.configButton.setDisable(true);
+                controller.analyseButton.setDisable(true);
+                controller.selectCompTrialButton.setVisible(false);
+                controller.analyseTypMenuButton.setText("Analyse-Typ");
+                hmConfig = new HeatmapConfig();
+                diaConfig = new DiagramConfig();
+                controller.errorLabel.setVisible(false);
+            }
             controller.analyseTypMenuButton.setDisable(false);
+            Logger.info("trialId set to " + trial.trialId);
         }
-        Logger.info("trialId set to " + trial.trialId);
     }
 
     /**
@@ -93,12 +99,16 @@ public class Analyzer extends AbsScene {
      */
     public static void setTrialIdComp() {
         trialComp = TrialSelector.getTrialData(trial.configId);
-        if (trialComp != null) {
+        if (!trialComp.getTrialId().equals(trial.getTrialId())) {
             controller.analyseButton.setDisable(false);
+            controller.errorLabel.setVisible(false);
+            Logger.info("trialIdComp set to " + trialComp.trialId);
         } else {
             controller.analyseButton.setDisable(true);
+            controller.errorLabel.setText(
+                "Trial und Vergleichs-Trial sind identisch. Wähle ein anderes Vergleichs-Trial!");
+            controller.errorLabel.setVisible(true);
         }
-        Logger.info("trialIdComp set to " + trialComp.trialId);
     }
 
     /**

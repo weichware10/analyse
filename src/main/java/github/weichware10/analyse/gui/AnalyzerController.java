@@ -5,6 +5,7 @@ import github.weichware10.analyse.gui.util.AbsSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 
 /**
@@ -20,6 +21,8 @@ public class AnalyzerController extends AbsSceneController {
     protected Button configButton;
     @FXML
     protected Button selectCompTrialButton;
+    @FXML
+    protected Label errorLabel;
 
     @FXML
     protected void analyze(ActionEvent event) {
@@ -90,13 +93,15 @@ public class AnalyzerController extends AbsSceneController {
     @FXML
     protected void initialize() {
         assert analyseButton != null :
-            "fx:id=\"analyseButton\" not injected: check 'Analyzer.fxml'.";
+                "fx:id=\"analyseButton\" not injected: check 'Analyzer.fxml'.";
         assert analyseTypMenuButton != null :
-            "fx:id=\"analyseTypMenuButton\" not injected: check 'Analyzer.fxml'.";
+                "fx:id=\"analyseTypMenuButton\" not injected: check 'Analyzer.fxml'.";
         assert configButton != null :
-            "fx:id=\"configButton\" not injected: check 'Analyzer.fxml'.";
+                "fx:id=\"configButton\" not injected: check 'Analyzer.fxml'.";
+        assert errorLabel != null :
+                "fx:id=\"errorLabel\" not injected: check 'Analyzer.fxml'.";
         assert selectCompTrialButton != null :
-            "fx:id=\"selectCompTrialButton\" not injected: check 'Analyzer.fxml'.";
+                "fx:id=\"selectCompTrialButton\" not injected: check 'Analyzer.fxml'.";
     }
 
 }
