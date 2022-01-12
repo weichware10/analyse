@@ -77,4 +77,20 @@ public class HeatmapConfig {
     public boolean isImage() {
         return image;
     }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                HeatmapConfig: {
+                    minColorDiff: (%f,%f,%f)
+                    maxColorDiff: (%f,%f,%f)
+                    isGrid: %b
+                    isImage: %b
+                }
+                """,
+                minColorDiff.getRed(), minColorDiff.getGreen(), minColorDiff.getBlue(),
+                maxColorDiff.getRed(), maxColorDiff.getGreen(), maxColorDiff.getBlue(),
+                isGrid(),
+                isImage());
+    }
 }

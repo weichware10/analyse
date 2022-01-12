@@ -116,4 +116,19 @@ public class DiagramConfig {
         return stepsBetween;
     }
 
+    @Override
+    public String toString() {
+        return String.format("""
+                DiagramConfig: {
+                    amountAreas: %d
+                    minTime: %f
+                    maxTime: %f
+                    stepsBetween: %d
+                }
+                """,
+                amountAreas,
+                minTime,
+                maxTime,
+                stepsBetween);
+    }
 }
