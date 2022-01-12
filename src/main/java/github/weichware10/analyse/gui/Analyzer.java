@@ -42,7 +42,6 @@ public class Analyzer extends AbsScene {
     }
 
     /**
-     * /**
      * Setzt den Analyse-Typ.
      *
      * @param analyseType - Analyse-Typ
@@ -112,7 +111,7 @@ public class Analyzer extends AbsScene {
     }
 
     /**
-     * setzt die Konfiguration für Heatmap bzw. Diagramm Analyse
+     * Setzt die Konfiguration für Heatmap bzw. Diagramm Analyse
      */
     public static void setConfig() {
         if (analyseType == AnalyseType.COMPHEATMAP
@@ -126,8 +125,17 @@ public class Analyzer extends AbsScene {
         }
     }
 
+    /**
+     * Start Analyse.
+     */
     public static void analyse() {
-        Logger.info("Analyzer");
+        String output = String.format(
+                "analyseType: %s \ntrial: %s \ntrialComp: %s \nhmConfig: %s \ndiaConfig: %s",
+                analyseType != null ? analyseType : "null",
+                trial != null ? trial.toString() : "null",
+                trialComp != null ? trialComp.toString() : "null",
+                hmConfig.toString(),
+                diaConfig.toString());
+        Logger.info(output);
     }
-
 }

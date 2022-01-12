@@ -18,16 +18,37 @@ public class AnalyzerController extends AbsSceneController {
     @FXML
     protected MenuButton analyseTypMenuButton;
     @FXML
+    protected Button backButton;
+    @FXML
     protected Button configButton;
     @FXML
-    protected Button selectCompTrialButton;
-    @FXML
     protected Label errorLabel;
+    @FXML
+    protected Button exportButton;
+    @FXML
+    protected Button exportRawButton;
+    @FXML
+    protected Button selectCompTrialButton;
 
     @FXML
     protected void analyze(ActionEvent event) {
-        // TODO: Start Analyse
+        // TODO: Analyse
         Analyzer.analyse();
+    }
+
+    @FXML
+    void back(ActionEvent event) {
+        // TODO: back
+    }
+
+    @FXML
+    void export(ActionEvent event) {
+        // TODO: Export
+    }
+
+    @FXML
+    void exportRaw(ActionEvent event) {
+        // TODO: ExportRaw
     }
 
     @FXML
@@ -55,7 +76,7 @@ public class AnalyzerController extends AbsSceneController {
     }
 
     @FXML
-    protected void setHeapmap(ActionEvent event) {
+    protected void setHeatmap(ActionEvent event) {
         configButton.setDisable(false);
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
@@ -92,16 +113,22 @@ public class AnalyzerController extends AbsSceneController {
 
     @FXML
     protected void initialize() {
-        assert analyseButton != null :
-                "fx:id=\"analyseButton\" not injected: check 'Analyzer.fxml'.";
-        assert analyseTypMenuButton != null :
-                "fx:id=\"analyseTypMenuButton\" not injected: check 'Analyzer.fxml'.";
-        assert configButton != null :
-                "fx:id=\"configButton\" not injected: check 'Analyzer.fxml'.";
-        assert errorLabel != null :
-                "fx:id=\"errorLabel\" not injected: check 'Analyzer.fxml'.";
-        assert selectCompTrialButton != null :
-                "fx:id=\"selectCompTrialButton\" not injected: check 'Analyzer.fxml'.";
+        assert analyseButton != null
+                : "fx:id=\"analyseButton\" not injected: check 'Analyzer.fxml'.";
+        assert analyseTypMenuButton != null
+                : "fx:id=\"analyseTypMenuButton\" not injected: check 'Analyzer.fxml'.";
+        assert backButton != null
+                : "fx:id=\"backButton\" was injected: check 'Analyzer.fxml'.";
+        assert configButton != null
+                : "fx:id=\"configButton\" not injected: check 'Analyzer.fxml'.";
+        assert errorLabel != null
+                : "fx:id=\"errorLabel\" not injected: check 'Analyzer.fxml'.";
+        assert exportButton != null
+                : "fx:id=\"exportButton\" not injected: check 'Analyzer.fxml'.";
+        assert exportRawButton != null
+                : "fx:id=\"exportRawButton\" not injected: check 'Analyzer.fxml'.";
+        assert selectCompTrialButton != null
+                : "fx:id=\"selectCompTrialButton\" not injected: check 'Analyzer.fxml'.";
     }
 
 }

@@ -19,7 +19,7 @@
             <Button mnemonicParsing="false" onAction="#selectTrial" text="Auswahl Trial" />
             <MenuButton fx:id="analyseTypMenuButton" disable="true" mnemonicParsing="false" text="Analyse-Typ">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#setHeapmap" text="Heatmap" />
+                <MenuItem mnemonicParsing="false" onAction="#setHeatmap" text="Heatmap" />
                 <MenuItem mnemonicParsing="false" onAction="#setCompHeatmap" text="Heatmap Vergleich" />
                   <MenuItem mnemonicParsing="false" onAction="#setVerlauf" text="Verlauf" />
                   <MenuItem mnemonicParsing="false" onAction="#setRelFrqImgArea" text="Häufigkeitsverteilung Bildbereiche" />
@@ -51,6 +51,21 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="90.0" prefWidth="200.0" spacing="15.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="183.0" spacing="15.0">
+               <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Zurück" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="337.0" spacing="15.0">
+               <children>
+                  <Button fx:id="exportRawButton" disable="true" mnemonicParsing="false" onAction="#exportRaw" text="ExportRaw" />
+                  <Button fx:id="exportButton" disable="true" mnemonicParsing="false" onAction="#export" text="Export" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
