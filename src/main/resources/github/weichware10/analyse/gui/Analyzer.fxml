@@ -20,7 +20,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#setHeapmap" text="Heatmap" />
                 <MenuItem mnemonicParsing="false" onAction="#setCompHeatmap" text="Heatmap Vergleich" />
                   <MenuItem mnemonicParsing="false" onAction="#setVerlauf" text="Verlauf" />
-                  <MenuItem mnemonicParsing="false" onAction="#setRelFrqImgArea" text="Häufigkeitsvertilung Bildbereiche" />
+                  <MenuItem mnemonicParsing="false" onAction="#setRelFrqImgArea" text="Häufigkeitsverteilung Bildbereiche" />
                   <MenuItem mnemonicParsing="false" onAction="#setViewTimeDistr" text="Verteilung Betrachtungszeit" />
               </items>
             </MenuButton>

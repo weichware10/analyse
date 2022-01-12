@@ -77,6 +77,7 @@ public class Analyzer extends AbsScene {
             controller.configButton.setDisable(true);
             controller.analyseButton.setDisable(true);
             controller.selectCompTrialButton.setVisible(false);
+            controller.analyseTypMenuButton.setText("Analyse-Typ");
             hmConfig = new HeatmapConfig();
             diaConfig = new DiagramConfig();
         }

@@ -43,6 +43,7 @@ public class AnalyzerController extends AbsSceneController {
         analyseButton.setDisable(true);
         selectCompTrialButton.setVisible(true);
         Analyzer.setAnalyseType(AnalyseType.COMPHEATMAP);
+        analyseTypMenuButton.setText("Heatmap Vergleich");
     }
 
     @FXML
@@ -56,6 +57,7 @@ public class AnalyzerController extends AbsSceneController {
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
         Analyzer.setAnalyseType(AnalyseType.HEATPMAP);
+        analyseTypMenuButton.setText("Heatmap");
     }
 
     @FXML
@@ -64,6 +66,7 @@ public class AnalyzerController extends AbsSceneController {
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
         Analyzer.setAnalyseType(AnalyseType.RELFRQIMGAREA);
+        analyseTypMenuButton.setText("Häufigkeitsverteilung Bildbereiche");
     }
 
     @FXML
@@ -72,6 +75,7 @@ public class AnalyzerController extends AbsSceneController {
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
         Analyzer.setAnalyseType(AnalyseType.VERLAUF);
+        analyseTypMenuButton.setText("Verlauf");
     }
 
     @FXML
@@ -80,6 +84,7 @@ public class AnalyzerController extends AbsSceneController {
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
         Analyzer.setAnalyseType(AnalyseType.VIEWTIMEDISTR);
+        analyseTypMenuButton.setText("Verteilung Betrachtungszeit");
     }
 
     @FXML
