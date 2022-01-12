@@ -8,7 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Konfiguratorfenster für Diagramm-Analysen der App.
@@ -29,6 +31,10 @@ public class DiagramConfigurator extends AbsScene {
         configDialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL, applyButtonType);
 
         configDialog.setTitle("Konfiguration Diagramm");
+
+        Stage stage = (Stage) configDialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(
+                new Image(DiagramConfigurator.class.getResource("app-icon.png").toString()));
 
         InitResult ir =
                 initialize(DiagramConfigurator.class.getResource("DiagramConfigurator.fxml"));

@@ -13,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.joda.time.DateTime;
 
 /**
@@ -33,6 +35,12 @@ public class TrialSelector extends AbsScene {
         Dialog<Void> selectorDialog = new Dialog<>();
         ButtonType select = new ButtonType("Trial auswählen", ButtonData.APPLY);
         selectorDialog.getDialogPane().getButtonTypes().addAll(select, ButtonType.CANCEL);
+
+        selectorDialog.setTitle("Auswahl Trial");
+
+        Stage stage = (Stage) selectorDialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(
+                new Image(TrialSelector.class.getResource("app-icon.png").toString()));
 
         selectorDialog.getDialogPane().setContent((root != null) ? root : initialize());
 

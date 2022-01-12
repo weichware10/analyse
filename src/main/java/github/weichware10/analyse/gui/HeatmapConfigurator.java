@@ -7,7 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Konfiguratorfenster für Heatmap-Analysen der App.
@@ -28,6 +30,10 @@ public class HeatmapConfigurator extends AbsScene {
         configDialog.getDialogPane().getButtonTypes().addAll(applyButtonType, ButtonType.CANCEL);
 
         configDialog.setTitle("Konfiguration Heatmap");
+
+        Stage stage = (Stage) configDialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(
+                new Image(HeatmapConfigurator.class.getResource("app-icon.png").toString()));
 
         InitResult ir =
                 initialize(HeatmapConfigurator.class.getResource("HeatmapConfigurator.fxml"));
