@@ -1,4 +1,4 @@
-package github.weichware10.analyse.gui;
+package github.weichware10.analyse.gui.analyse;
 
 import github.weichware10.analyse.config.HeatmapConfig;
 import github.weichware10.analyse.gui.util.AbsScene;

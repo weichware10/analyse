@@ -1,9 +1,11 @@
-package github.weichware10.analyse.gui;
+package github.weichware10.analyse.gui.analyse;
 
 import github.weichware10.analyse.Main;
 import github.weichware10.analyse.config.DiagramConfig;
 import github.weichware10.analyse.config.HeatmapConfig;
 import github.weichware10.analyse.enums.AnalyseType;
+import github.weichware10.analyse.gui.general.Login;
+import github.weichware10.analyse.gui.general.MainMenuBar;
 import github.weichware10.analyse.gui.util.AbsScene;
 import github.weichware10.util.Logger;
 import github.weichware10.util.data.TrialData;

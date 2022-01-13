@@ -1,6 +1,7 @@
-package github.weichware10.analyse.gui;
+package github.weichware10.analyse.gui.general;
 
 import github.weichware10.analyse.Main;
+import github.weichware10.analyse.gui.analyse.Analyzer;
 import github.weichware10.analyse.gui.util.AbsSceneController;
 import github.weichware10.util.Logger;
 import javafx.event.ActionEvent;

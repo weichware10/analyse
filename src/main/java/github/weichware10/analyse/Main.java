@@ -1,6 +1,6 @@
 package github.weichware10.analyse;
 
-import github.weichware10.analyse.gui.Login;
+import github.weichware10.analyse.gui.general.Login;
 import github.weichware10.analyse.gui.util.Log;
 import github.weichware10.util.Logger;
 import github.weichware10.util.db.DataBaseClient;
