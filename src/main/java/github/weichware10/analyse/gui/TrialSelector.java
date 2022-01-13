@@ -2,7 +2,6 @@ package github.weichware10.analyse.gui;
 
 import github.weichware10.analyse.Main;
 import github.weichware10.analyse.gui.util.AbsScene;
-import github.weichware10.util.Logger;
 import github.weichware10.util.ToolType;
 import github.weichware10.util.data.TrialData;
 import java.io.File;
@@ -35,7 +34,6 @@ public class TrialSelector extends AbsScene {
     private static String fixedConfigId = null;
     private static Dialog<Void> selectorDialog;
     private static Button selectButton;
-    private static boolean secondTrial;
 
     /**
      * Auswahldialog für Trial.
