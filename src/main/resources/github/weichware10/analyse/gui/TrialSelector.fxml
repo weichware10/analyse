@@ -35,14 +35,14 @@
                   <Label text="Bei Eingabe einer Versuchs-ID werden andere Parameter ignoriert." />
                   <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                      <children>
-                        <TextField prefHeight="25.0" prefWidth="177.0" promptText="Versuchs-ID" />
+                        <TextField fx:id="trialIdField" prefHeight="25.0" prefWidth="177.0" promptText="Versuchs-ID" />
                      </children>
                   </HBox>
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="zurücksetzen" />
+                  <Button mnemonicParsing="false" onAction="#reset" text="zurücksetzen" />
                   <HBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
                         <ComboBox fx:id="amountBox" editable="true" onAction="#checkAmountInput" onKeyPressed="#checkAmountInput" prefHeight="25.0" prefWidth="112.0" promptText="Anzahl" />
@@ -68,12 +68,17 @@
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER_RIGHT">
+      <HBox spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <Label fx:id="warnLabel" alignment="CENTER" textFill="#da3633" HBox.hgrow="ALWAYS" />
+            <Label fx:id="jsonLabel" wrapText="true" />
+            <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="warnLabel" alignment="CENTER" textFill="#da3633" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
          </children>
       </HBox>
    </bottom>

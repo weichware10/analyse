@@ -2,10 +2,13 @@ package github.weichware10.analyse.gui;
 
 import github.weichware10.analyse.Main;
 import github.weichware10.analyse.gui.util.AbsScene;
+import github.weichware10.util.Logger;
 import github.weichware10.util.ToolType;
 import github.weichware10.util.data.TrialData;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -15,6 +18,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import org.joda.time.DateTime;
 
@@ -26,15 +31,20 @@ public class TrialSelector extends AbsScene {
     private static BorderPane root;
     private static TrialSelectorController controller;
     private static String trialId;
+    private static TrialData trialData;
     private static String fixedConfigId = null;
+    private static Dialog<Void> selectorDialog;
+    private static Button selectButton;
+    private static boolean secondTrial;
 
     /**
      * Auswahldialog für Trial.
      */
     public static TrialData getTrialData(String fixedConfigId) {
-        Dialog<Void> selectorDialog = new Dialog<>();
+        selectorDialog = new Dialog<>();
         ButtonType select = new ButtonType("Trial auswählen", ButtonData.APPLY);
-        selectorDialog.getDialogPane().getButtonTypes().addAll(select, ButtonType.CANCEL);
+        ButtonType json = new ButtonType("load from JSON", ButtonData.APPLY);
+        selectorDialog.getDialogPane().getButtonTypes().addAll(json, select, ButtonType.CANCEL);
 
         selectorDialog.setTitle("Auswahl Trial");
 
@@ -44,26 +54,41 @@ public class TrialSelector extends AbsScene {
 
         selectorDialog.getDialogPane().setContent((root != null) ? root : initialize());
 
-        TrialSelector.fixedConfigId = fixedConfigId;
         if (fixedConfigId != null) {
-            controller.configIdField.setText(fixedConfigId);
-            controller.configIdField.setDisable(true);
-            search();
+            controller.jsonLabel.setText("""
+                    Beim Laden von JSON-Dateien kann nicht überprüft werden,
+                    ob der Vergleich Sinn ergibt.""");
+            if (Main.dataBaseClient.configurations.getAvailability(fixedConfigId)) {
+                TrialSelector.fixedConfigId = fixedConfigId;
+            } else {
+                TrialSelector.fixedConfigId = null;
+            }
         } else {
-            controller.configIdField.setText("");
-            controller.configIdField.setDisable(false);
+            controller.jsonLabel.setText("");
         }
 
-        final Button selectButton = (Button) selectorDialog.getDialogPane().lookupButton(select);
+        reset();
+
+        selectButton = (Button) selectorDialog.getDialogPane().lookupButton(select);
+        Button jsonButton = (Button) selectorDialog.getDialogPane().lookupButton(json);
 
         selectButton.addEventFilter(ActionEvent.ACTION, e -> selectEventFilter(e));
+        jsonButton.addEventFilter(ActionEvent.ACTION, e -> loadFromJson(e));
 
         selectorDialog.showAndWait();
 
-        return (trialId != null) ? Main.dataBaseClient.trials.getTrial(trialId) : null;
+        return trialData;
     }
 
     protected static void search() {
+        if (controller.trialIdField.getText().length() == 0) {
+            searchForList();
+        } else {
+            searchForTrial();
+        }
+    }
+
+    protected static void searchForList() {
         String confContent = controller.configIdField.getText();
         final String configId = (confContent.length() > 0) ? confContent : null;
 
@@ -94,14 +119,67 @@ public class TrialSelector extends AbsScene {
         searchThread.start();
     }
 
+    protected static void searchForTrial() {
+        final String trialId = controller.trialIdField.getText();
+
+        controller.indicator.setVisible(true);
+
+        Thread searchThread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                List<TrialData> result = new ArrayList<>();
+                result.add(Main.dataBaseClient.trials.getTrial(trialId));
+
+                Platform.runLater(() -> {
+                    controller.indicator.setVisible(false);
+                    controller.resultTable.getItems().clear();
+                    controller.resultTable.getItems().addAll(result);
+                });
+            }
+        });
+
+        searchThread.start();
+    }
+
+    protected static void loadFromJson(ActionEvent jsonEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("JSON Config auswählen");
+        fileChooser.getExtensionFilters().add(
+                new ExtensionFilter("JSON Dateien", "*.json"));
+        File jsonFile = fileChooser.showOpenDialog(
+                selectorDialog.getDialogPane().getScene().getWindow());
+        String location = (jsonFile != null) ? jsonFile.getAbsolutePath() : null;
+
+        if (location != null) {
+            trialData = TrialData.fromJson(location);
+        } else {
+            jsonEvent.consume();
+        }
+        if (trialData == null) {
+            controller.warnLabel.setText("Could not load from JSON");
+            jsonEvent.consume();
+        }
+    }
+
     protected static void reset() {
-        controller.initResultTable();
+        controller.resultTable.getItems().clear();
+        controller.toolTypeBox.setValue(null);
         controller.initAmountBox();
+        controller.startPicker.setValue(null);
         controller.initEndPicker();
+        controller.trialIdField.setText("");
         if (fixedConfigId == null) {
             controller.configIdField.setText("");
+            controller.configIdField.setDisable(false);
+            controller.warnLabel.setText("");
+        } else {
+            controller.configIdField.setText(fixedConfigId);
             controller.configIdField.setDisable(true);
+            controller.warnLabel.setText("");
         }
+        controller.warnLabel.setText("");
+        search();
     }
 
     private static DateTime localDateToDateTime(java.time.LocalDate localDate, boolean endOfDay) {
@@ -135,5 +213,6 @@ public class TrialSelector extends AbsScene {
             return;
         }
         trialId = selected.trialId;
+        trialData = (trialId != null) ? Main.dataBaseClient.trials.getTrial(trialId) : null;
     }
 }

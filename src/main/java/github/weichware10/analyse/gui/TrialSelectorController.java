@@ -44,9 +44,9 @@ public class TrialSelectorController extends AbsSceneController {
     @FXML
     protected ProgressIndicator indicator;
     @FXML
-    protected Button resetButton;
-    @FXML
     protected TextField trialIdField;
+    @FXML
+    protected Label jsonLabel;
 
     @FXML
     protected Integer checkAmountInput() {
@@ -146,10 +146,10 @@ public class TrialSelectorController extends AbsSceneController {
                 : "fx:id=\"warnLabel\" not injected: check 'TrialSelector.fxml'.";
         assert indicator != null
                 : "fx:id=\"indicator\" not injected: check 'TrialSelector.fxml'.";
-        assert resetButton != null
-                : "fx:id=\"resetButton\" not injected: check 'TrialSelector.fxml'.";
         assert trialIdField != null
                 : "fx:id=\"trialIdField\" not injected: check 'TrialSelector.fxml'.";
+        assert jsonLabel != null
+                : "fx:id=\"jsonLabel\" not injected: check 'TrialSelector.fxml'.";
     }
 
 }
