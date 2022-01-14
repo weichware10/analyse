@@ -39,8 +39,8 @@ public class Main extends Application {
         Login.start();
         primaryStage.getIcons().add(new Image("app-icon.png"));
         // FENSTERGRÖẞE
-        primaryStage.setMinHeight(300);
-        primaryStage.setMinWidth(300);
+        primaryStage.setMinHeight(800);
+        primaryStage.setMinWidth(800);
         primaryStage.show();
     }
 }

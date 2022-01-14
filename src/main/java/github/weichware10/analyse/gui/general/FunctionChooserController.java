@@ -1,11 +1,11 @@
 package github.weichware10.analyse.gui.general;
 
 import github.weichware10.analyse.Main;
+import github.weichware10.analyse.gui.admin.Configurator;
 import github.weichware10.analyse.gui.admin.TrialCreator;
 import github.weichware10.analyse.gui.analyse.Analyzer;
 import github.weichware10.analyse.gui.util.AbsSceneController;
 import github.weichware10.util.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -16,6 +16,8 @@ public class FunctionChooserController extends AbsSceneController {
 
     @FXML
     private Button trialCreatorButton;
+    @FXML
+    private Button configuratorButton;
 
     @FXML
     void logOut() {
@@ -24,13 +26,19 @@ public class FunctionChooserController extends AbsSceneController {
     }
 
     @FXML
-    void startAnalyzer(ActionEvent event) {
+    void startAnalyzer() {
         Logger.info("functionchooser:content Logging out");
         Analyzer.start();
     }
 
     @FXML
-    void startTrialCreator(ActionEvent event) {
+    void startConfigurator() {
+        Logger.info("functionchooser:content Starting Configurator");
+        Configurator.start();
+    }
+
+    @FXML
+    void startTrialCreator() {
         Logger.info("functionchooser:content Starting TrialCreator");
         TrialCreator.start();
     }
@@ -38,7 +46,10 @@ public class FunctionChooserController extends AbsSceneController {
     @Override
     protected void initialize() {
         assert trialCreatorButton != null
-                : "fx:id=\"adminButton\" not injected: check 'FunctionChooser.fxml'.";
+                : "fx:id=\"trialCreatorButton\" not injected: check 'FunctionChooser.fxml'.";
+        assert configuratorButton != null
+                : "fx:id=\"configuratorButton\" not injected: check 'FunctionChooser.fxml'.";
         trialCreatorButton.setDisable(!Main.dataBaseClient.permissions.isAuthor);
+        configuratorButton.setDisable(!Main.dataBaseClient.permissions.isAuthor);
     }
 }
