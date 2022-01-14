@@ -1,6 +1,7 @@
 package github.weichware10.analyse.gui.analyse;
 
 import github.weichware10.analyse.enums.AnalyseType;
+import github.weichware10.analyse.gui.general.FunctionChooser;
 import github.weichware10.analyse.gui.util.AbsSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ public class AnalyzerController extends AbsSceneController {
 
     @FXML
     void back(ActionEvent event) {
-        // TODO: back
+        FunctionChooser.start();
     }
 
     @FXML

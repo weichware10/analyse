@@ -30,7 +30,7 @@ public class Analyzer extends AbsScene {
         InitResult ir = start(Main.primaryStage,
                 Analyzer.class.getResource("Analyzer.fxml"),
                 root,
-                null,
+                controller,
                 "Analyse",
                 MainMenuBar.getMenuBar(),
                 null,

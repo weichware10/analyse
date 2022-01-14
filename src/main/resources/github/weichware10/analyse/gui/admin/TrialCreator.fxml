@@ -41,7 +41,7 @@
             </GridPane>
             <ButtonBar>
               <buttons>
-                  <Button mnemonicParsing="false" text="zurück" ButtonBar.buttonData="LEFT" />
+                  <Button mnemonicParsing="false" onAction="#startFunctionChooser" text="zurück" ButtonBar.buttonData="LEFT" />
                 <Button defaultButton="true" mnemonicParsing="false" text="IDs als txt-Datei speichern" />
               </buttons>
             </ButtonBar>
