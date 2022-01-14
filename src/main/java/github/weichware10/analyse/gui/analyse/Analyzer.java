@@ -4,14 +4,11 @@ import github.weichware10.analyse.Main;
 import github.weichware10.analyse.config.DiagramConfig;
 import github.weichware10.analyse.config.HeatmapConfig;
 import github.weichware10.analyse.enums.AnalyseType;
-import github.weichware10.analyse.gui.general.Login;
 import github.weichware10.analyse.gui.general.MainMenuBar;
 import github.weichware10.analyse.gui.util.AbsScene;
 import github.weichware10.util.Logger;
 import github.weichware10.util.data.TrialData;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
-import javafx.stage.Screen;
 
 /**
  * Analysefenster der App.
@@ -30,15 +27,14 @@ public class Analyzer extends AbsScene {
      * Startet die App.
      */
     public static void start() {
-        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         InitResult ir = start(Main.primaryStage,
-                Login.class.getResource("Analyzer.fxml"),
+                Analyzer.class.getResource("Analyzer.fxml"),
                 root,
                 null,
                 "Analyse",
                 MainMenuBar.getMenuBar(),
-                (int) screenBounds.getWidth() / 2,
-                (int) screenBounds.getHeight() / 2);
+                null,
+                null);
         root = ir.root;
         controller = (AnalyzerController) ir.controller;
     }

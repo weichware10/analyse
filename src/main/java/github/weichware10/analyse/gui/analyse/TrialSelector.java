@@ -48,7 +48,7 @@ public class TrialSelector extends AbsScene {
 
         Stage stage = (Stage) selectorDialog.getDialogPane().getScene().getWindow();
         stage.getIcons().add(
-                new Image(TrialSelector.class.getResource("app-icon.png").toString()));
+                new Image(Main.class.getResource("app-icon.png").toString()));
 
         selectorDialog.getDialogPane().setContent((root != null) ? root : initialize());
 

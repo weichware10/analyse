@@ -1,5 +1,6 @@
 package github.weichware10.analyse.gui.analyse;
 
+import github.weichware10.analyse.Main;
 import github.weichware10.analyse.config.HeatmapConfig;
 import github.weichware10.analyse.gui.util.AbsScene;
 import javafx.event.ActionEvent;
@@ -33,7 +34,7 @@ public class HeatmapConfigurator extends AbsScene {
 
         Stage stage = (Stage) configDialog.getDialogPane().getScene().getWindow();
         stage.getIcons().add(
-                new Image(HeatmapConfigurator.class.getResource("app-icon.png").toString()));
+                new Image(Main.class.getResource("app-icon.png").toString()));
 
         InitResult ir =
                 initialize(HeatmapConfigurator.class.getResource("HeatmapConfigurator.fxml"));

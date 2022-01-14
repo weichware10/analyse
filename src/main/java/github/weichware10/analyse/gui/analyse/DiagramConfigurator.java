@@ -1,5 +1,6 @@
 package github.weichware10.analyse.gui.analyse;
 
+import github.weichware10.analyse.Main;
 import github.weichware10.analyse.config.DiagramConfig;
 import github.weichware10.analyse.enums.AnalyseType;
 import github.weichware10.analyse.gui.util.AbsScene;
@@ -34,7 +35,7 @@ public class DiagramConfigurator extends AbsScene {
 
         Stage stage = (Stage) configDialog.getDialogPane().getScene().getWindow();
         stage.getIcons().add(
-                new Image(DiagramConfigurator.class.getResource("app-icon.png").toString()));
+                new Image(Main.class.getResource("app-icon.png").toString()));
 
         InitResult ir =
                 initialize(DiagramConfigurator.class.getResource("DiagramConfigurator.fxml"));
