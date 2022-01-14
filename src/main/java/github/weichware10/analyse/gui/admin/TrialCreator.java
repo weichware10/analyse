@@ -14,13 +14,13 @@ public class TrialCreator extends AbsScene {
      * Startet den TrialCreator.
      */
     public static void start() {
-        start(Main.primaryStage,
+        root = start(Main.primaryStage,
                 TrialCreator.class.getResource("TrialCreator.fxml"),
                 root,
                 null,
                 "Analyse - Trialerstellung",
                 null,
                 null,
-                null);
+                null).root;
     }
 }
