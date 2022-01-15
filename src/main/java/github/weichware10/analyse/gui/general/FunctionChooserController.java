@@ -21,6 +21,8 @@ public class FunctionChooserController extends AbsSceneController {
 
     @FXML
     void logOut() {
+        Logger.info("analyzer:content Resetting");
+        Analyzer.reset();
         Logger.info("functionchooser:content Logging out");
         Login.logOut();
     }

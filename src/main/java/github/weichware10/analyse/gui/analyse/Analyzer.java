@@ -136,4 +136,21 @@ public class Analyzer extends AbsScene {
                 diaConfig.toString());
         Logger.info(output);
     }
+
+    /**
+     * Setzt Analyse zurück.
+     */
+    public static void reset() {
+        controller.analyseButton.setDisable(true);
+        controller.analyseTypMenuButton.setDisable(true);
+        controller.configButton.setDisable(true);
+        controller.exportButton.setDisable(true);
+        controller.exportRawButton.setDisable(true);
+        controller.selectCompTrialButton.setVisible(false);
+        Analyzer.analyseType = null;
+        Analyzer.trial = null;
+        Analyzer.trialComp = null;
+        Analyzer.hmConfig = new HeatmapConfig();
+        Analyzer.diaConfig = new DiagramConfig();
+    }
 }
