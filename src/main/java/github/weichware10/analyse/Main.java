@@ -21,6 +21,8 @@ public class Main extends Application {
     public static Stage primaryStage;
     public static DataBaseClient dataBaseClient;
     public static String databaseUrl;
+    public static final int MINWIDTH = 800;
+    public static final int MINHEIGHT = 800;
 
     /**
      * Einstiegspunkt der Analyse.
@@ -42,13 +44,8 @@ public class Main extends Application {
         Login.start();
         primaryStage.getIcons().add(new Image("app-icon.png"));
         // FENSTERGRÖẞE
-        primaryStage.setMinHeight(800);
-        primaryStage.setMinWidth(800);
+        primaryStage.setMinWidth(MINWIDTH);
+        primaryStage.setMinHeight(MINHEIGHT);
         primaryStage.show();
-        primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, (e) -> {
-            if (e.getCode() == KeyCode.CONTROL) {
-                Configurator.start();
-            }
-        });
     }
 }
