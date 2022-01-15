@@ -5,9 +5,9 @@ import github.weichware10.analyse.config.DiagramConfig;
 import github.weichware10.analyse.config.HeatmapConfig;
 import github.weichware10.analyse.enums.AnalyseType;
 import github.weichware10.analyse.gui.general.MainMenuBar;
-import github.weichware10.analyse.gui.util.AbsScene;
 import github.weichware10.util.Logger;
 import github.weichware10.util.data.TrialData;
+import github.weichware10.util.gui.AbsScene;
 import javafx.scene.Parent;
 
 /**
@@ -33,6 +33,7 @@ public class Analyzer extends AbsScene {
                 controller,
                 "Analyse",
                 MainMenuBar.getMenuBar(),
+                null,
                 null,
                 null);
         root = ir.root;

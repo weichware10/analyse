@@ -1,6 +1,6 @@
 package github.weichware10.analyse.gui.analyse;
 
-import github.weichware10.analyse.gui.util.AbsSceneController;
+import github.weichware10.util.gui.AbsSceneController;
 import java.text.DecimalFormat;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

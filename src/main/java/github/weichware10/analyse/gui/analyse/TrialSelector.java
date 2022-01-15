@@ -1,9 +1,9 @@
 package github.weichware10.analyse.gui.analyse;
 
 import github.weichware10.analyse.Main;
-import github.weichware10.analyse.gui.util.AbsScene;
 import github.weichware10.util.ToolType;
 import github.weichware10.util.data.TrialData;
+import github.weichware10.util.gui.AbsScene;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;

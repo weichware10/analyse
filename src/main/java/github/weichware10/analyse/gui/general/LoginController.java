@@ -1,7 +1,7 @@
 package github.weichware10.analyse.gui.general;
 
 import github.weichware10.analyse.Main;
-import github.weichware10.analyse.gui.util.AbsSceneController;
+import github.weichware10.util.gui.AbsSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;

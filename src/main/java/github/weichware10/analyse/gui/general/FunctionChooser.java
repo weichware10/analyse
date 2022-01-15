@@ -1,7 +1,7 @@
 package github.weichware10.analyse.gui.general;
 
 import github.weichware10.analyse.Main;
-import github.weichware10.analyse.gui.util.AbsScene;
+import github.weichware10.util.gui.AbsScene;
 import javafx.scene.Parent;
 
 /**
@@ -20,6 +20,7 @@ public class FunctionChooser extends AbsScene {
                 null,
                 "Analyse",
                 MainMenuBar.getMenuBar(),
+                null,
                 null,
                 null).root;
     }

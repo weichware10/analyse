@@ -1,8 +1,8 @@
 package github.weichware10.analyse.gui.analyse;
 
-import github.weichware10.analyse.gui.util.AbsSceneController;
 import github.weichware10.util.ToolType;
 import github.weichware10.util.data.TrialData;
+import github.weichware10.util.gui.AbsSceneController;
 import java.time.LocalDate;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

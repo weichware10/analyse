@@ -2,7 +2,7 @@ package github.weichware10.analyse.gui.analyse;
 
 import github.weichware10.analyse.enums.AnalyseType;
 import github.weichware10.analyse.gui.general.FunctionChooser;
-import github.weichware10.analyse.gui.util.AbsSceneController;
+import github.weichware10.util.gui.AbsSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

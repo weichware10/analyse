@@ -1,9 +1,9 @@
 package github.weichware10.analyse.gui.admin;
 
 import github.weichware10.analyse.gui.general.FunctionChooser;
-import github.weichware10.analyse.gui.util.AbsSceneController;
 import github.weichware10.util.Logger;
 import github.weichware10.util.ToolType;
+import github.weichware10.util.gui.AbsSceneController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.Observable;

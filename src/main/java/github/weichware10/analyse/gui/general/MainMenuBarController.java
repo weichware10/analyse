@@ -1,8 +1,8 @@
 package github.weichware10.analyse.gui.general;
 
-import github.weichware10.analyse.gui.util.AbsSceneController;
-import github.weichware10.analyse.gui.util.Log;
 import github.weichware10.util.Logger;
+import github.weichware10.util.gui.AbsSceneController;
+import github.weichware10.util.gui.Log;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;

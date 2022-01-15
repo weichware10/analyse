@@ -1,9 +1,9 @@
 package github.weichware10.analyse;
 
 import github.weichware10.analyse.gui.general.Login;
-import github.weichware10.analyse.gui.util.Log;
 import github.weichware10.util.Logger;
 import github.weichware10.util.db.DataBaseClient;
+import github.weichware10.util.gui.Log;
 import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -38,7 +38,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Log.start();
+        Log.start("app-icon.png");
         Main.primaryStage = primaryStage;
         Login.start();
         primaryStage.getIcons().add(new Image("app-icon.png"));

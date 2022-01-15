@@ -2,7 +2,7 @@ package github.weichware10.analyse.gui.analyse;
 
 import github.weichware10.analyse.Main;
 import github.weichware10.analyse.config.HeatmapConfig;
-import github.weichware10.analyse.gui.util.AbsScene;
+import github.weichware10.util.gui.AbsScene;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;

@@ -1,6 +1,6 @@
 package github.weichware10.analyse.gui.analyse;
 
-import github.weichware10.analyse.gui.util.AbsSceneController;
+import github.weichware10.util.gui.AbsSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;

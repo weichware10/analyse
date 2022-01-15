@@ -4,8 +4,8 @@ import github.weichware10.analyse.Main;
 import github.weichware10.analyse.gui.admin.Configurator;
 import github.weichware10.analyse.gui.admin.TrialCreator;
 import github.weichware10.analyse.gui.analyse.Analyzer;
-import github.weichware10.analyse.gui.util.AbsSceneController;
 import github.weichware10.util.Logger;
+import github.weichware10.util.gui.AbsSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 

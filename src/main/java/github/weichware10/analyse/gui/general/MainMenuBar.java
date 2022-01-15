@@ -1,8 +1,8 @@
 package github.weichware10.analyse.gui.general;
 
 import github.weichware10.analyse.Main;
-import github.weichware10.analyse.gui.util.AbsScene;
 import github.weichware10.util.Logger;
+import github.weichware10.util.gui.AbsScene;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;

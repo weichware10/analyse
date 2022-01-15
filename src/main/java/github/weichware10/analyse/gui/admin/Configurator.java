@@ -2,7 +2,7 @@ package github.weichware10.analyse.gui.admin;
 
 import github.weichware10.analyse.Main;
 import github.weichware10.analyse.gui.general.MainMenuBar;
-import github.weichware10.analyse.gui.util.AbsScene;
+import github.weichware10.util.gui.AbsScene;
 import javafx.scene.Parent;
 
 /**
@@ -21,6 +21,7 @@ public class Configurator extends AbsScene {
                 null,
                 "Analyse - Konfigurator",
                 MainMenuBar.getMenuBar(),
+                null,
                 null,
                 null).root;
     }
