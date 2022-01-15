@@ -36,8 +36,8 @@ public class Login extends AbsScene {
                 null,
                 "Analyse",
                 MainMenuBar.getMenuBar(),
-                (int) screenBounds.getWidth() / 2,
-                (int) screenBounds.getHeight() / 2).root;
+                Math.max((int) screenBounds.getWidth() / 2, Main.MINWIDTH),
+                Math.max((int) screenBounds.getHeight() / 2, Main.MINHEIGHT)).root;
     }
 
     /**
