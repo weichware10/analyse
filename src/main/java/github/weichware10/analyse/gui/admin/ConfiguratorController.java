@@ -184,5 +184,12 @@ public class ConfiguratorController extends AbsSceneController {
         speedField.setText(null);
         imageViewWidthField.setText(null);
         imageViewHeightField.setText(null);
+        tutorialBox.setSelected(false);
+        showGridBox.setSelected(false);
+        relativeSizeBox.setSelected(false);
+        randomStringsBox.setSelected(false);
+        timingsImgField.setText(null);
+        timingsGridField.setText(null);
+        configHeading.setText("neue Konfiguration");
     }
 }

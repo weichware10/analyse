@@ -128,7 +128,7 @@
                                  </tooltip>
                               </Label>
                               <TextField fx:id="stringIdField" promptText="string" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button fx:id="stringIdButton" mnemonicParsing="false" text="anzeigen" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Button fx:id="stringIdButton" mnemonicParsing="false" text="..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <Label text="Rastergröße X" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                                  <tooltip>
                                     <Tooltip text="Ausgangsunterteilung des Rasters (horizontal)" wrapText="true" />
@@ -157,7 +157,7 @@
                                     <Tooltip text="ob die Linien des Rasters sichtbar sein sollen" wrapText="true" />
                                  </tooltip>
                               </Label>
-                              <CheckBox fx:id="shoGridBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <CheckBox fx:id="showGridBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label text="relative Größenänderung" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                                  <tooltip>
                                     <Tooltip text="ob das Raster die Größe in betrachteten Bereichen anpassen soll" wrapText="true" />
@@ -217,6 +217,11 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
+                              <Label text="ZoomMaps-Konfiguration" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
                               <Label layoutX="155.0" layoutY="27.0" text="Fragestellung" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                                  <tooltip>
                                     <Tooltip text="die Frage, die beantwortet werden soll" />
@@ -237,15 +242,10 @@
                                     <Tooltip text="bestimmt die Breite des anzuzeigenden Bildes in Pixeln" />
                                  </tooltip>
                               </Label>
-                              <TextField fx:id="speedField1" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                              <TextField fx:id="imageViewWidthField1" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                              <TextField fx:id="imageViewHeightField1" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                              <TextField fx:id="questionField1" promptText="string" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <Label text="ZoomMaps-Konfiguration" GridPane.columnSpan="4" GridPane.halignment="CENTER">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
+                              <TextField fx:id="speedField" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <TextField fx:id="imageViewWidthField" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TextField fx:id="imageViewHeightField" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <TextField fx:id="questionField" promptText="string" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
