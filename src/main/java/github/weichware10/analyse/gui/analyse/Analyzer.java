@@ -93,7 +93,7 @@ public class Analyzer extends AbsScene {
     }
 
     /**
-     *  Setzt das ausgewählte Vergleichs Trial.
+     * Setzt das ausgewählte Vergleichs Trial.
      */
     public static void setTrialIdComp() {
         trialComp = TrialSelector.getTrialData(trial.configId);

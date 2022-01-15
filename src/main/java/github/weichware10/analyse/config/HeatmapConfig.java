@@ -82,14 +82,16 @@ public class HeatmapConfig {
     public String toString() {
         return String.format("""
                 HeatmapConfig: {
-                    minColorDiff: (%f,%f,%f)
-                    maxColorDiff: (%f,%f,%f)
+                    minColorDiff: (%f,%f,%f,%f)
+                    maxColorDiff: (%f,%f,%f,%f)
                     isGrid: %b
                     isImage: %b
                 }
                 """,
-                minColorDiff.getRed(), minColorDiff.getGreen(), minColorDiff.getBlue(),
-                maxColorDiff.getRed(), maxColorDiff.getGreen(), maxColorDiff.getBlue(),
+                minColorDiff.getRed(), minColorDiff.getGreen(),
+                minColorDiff.getBlue(), minColorDiff.getOpacity(),
+                maxColorDiff.getRed(), maxColorDiff.getGreen(),
+                maxColorDiff.getBlue(), minColorDiff.getOpacity(),
                 isGrid(),
                 isImage());
     }
