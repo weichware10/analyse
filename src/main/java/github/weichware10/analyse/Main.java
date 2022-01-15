@@ -1,6 +1,7 @@
 package github.weichware10.analyse;
 
 import github.weichware10.analyse.gui.general.Login;
+import github.weichware10.util.Files;
 import github.weichware10.util.Logger;
 import github.weichware10.util.db.DataBaseClient;
 import github.weichware10.util.gui.Log;
@@ -33,6 +34,8 @@ public class Main extends Application {
         String logfile = String.format(
                 Dotenv.load().get("LOGS") + "/%s.log", DateTime.now().toString("yMMdd-HHmmss"));
         Logger.setLogfile(logfile);
+        // delete temp dir
+        Runtime.getRuntime().addShutdownHook(Files.deleteTempDir());
         launch(args);
     }
 
