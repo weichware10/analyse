@@ -16,16 +16,4 @@ public abstract class Analyse {
     protected List<List<Float>> calcRelFreq(TrialData data) {
         return null;
     }
-
-    /**
-     * erstellt eine Tabelle mit den Zeitpunkten und dazugehörigen Bildkoordinaten
-     * bzw. Zoomstärken
-     *
-     * @return Tabelle mit Zeitpunkten und dazugehörigen Bildkoordinaten bzw.
-     *         Zoomstärken
-     */
-    protected List<List<Float>> createTimeTable(TrialData data) {
-        return null;
-    }
-
 }
