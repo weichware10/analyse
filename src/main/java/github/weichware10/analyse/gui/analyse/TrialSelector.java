@@ -63,6 +63,7 @@ public class TrialSelector extends AbsScene {
             }
         } else {
             controller.jsonLabel.setText("");
+            TrialSelector.fixedConfigId = null;
         }
 
         reset();
