@@ -12,7 +12,7 @@
             <MenuItem mnemonicParsing="false" onAction="#setDataBaseUrl" text="Datenbank ändern" />
             <MenuItem mnemonicParsing="false" onAction="#resetDataBaseUrl" text="Datenbank URL reset" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#toggleLogs" text="show Logs" />
+            <MenuItem fx:id="logsMenu" mnemonicParsing="false" onAction="#toggleLogs" text="show Logs" />
             <SeparatorMenuItem mnemonicParsing="false" />
         <MenuItem fx:id="logOutMenu" disable="true" mnemonicParsing="false" onAction="#logOut" text="Ausloggen" />
       </items>
