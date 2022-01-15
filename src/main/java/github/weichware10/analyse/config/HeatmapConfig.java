@@ -95,4 +95,18 @@ public class HeatmapConfig {
                 isGrid(),
                 isImage());
     }
+
+    /**
+     * Konvertiert javafx Color in awt Color.
+     *
+     * @param color - javafx Color
+     * @return awt Color
+     */
+    public static java.awt.Color fxToAwtColor(Color color) {
+        return new java.awt.Color(
+                                (float) color.getRed(),
+                                (float) color.getGreen(),
+                                (float) color.getBlue(),
+                                (float) color.getOpacity());
+    }
 }
