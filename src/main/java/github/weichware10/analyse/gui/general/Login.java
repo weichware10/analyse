@@ -8,13 +8,11 @@ import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 
 /**
  * Der Loginbildschirm der App.
@@ -29,15 +27,14 @@ public class Login extends AbsScene {
      * Startet die App.
      */
     public static void start() {
-        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         root = start(Main.primaryStage,
                 Login.class.getResource("Login.fxml"),
                 root,
                 null,
                 "Analyse",
                 MainMenuBar.getMenuBar(),
-                Math.max((int) screenBounds.getWidth() / 2, Main.MINWIDTH),
-                Math.max((int) screenBounds.getHeight() / 2, Main.MINHEIGHT)).root;
+                null,
+                null).root;
     }
 
     /**

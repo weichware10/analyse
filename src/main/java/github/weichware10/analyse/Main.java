@@ -6,7 +6,9 @@ import github.weichware10.util.Logger;
 import github.weichware10.util.db.DataBaseClient;
 import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.joda.time.DateTime;
 
@@ -43,6 +45,9 @@ public class Main extends Application {
         // FENSTERGRÖẞE
         primaryStage.setMinWidth(MINWIDTH);
         primaryStage.setMinHeight(MINHEIGHT);
+        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+        primaryStage.setWidth(Math.max((int) screenBounds.getWidth() / 2, Main.MINWIDTH));
+        primaryStage.setHeight(Math.max((int) screenBounds.getHeight() / 2, Main.MINHEIGHT));
         primaryStage.show();
     }
 }
