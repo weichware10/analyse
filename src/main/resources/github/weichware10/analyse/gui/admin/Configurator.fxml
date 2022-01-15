@@ -1,282 +1,274 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.admin.ConfiguratorController">
    <center>
-      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
          <children>
-            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER" prefWidth="600.0">
                <children>
-                  <GridPane alignment="CENTER" vgap="10.0" HBox.hgrow="ALWAYS">
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                        <RowConstraints minHeight="10.0" vgrow="NEVER" />
-                        <RowConstraints minHeight="10.0" vgrow="NEVER" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-                     </rowConstraints>
+                  <ButtonBar prefHeight="40.0" prefWidth="600.0">
+                     <buttons>
+                        <Button mnemonicParsing="false" text="aus JSON laden" ButtonBar.buttonData="LEFT" />
+                        <TextField fx:id="configIdField" promptText="Konfigurations-ID" />
+                        <Button layoutX="370.0" layoutY="42.0" mnemonicParsing="false" text="aus Datenbank laden" />
+                     </buttons>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </ButtonBar>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Bewegen Sie die Maus über Begriffe, um mehr über sie zu erfahren." />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <GridPane alignment="CENTER" hgap="10.0" prefWidth="600.0" vgap="10.0" HBox.hgrow="NEVER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <ButtonBar prefHeight="40.0" prefWidth="200.0">
-                           <buttons>
-                              <TextField fx:id="configIdField" promptText="Konfigurations-ID" />
-                              <Button layoutX="370.0" layoutY="42.0" mnemonicParsing="false" text="aus Datenbank laden" />
-                              <Button mnemonicParsing="false" text="aus JSON laden" />
-                           </buttons>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </ButtonBar>
-                        <Label text="Bewegen Sie die Maus über Begriffe, um mehr über sie zu erfahren." GridPane.rowIndex="1" />
-                        <ScrollPane fitToWidth="true" GridPane.rowIndex="2">
-                           <content>
-                              <Accordion expandedPane="$generalConfigPane" >
-                                <panes>
-                                  <TitledPane fx:id="generalConfigPane" animated="false" text="allgemeine Konfiguration">
-                                       <content>
-                                          <GridPane hgap="10.0" vgap="10.0">
-                                            <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                             <children>
-                                                <Label text="Konfigurations-ID:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                                                   <tooltip>
-                                                      <Tooltip text="wird automatisch gesetzt." wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <Label fx:id="configIdLabel" text="noch nicht gesetzt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="Tool-Typ" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                                   <tooltip>
-                                                      <Tooltip text="Der Tool-Typ bestimmt, welcher Versuch durchgeführt wird." wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <ComboBox fx:id="toolTypeBox" prefWidth="150.0" promptText="Tool-Typ auswählen" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                                                <Label text="Intro" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                                                   <tooltip>
-                                                      <Tooltip text="eine kleine Nachricht, welche vor dem Versuch angezeigt wird" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="introField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="Outro" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-                                                   <tooltip>
-                                                      <Tooltip text="eine kleine Nachricht, die nach dem Versuch angezeigt wird" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="outroField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="Bild-URL" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
-                                                   <tooltip>
-                                                      <Tooltip text="die URL des anzuzeigenden Bildes" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="imgUrlField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="Tutorial" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
-                                                   <tooltip>
-                                                      <Tooltip text="definiert, ob das Tutorial gezeigt werden soll, oder nicht" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <CheckBox fx:id="tutorialBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                             </children>
-                                          </GridPane>
-                                       </content>
-                                  </TitledPane>
-                                  <TitledPane fx:id="codeChartsConfigPane" animated="false" text="CodeCharts-Konfiguration">
-                                       <content>
-                                          <GridPane hgap="10.0" vgap="10.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                             <children>
-                                                <Label text="String-ID" GridPane.halignment="RIGHT">
-                                                   <tooltip>
-                                                      <Tooltip text="die ID der String-Liste in der Datenbank" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <GridPane hgap="10.0" GridPane.columnIndex="1">
-                                                   <columnConstraints>
-                                                      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                                                      <ColumnConstraints hgrow="ALWAYS" minWidth="70.0" />
-                                                   </columnConstraints>
-                                                   <rowConstraints>
-                                                      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                   </rowConstraints>
-                                                   <children>
-                                                      <TextField fx:id="stringIdField" />
-                                                      <Button fx:id="stringIdButton" mnemonicParsing="false" text="anzeigen" GridPane.columnIndex="1" />
-                                                   </children>
-                                                </GridPane>
-                                                <Label text="Ausgangsgröße" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                                                   <tooltip>
-                                                      <Tooltip text="Ausgangsunterteilung des Rasters" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                   <children>
-                                                      <Label text="X:" />
-                                                      <TextField fx:id="initialSizeFieldX" prefWidth="50.0" promptText="X" />
-                                                      <Label text="Y:" />
-                                                      <TextField fx:id="initialSizeFieldY" prefWidth="50.0" promptText="Y" />
-                                                   </children>
-                                                </HBox>
-                                                <Label text="Anzeigezeit Bild" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                                                   <tooltip>
-                                                      <Tooltip text="für wie ms das Bild angezeigt werden soll" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="timingsImgField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label layoutX="101.0" layoutY="87.0" text="Anzeigezeit Raster" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                                                   <tooltip>
-                                                      <Tooltip text="für wie ms das Raster angezeigt werden soll" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="timingsGridField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="Sichtbarkeit Rasterlinien" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-                                                   <tooltip>
-                                                      <Tooltip text="ob die Linien des Rasters sichtbar sein sollen" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <CheckBox fx:id="shoGridBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="relative Größenänderung" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
-                                                   <tooltip>
-                                                      <Tooltip text="ob das Raster die Größe in betrachteten Bereichen anpassen soll" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <CheckBox fx:id="relativeSizeBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="zufällige String-Anordnung" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
-                                                   <tooltip>
-                                                      <Tooltip text="ob die Strings zufällig angeordnet werden sollen (wenn nicht werden sie so wie in der Liste angeordnet)" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <CheckBox fx:id="randomStringsBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                                <Label text="Durchläufe" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
-                                                   <tooltip>
-                                                      <Tooltip text="wie viele Durchläufe mit korrekter Antwort absolviert werden müssen" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="iterationsField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                                <Label text="maximale Tiefe" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
-                                                   <tooltip>
-                                                      <Tooltip text="wie oft ein Raster maximal unterteilt werden sollte" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="maxDepthField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                                <Label text="horizontale Unterteilungen" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
-                                                   <tooltip>
-                                                      <Tooltip text="wie oft ein Raster bei der relativen Größenänderung horizontal unterteilt werden soll (≤0 für dynamische Änderung)" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="horizontalSplitField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                                <Label text="vertikale Unterteilungen" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
-                                                   <tooltip>
-                                                      <Tooltip text="wie oft ein Raster bei der relativen Größenänderung vertikal unterteilt werden soll (≤0 für dynamische Änderung)" wrapText="true" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="verticalSplitField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                             </children>
-                                          </GridPane>
-                                       </content>
-                                  </TitledPane>
-                                  <TitledPane fx:id="zoomMapsConfigPane" animated="false" text="ZoomMaps-Konfiguration">
-                                       <content>
-                                          <GridPane hgap="10.0" vgap="10.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                             <children>
-                                                <Label layoutX="155.0" layoutY="27.0" text="Fragestellung" GridPane.halignment="RIGHT">
-                                                   <tooltip>
-                                                      <Tooltip text="die Frage, die beantwortet werden soll" />
-                                                   </tooltip>
-                                                </Label>
-                                                <Label text="Geschwindigkeit" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                                                   <tooltip>
-                                                      <Tooltip text="bestimmt die Zoom-Geschwindigkeit" />
-                                                   </tooltip>
-                                                </Label>
-                                                <Label layoutX="20.0" layoutY="27.0" text="Bild-Breite" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                                                   <tooltip>
-                                                      <Tooltip text="bestimmt die Höhe des anzuzeigenden Bildes in Pixeln" />
-                                                   </tooltip>
-                                                </Label>
-                                                <Label layoutX="20.0" layoutY="27.0" text="Bild-Höhe" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                                                   <tooltip>
-                                                      <Tooltip text="bestimmt die Breite des anzuzeigenden Bildes in Pixeln" />
-                                                   </tooltip>
-                                                </Label>
-                                                <TextField fx:id="speedField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <TextField fx:id="imageViewWidthField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextField fx:id="imageViewHeightField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <TextField fx:id="questionField" GridPane.columnIndex="1" />
-                                             </children>
-                                          </GridPane>
-                                       </content></TitledPane>
-                                </panes>
-                              </Accordion>
-                           </content>
-                        </ScrollPane>
-                        <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="4">
-                          <buttons>
-                              <Button layoutX="54.0" layoutY="10.0" mnemonicParsing="false" text="reset" ButtonBar.buttonData="LEFT" />
-                              <Button fx:id="dataBaseSaveButton" layoutX="370.0" layoutY="42.0" mnemonicParsing="false" text="in Datenbank speichern" />
-                            <Button fx:id="jsonSaveButton" mnemonicParsing="false" text="als JSON speichern" />
-                          </buttons>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </ButtonBar>
-                        <TextArea editable="false" focusTraversable="false" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" promptText="keine Probleme erkannt." wrapText="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.vgrow="SOMETIMES" />
+                        <Label text="Tool-Typ" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <tooltip>
+                              <Tooltip text="Der Tool-Typ bestimmt, welcher Versuch durchgeführt wird." wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <ComboBox fx:id="toolTypeBox" prefWidth="150.0" promptText="Tool-Typ auswählen" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                        <Label text="Intro" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <tooltip>
+                              <Tooltip text="eine kleine Nachricht, welche vor dem Versuch angezeigt wird" wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <TextField fx:id="introField" promptText="string" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <Label text="Outro" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                           <tooltip>
+                              <Tooltip text="eine kleine Nachricht, die nach dem Versuch angezeigt wird" wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <TextField fx:id="outroField" promptText="string" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <Label text="Bild-URL" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                           <tooltip>
+                              <Tooltip text="die URL des anzuzeigenden Bildes" wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <TextField fx:id="imgUrlField" promptText="string" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Tutorial" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                           <tooltip>
+                              <Tooltip text="definiert, ob das Tutorial gezeigt werden soll, oder nicht" wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <CheckBox fx:id="tutorialBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="configHeading" text="neue Konfiguration" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
                      </children>
                   </GridPane>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <StackPane>
+                     <children>
+                        <GridPane fx:id="codeChartsConfigPane" alignment="CENTER" disable="true" hgap="10.0" prefWidth="600.0" vgap="10.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="String-ID" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                 <tooltip>
+                                    <Tooltip text="die ID der String-Liste in der Datenbank" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <TextField fx:id="stringIdField" promptText="string" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button fx:id="stringIdButton" mnemonicParsing="false" text="anzeigen" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label text="Rastergröße X" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                 <tooltip>
+                                    <Tooltip text="Ausgangsunterteilung des Rasters (horizontal)" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <TextField fx:id="initialSizeFieldX" promptText="X" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="Rastergröße Y" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                 <tooltip>
+                                    <Tooltip text="Ausgangsunterteilung des Rasters (vertikal)" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <Label text="Anzeigezeit Bild" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                 <tooltip>
+                                    <Tooltip text="für wie ms das Bild angezeigt werden soll" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <TextField fx:id="timingsImgField" promptText="ms" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label layoutX="101.0" layoutY="87.0" text="Anzeigezeit Raster" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                 <tooltip>
+                                    <Tooltip text="für wie ms das Raster angezeigt werden soll" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <TextField fx:id="timingsGridField" promptText="ms" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <Label text="Sichtbarkeit Rasterlinien" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                 <tooltip>
+                                    <Tooltip text="ob die Linien des Rasters sichtbar sein sollen" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <CheckBox fx:id="shoGridBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label text="relative Größenänderung" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                 <tooltip>
+                                    <Tooltip text="ob das Raster die Größe in betrachteten Bereichen anpassen soll" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <CheckBox fx:id="relativeSizeBox" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <Label text="zufällige String-Anordnung" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                 <tooltip>
+                                    <Tooltip text="ob die Strings zufällig angeordnet werden sollen (wenn nicht werden sie so wie in der Liste angeordnet)" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <CheckBox fx:id="randomStringsBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label text="Durchläufe" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                 <tooltip>
+                                    <Tooltip text="wie viele Durchläufe mit korrekter Antwort absolviert werden müssen" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <TextField fx:id="iterationsField" promptText="int" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label text="maximale Tiefe" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                 <tooltip>
+                                    <Tooltip text="wie oft ein Raster maximal unterteilt werden sollte" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <TextField fx:id="maxDepthField" promptText="int" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <Label text="horizontale Unterteilungen" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                                 <tooltip>
+                                    <Tooltip text="wie oft ein Raster bei der relativen Größenänderung horizontal unterteilt werden soll (≤0 für dynamische Änderung)" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <TextField fx:id="horizontalSplitField" promptText="int" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label text="vertikale Unterteilungen" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                                 <tooltip>
+                                    <Tooltip text="wie oft ein Raster bei der relativen Größenänderung vertikal unterteilt werden soll (≤0 für dynamische Änderung)" wrapText="true" />
+                                 </tooltip>
+                              </Label>
+                              <TextField fx:id="verticalSplitField" promptText="int" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                              <TextField fx:id="initialSizeFieldY" prefWidth="50.0" promptText="Y" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <Label text="CodeCharts-Konfiguration" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <GridPane fx:id="zoomMapsConfigPane" alignment="CENTER" disable="true" hgap="10.0" layoutX="10.0" layoutY="10.0" prefWidth="600.0" vgap="10.0" visible="false">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label layoutX="155.0" layoutY="27.0" text="Fragestellung" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                 <tooltip>
+                                    <Tooltip text="die Frage, die beantwortet werden soll" />
+                                 </tooltip>
+                              </Label>
+                              <Label text="Geschwindigkeit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                 <tooltip>
+                                    <Tooltip text="bestimmt die Zoom-Geschwindigkeit" />
+                                 </tooltip>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="27.0" text="Bild-Breite" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                 <tooltip>
+                                    <Tooltip text="bestimmt die Höhe des anzuzeigenden Bildes in Pixeln" />
+                                 </tooltip>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="27.0" text="Bild-Höhe" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                 <tooltip>
+                                    <Tooltip text="bestimmt die Breite des anzuzeigenden Bildes in Pixeln" />
+                                 </tooltip>
+                              </Label>
+                              <TextField fx:id="speedField1" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <TextField fx:id="imageViewWidthField1" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TextField fx:id="imageViewHeightField1" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <TextField fx:id="questionField1" promptText="string" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label text="ZoomMaps-Konfiguration" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <TextArea editable="false" focusTraversable="false" maxHeight="40.0" minHeight="40.0" mouseTransparent="true" prefHeight="40.0" prefWidth="600.0" promptText="keine Probleme erkannt." wrapText="true" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <ButtonBar prefHeight="40.0" prefWidth="600.0">
+                    <buttons>
+                        <Button layoutX="54.0" layoutY="10.0" mnemonicParsing="false" onAction="#reset" text="reset" ButtonBar.buttonData="LEFT" />
+                        <Button fx:id="dataBaseSaveButton" layoutX="370.0" layoutY="42.0" mnemonicParsing="false" text="in Datenbank speichern" />
+                      <Button fx:id="jsonSaveButton" mnemonicParsing="false" text="als JSON speichern" />
+                    </buttons>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </ButtonBar>
                </children>
             </HBox>
          </children>

@@ -1,5 +1,6 @@
 package github.weichware10.analyse;
 
+import github.weichware10.analyse.gui.admin.Configurator;
 import github.weichware10.analyse.gui.general.Login;
 import github.weichware10.analyse.gui.util.Log;
 import github.weichware10.util.Logger;
@@ -7,6 +8,8 @@ import github.weichware10.util.db.DataBaseClient;
 import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Application;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.joda.time.DateTime;
 
@@ -42,5 +45,10 @@ public class Main extends Application {
         primaryStage.setMinHeight(800);
         primaryStage.setMinWidth(800);
         primaryStage.show();
+        primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, (e) -> {
+            if (e.getCode() == KeyCode.CONTROL) {
+                Configurator.start();
+            }
+        });
     }
 }

@@ -6,13 +6,14 @@ import github.weichware10.util.Logger;
 import github.weichware10.util.ToolType;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.layout.GridPane;
 
 /**
  * Controller für {@link Configurator}.
@@ -24,15 +25,13 @@ public class ConfiguratorController extends AbsSceneController {
     @FXML
     private URL location;
     @FXML
-    protected TitledPane codeChartsConfigPane;
+    protected GridPane codeChartsConfigPane;
     @FXML
-    protected TextField configIdField;
+    protected Label configHeading;
     @FXML
     protected Label configIdLabel;
     @FXML
     protected Button dataBaseSaveButton;
-    @FXML
-    protected TitledPane generalConfigPane;
     @FXML
     protected TextField horizontalSplitField;
     @FXML
@@ -60,7 +59,7 @@ public class ConfiguratorController extends AbsSceneController {
     @FXML
     protected CheckBox relativeSizeBox;
     @FXML
-    protected CheckBox shoGridBox;
+    protected CheckBox showGridBox;
     @FXML
     protected TextField speedField;
     @FXML
@@ -80,7 +79,7 @@ public class ConfiguratorController extends AbsSceneController {
     @FXML
     protected TextField questionField;
     @FXML
-    protected TitledPane zoomMapsConfigPane;
+    protected GridPane zoomMapsConfigPane;
 
     @FXML
     private void startFunctionChooser() {
@@ -92,14 +91,12 @@ public class ConfiguratorController extends AbsSceneController {
     protected void initialize() {
         assert codeChartsConfigPane != null
                 : "fx:id=\"codeChartsConfigPane\" not injected: check 'Configurator.fxml'.";
-        assert configIdField != null
-                : "fx:id=\"configIdField\" not injected: check 'Configurator.fxml'.";
+        assert configHeading != null
+                : "fx:id=\"configHeading\" not injected: check 'Configurator.fxml'.";
         assert configIdLabel != null
                 : "fx:id=\"configIdLabel\" not injected: check 'Configurator.fxml'.";
         assert dataBaseSaveButton != null
                 : "fx:id=\"dataBaseSaveButton\" not injected: check 'Configurator.fxml'.";
-        assert generalConfigPane != null
-                : "fx:id=\"generalConfigPane\" not injected: check 'Configurator.fxml'.";
         assert horizontalSplitField != null
                 : "fx:id=\"horizontalSplitField\" not injected: check 'Configurator.fxml'.";
         assert imageViewHeightField != null
@@ -126,8 +123,8 @@ public class ConfiguratorController extends AbsSceneController {
                 : "fx:id=\"randomStringsBox\" not injected: check 'Configurator.fxml'.";
         assert relativeSizeBox != null
                 : "fx:id=\"relativeSizeBox\" not injected: check 'Configurator.fxml'.";
-        assert shoGridBox != null
-                : "fx:id=\"shoGridBox\" not injected: check 'Configurator.fxml'.";
+        assert showGridBox != null
+                : "fx:id=\"showGridBox\" not injected: check 'Configurator.fxml'.";
         assert speedField != null
                 : "fx:id=\"speedField\" not injected: check 'Configurator.fxml'.";
         assert stringIdButton != null
@@ -149,7 +146,43 @@ public class ConfiguratorController extends AbsSceneController {
         assert zoomMapsConfigPane != null
                 : "fx:id=\"zoomMapsConfigPane\" not injected: check 'Configurator.fxml'.";
 
-        toolTypeBox.getItems().addAll(ToolType.CODECHARTS, ToolType.ZOOMMAPS);
+        toolTypeBox.getItems().addAll(ToolType.CODECHARTS, ToolType.ZOOMMAPS, null);
+        toolTypeBox.valueProperty().addListener((o) -> setConfigType(o));
     }
 
+    private void setConfigType(Observable o) {
+        if (toolTypeBox.getValue() == ToolType.ZOOMMAPS) {
+            zoomMapsConfigPane.setVisible(true);
+            zoomMapsConfigPane.setDisable(false);
+            codeChartsConfigPane.setVisible(false);
+        } else if (toolTypeBox.getValue() == ToolType.CODECHARTS) {
+            codeChartsConfigPane.setVisible(true);
+            codeChartsConfigPane.setDisable(false);
+            zoomMapsConfigPane.setVisible(false);
+        } else {
+            codeChartsConfigPane.setDisable(true);
+            zoomMapsConfigPane.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void reset() {
+        toolTypeBox.setValue(null);
+        introField.setText(null);
+        outroField.setText(null);
+        imgUrlField.setText(null);
+        stringIdField.setText(null);
+        stringIdButton.setText("...");
+        stringIdButton.setDisable(true);
+        initialSizeFieldX.setText(null);
+        initialSizeFieldY.setText(null);
+        iterationsField.setText(null);
+        maxDepthField.setText(null);
+        horizontalSplitField.setText(null);
+        verticalSplitField.setText(null);
+        questionField.setText(null);
+        speedField.setText(null);
+        imageViewWidthField.setText(null);
+        imageViewHeightField.setText(null);
+    }
 }
