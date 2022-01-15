@@ -5,10 +5,12 @@ import github.weichware10.analyse.config.DiagramConfig;
 import github.weichware10.analyse.config.HeatmapConfig;
 import github.weichware10.analyse.enums.AnalyseType;
 import github.weichware10.analyse.gui.general.MainMenuBar;
+import github.weichware10.analyse.logic.Heatmap;
 import github.weichware10.util.Logger;
 import github.weichware10.util.data.TrialData;
 import github.weichware10.util.gui.AbsScene;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 
 /**
  * Analysefenster der App.
@@ -22,6 +24,7 @@ public class Analyzer extends AbsScene {
     private static TrialData trialComp;
     private static HeatmapConfig hmConfig = new HeatmapConfig();
     private static DiagramConfig diaConfig = new DiagramConfig();
+    private static String analysedImage;
 
     /**
      * Startet die App.
@@ -104,7 +107,7 @@ public class Analyzer extends AbsScene {
         } else {
             controller.analyseButton.setDisable(true);
             controller.errorLabel.setText(
-                "Trial und Vergleichs-Trial sind identisch. Wähle ein anderes Vergleichs-Trial!");
+                    "Trial & Vergleichs-Trial sind identisch. Wähle ein anderes Vergleichs-Trial!");
             controller.errorLabel.setVisible(true);
         }
     }
@@ -136,6 +139,25 @@ public class Analyzer extends AbsScene {
                 hmConfig.toString(),
                 diaConfig.toString());
         Logger.info(output);
+
+        switch (analyseType) {
+            case HEATPMAP:
+                analysedImage = Heatmap.createHeatmap(trial, hmConfig);
+                break;
+            case COMPHEATMAP:
+                analysedImage = Heatmap.createHeatmapComp(trial, trialComp, hmConfig);
+                break;
+            case VERLAUF:
+                break;
+            case RELFRQIMGAREA:
+                break;
+            case VIEWTIMEDISTR:
+                break;
+            default:
+                // sollte niemals eintreten
+                break;
+        }
+        controller.analysedImage.setImage(new Image(analysedImage));
     }
 
     /**
@@ -148,10 +170,12 @@ public class Analyzer extends AbsScene {
         controller.exportButton.setDisable(true);
         controller.exportRawButton.setDisable(true);
         controller.selectCompTrialButton.setVisible(false);
+        controller.analysedImage.setImage(null);
         Analyzer.analyseType = null;
         Analyzer.trial = null;
         Analyzer.trialComp = null;
         Analyzer.hmConfig = new HeatmapConfig();
         Analyzer.diaConfig = new DiagramConfig();
+        Analyzer.analysedImage = null;
     }
 }

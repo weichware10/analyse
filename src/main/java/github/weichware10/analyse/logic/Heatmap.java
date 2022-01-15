@@ -1,50 +1,131 @@
 package github.weichware10.analyse.logic;
 
+import github.weichware10.analyse.Main;
 import github.weichware10.analyse.config.HeatmapConfig;
+import github.weichware10.util.Files;
+import github.weichware10.util.Logger;
+import github.weichware10.util.ToolType;
+import github.weichware10.util.config.Configuration;
+import github.weichware10.util.data.DataPoint;
 import github.weichware10.util.data.TrialData;
-import java.util.List;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
 
 /**
  * verantwortlich für die Erstellung der Heatmap.
  */
-@SuppressWarnings("unused")
-public class Heatmap extends Analyse {
-    private final TrialData data;
-    private final HeatmapConfig confHm;
-    private List<List<Float>> heatmap;
+public class Heatmap {
 
     /**
-     * verantwortlich für die Erstellung der Heatmap.
+     * Erstellt Heatmap.
      *
-     * @param data   - Daten die zur Erstellung der Heatmaps benötigt werden
-     * @param confHm - Konfiguration der Heatmap
+     * @param trial    - Versuch
+     * @param hmConfig - Konfiguration
+     * @return ?
      */
-    public Heatmap(TrialData data, HeatmapConfig confHm) {
-        this.data = data;
-        this.confHm = confHm;
+    public static String createHeatmap(TrialData trial, HeatmapConfig hmConfig) {
+        Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
+
+        // Load image for width & height
+        String imageUrl = null;
+        ;
+        try {
+            imageUrl = Files.saveImage(config.getImageUrl());
+        } catch (IllegalArgumentException | IOException e) {
+            Logger.error("Failed to save img", e, true);
+        }
+        Image image = new Image(imageUrl);
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+
+        // Create image
+        BufferedImage heatmap = null;
+        double opacity;
+
+        if (hmConfig.isImage()) {
+            try {
+                heatmap = ImageIO.read(new File(imageUrl));
+            } catch (IOException e) {
+                Logger.error("Failed to load image", e, true);
+            }
+            opacity = 0.4f;
+        } else {
+            heatmap = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            opacity = 1.0f;
+        }
+        Graphics2D graphic = heatmap.createGraphics();
+        // Tiefe 0 setzten
+        graphic.setColor(calcColor(0.0f, opacity,
+                hmConfig.getMinColorDiff(), hmConfig.getMaxColorDiff()));
+        graphic.fillRect(0, 0, width, height);
+
+        if (trial.toolType == ToolType.ZOOMMAPS) {
+            // TODO: Implementieren
+        } else if (trial.toolType == ToolType.CODECHARTS) {
+            // Rechtecke der Durchläufe setzen
+            for (DataPoint dataPoint : trial.getData()) {
+                // Relative Tiefe berechnen
+                double relDepth = (double) dataPoint.depth
+                        / (double) config.getCodeChartsConfiguration().getMaxDepth();
+
+                // Rechteck färben und setzten
+                graphic.setColor(calcColor(relDepth, opacity,
+                        hmConfig.getMinColorDiff(), hmConfig.getMaxColorDiff()));
+                graphic.fillRect((int) dataPoint.viewport.getMinX(),
+                        (int) dataPoint.viewport.getMinY(),
+                        (int) dataPoint.viewport.getWidth(),
+                        (int) dataPoint.viewport.getHeight());
+            }
+        }
+
+        graphic.dispose();
+
+        // save generated image
+        String imgLocation = null;
+        try {
+            imgLocation = Files.saveGeneratedImage(heatmap, "test.png");
+        } catch (IllegalArgumentException | IOException e) {
+            Logger.error("Failed to save the image", e, true);
+        }
+
+        return imgLocation;
     }
 
     /**
-     * erstellt die Heatmap, welche die relativen Häufigkeiten der betrachteten
-     * Bildkoordinaten darstellt.
+     * Erstellt Heatmap-Vergleich.
      *
-     * @return Pfad des Bildes der erstellten Heatmap
+     * @param trial     - 1. Versuch
+     * @param trialComp - 2. Versuch
+     * @param hmConfig  - Konfiguration
+     * @return ?
      */
-    public String createHeatmap() {
-        return ".../heatmap/HEATMAP_" + this.data.toolType.toString()
-            + "_" + this.data.trialId + ".jpg";
+    public static String createHeatmapComp(TrialData trial,
+            TrialData trialComp, HeatmapConfig hmConfig) {
+        return null;
     }
 
     /**
-     * vergleicht zwei Heatmaps und erstellt aus dem Vergleich eine Heatmap.
+     * Berechnet neue Farbe anhand der Tiefe (CodeCharts).
      *
-     * @param heatmap1 - erste Heatmap für den Vergleich
-     * @param heatmap2 - zweite Heatmap für den Vergleich
-     * @return Pfad des Bildes der erstellten Heatmap
+     * @param relDepth     - relative Tiefe
+     * @param opacity      - Transparenz
+     * @param minColorDiff - minimale Farbe
+     * @param maxColorDiff - maximale Farbe
+     * @return berechnete Farbe (java.awt.Color Color)
      */
-    public static String compHeatmaps(Heatmap heatmap1, Heatmap heatmap2) {
-        return ".../heatmap/COMPHEATMAP_" + heatmap1.data.toolType.toString()
-            + "_" + heatmap1.data.trialId + "_" + heatmap2.data.toolType.toString()
-            + "_" + heatmap2.data.trialId + ".jpg";
+    private static java.awt.Color calcColor(double relDepth, double opacity,
+            javafx.scene.paint.Color minColorDiff,
+            javafx.scene.paint.Color maxColorDiff) {
+        double r = minColorDiff.getRed() * (1.0f - relDepth) + maxColorDiff.getRed() * relDepth;
+        double g = minColorDiff.getGreen() * (1.0f - relDepth) + maxColorDiff.getGreen() * relDepth;
+        double b = minColorDiff.getBlue() * (1.0f - relDepth) + maxColorDiff.getBlue() * relDepth;
+        Logger.debug(String.format("R:%f, G:%fm B:%f", r, g, b));
+
+        javafx.scene.paint.Color color = new javafx.scene.paint.Color(r, g, b, opacity);
+        return HeatmapConfig.fxToAwtColor(color);
     }
 }
