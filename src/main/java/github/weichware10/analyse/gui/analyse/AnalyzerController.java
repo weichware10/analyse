@@ -36,7 +36,6 @@ public class AnalyzerController extends AbsSceneController {
 
     @FXML
     protected void analyze(ActionEvent event) {
-        // TODO: Analyse
         Analyzer.analyse();
     }
 
@@ -47,12 +46,12 @@ public class AnalyzerController extends AbsSceneController {
 
     @FXML
     void export(ActionEvent event) {
-        // TODO: Export
+        Analyzer.export();
     }
 
     @FXML
     void exportRaw(ActionEvent event) {
-        // TODO: ExportRaw
+        // TODO: ExportRaw (Was sollte hier ausgegeben werden?)
     }
 
     @FXML
@@ -113,6 +112,11 @@ public class AnalyzerController extends AbsSceneController {
         selectCompTrialButton.setVisible(false);
         Analyzer.setAnalyseType(AnalyseType.VIEWTIMEDISTR);
         analyseTypMenuButton.setText("Verteilung Betrachtungszeit");
+    }
+
+    protected void setExportStatus(String text) {
+        errorLabel.setText(text);
+        errorLabel.setVisible(true);
     }
 
     @FXML
