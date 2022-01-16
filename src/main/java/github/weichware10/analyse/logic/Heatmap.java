@@ -12,7 +12,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import javafx.scene.image.Image;
 import javax.imageio.ImageIO;
 
@@ -33,7 +32,6 @@ public class Heatmap {
 
         // Bild laden für Bildbreite und -höhe
         String imageUrl = null;
-        ;
         try {
             imageUrl = Files.saveImage(config.getImageUrl());
         } catch (IllegalArgumentException | IOException e) {
@@ -70,7 +68,8 @@ public class Heatmap {
             graphic.fillRect(0, 0, width, height);
 
             // Maximale Tiefe ermitteln
-            double maxDepth = findMaxDepth(trial.getData(), (double) width, (double) height);
+            double maxDepth = Analyse.findMaxDepth(
+                    trial.getData(), (double) width, (double) height);
             double oldRelDepth = 0.0f;
 
             // Rechtecke der Zooms setzen
@@ -78,10 +77,8 @@ public class Heatmap {
                 // Relative Tiefe berechnen
                 double stepWidth = dataPoint.viewport.getWidth();
                 double stepHeight = dataPoint.viewport.getHeight();
-                double tempRelDepth = 1
-                        / ((stepWidth * stepHeight) / ((double) width * (double) height));
-                tempRelDepth = java.lang.Math.log10(tempRelDepth);
-                double relDepth = tempRelDepth / maxDepth;
+                double relDepth = Analyse.calcRelDepthZm(
+                            stepWidth, stepHeight, width, height, maxDepth);
 
                 // Prüfen ob herausgezoomt wurde
                 if (oldRelDepth > relDepth) {
@@ -89,11 +86,9 @@ public class Heatmap {
                     continue;
                 }
                 oldRelDepth = relDepth;
-                // Logger.debug(relDepth + " " + tempRelDepth);
 
                 // Rechteck färben und setzten
-                graphic.setColor(calcColorZm(relDepth, 0.1f,
-                        hmConfig.getMinColorDiff(), hmConfig.getMaxColorDiff()));
+                graphic.setColor(calcColorZm(relDepth, 0.1f, hmConfig.getMaxColorDiff()));
                 int minX = (dataPoint.viewport.getMinX() < 0.0f
                         ? 0 : (int) dataPoint.viewport.getMinX());
                 int minY = (dataPoint.viewport.getMinY() < 0.0f
@@ -109,8 +104,8 @@ public class Heatmap {
             // Rechtecke der Durchläufe setzen
             for (DataPoint dataPoint : trial.getData()) {
                 // Relative Tiefe berechnen
-                double relDepth = (double) dataPoint.depth
-                        / (double) config.getCodeChartsConfiguration().getMaxDepth();
+                double relDepth = Analyse.calcRelDepthCc((double) dataPoint.depth,
+                        (double) config.getCodeChartsConfiguration().getMaxDepth());
 
                 // Rechteck färben und setzten
                 graphic.setColor(calcColorCc(relDepth, opacity,
@@ -132,27 +127,6 @@ public class Heatmap {
         }
 
         return imgLocation;
-    }
-
-    /**
-     * Berechnet maximale Tiefe eines ZoomMaps-Versuchs.
-     *
-     * @param data - Datenpunkte des Versuchs
-     * @param width - Breite des verwendeten Bilds
-     * @param height - Höhe des verwendeten Bilds
-     * @return maximale Tiefe des Versuchs
-     */
-    private static double findMaxDepth(List<DataPoint> data, double width, double height) {
-        double maxDepth = Float.MAX_VALUE;
-        for (DataPoint dataPoint : data) {
-            double currentWidth = dataPoint.viewport.getWidth();
-            double currentHeight = dataPoint.viewport.getHeight();
-            double depth = (currentWidth * currentHeight) / (width * height);
-            if (depth < maxDepth) {
-                maxDepth = depth;
-            }
-        }
-        return java.lang.Math.log10(1 / maxDepth);
     }
 
     /**
@@ -181,12 +155,10 @@ public class Heatmap {
      *
      * @param relDepth     - relative Tiefe
      * @param opacity      - Transparenz
-     * @param minColorDiff - minimale Farbe
      * @param maxColorDiff - maximale Farbe
      * @return berechnete Farbe (java.awt.Color Color)
      */
     private static java.awt.Color calcColorZm(double relDepth, double opacity,
-            javafx.scene.paint.Color minColorDiff,
             javafx.scene.paint.Color maxColorDiff) {
         double r = 1.0f * (1.0f - relDepth) + maxColorDiff.getRed() * relDepth;
         double g = 1.0f * (1.0f - relDepth) + maxColorDiff.getGreen() * relDepth;
