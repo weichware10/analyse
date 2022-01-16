@@ -59,43 +59,45 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Tool-Typ" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <tooltip>
-                              <Tooltip text="Der Tool-Typ bestimmt, welcher Versuch durchgeführt wird." wrapText="true" />
-                           </tooltip>
-                        </Label>
-                        <ComboBox fx:id="toolTypeBox" prefWidth="150.0" promptText="Tool-Typ auswählen" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                        <Label text="Intro" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                           <tooltip>
-                              <Tooltip text="eine kleine Nachricht, welche vor dem Versuch angezeigt wird" wrapText="true" />
-                           </tooltip>
-                        </Label>
-                        <TextField fx:id="introField" promptText="string" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <Label text="Outro" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                           <tooltip>
-                              <Tooltip text="eine kleine Nachricht, die nach dem Versuch angezeigt wird" wrapText="true" />
-                           </tooltip>
-                        </Label>
-                        <TextField fx:id="outroField" promptText="string" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <Label text="Bild-URL" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                           <tooltip>
-                              <Tooltip text="die URL des anzuzeigenden Bildes" wrapText="true" />
-                           </tooltip>
-                        </Label>
-                        <TextField fx:id="imgUrlField" promptText="string" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Tutorial" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-                           <tooltip>
-                              <Tooltip text="definiert, ob das Tutorial gezeigt werden soll, oder nicht" wrapText="true" />
-                           </tooltip>
-                        </Label>
-                        <CheckBox fx:id="tutorialBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label fx:id="configHeading" text="neue Konfiguration" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
+                        <Label fx:id="configSubHeading" alignment="CENTER" contentDisplay="CENTER" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Label text="Tool-Typ" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                           <tooltip>
+                              <Tooltip text="Der Tool-Typ bestimmt, welcher Versuch durchgeführt wird." wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <ComboBox fx:id="toolTypeBox" prefWidth="150.0" promptText="Tool-Typ auswählen" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
+                        <Label text="Intro" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                           <tooltip>
+                              <Tooltip text="eine kleine Nachricht, welche vor dem Versuch angezeigt wird" wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <TextField fx:id="introField" promptText="string" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <Label text="Outro" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                           <tooltip>
+                              <Tooltip text="eine kleine Nachricht, die nach dem Versuch angezeigt wird" wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <TextField fx:id="outroField" promptText="string" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <Label text="Bild-URL" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                           <tooltip>
+                              <Tooltip text="die URL des anzuzeigenden Bildes" wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <TextField fx:id="imgUrlField" promptText="string" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Tutorial" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                           <tooltip>
+                              <Tooltip text="definiert, ob das Tutorial gezeigt werden soll, oder nicht" wrapText="true" />
+                           </tooltip>
+                        </Label>
+                        <CheckBox fx:id="tutorialBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                </children>
@@ -122,6 +124,11 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
+                              <Label text="CodeCharts-Konfiguration" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
                               <Label text="String-ID" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                                  <tooltip>
                                     <Tooltip text="die ID der String-Liste in der Datenbank" wrapText="true" />
@@ -134,24 +141,25 @@
                                     <Tooltip text="Ausgangsunterteilung des Rasters (horizontal)" wrapText="true" />
                                  </tooltip>
                               </Label>
-                              <TextField fx:id="initialSizeFieldX" promptText="X" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="initialSizeFieldX" onAction="#checkInt" promptText="X" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="Rastergröße Y" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                                  <tooltip>
                                     <Tooltip text="Ausgangsunterteilung des Rasters (vertikal)" wrapText="true" />
                                  </tooltip>
                               </Label>
+                              <TextField fx:id="initialSizeFieldY" onAction="#checkInt" prefWidth="50.0" promptText="Y" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                               <Label text="Anzeigezeit Bild" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                                  <tooltip>
                                     <Tooltip text="für wie ms das Bild angezeigt werden soll" wrapText="true" />
                                  </tooltip>
                               </Label>
-                              <TextField fx:id="timingsImgField" promptText="ms" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="timingsImgField" onAction="#checkInt" promptText="ms" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label layoutX="101.0" layoutY="87.0" text="Anzeigezeit Raster" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                                  <tooltip>
                                     <Tooltip text="für wie ms das Raster angezeigt werden soll" wrapText="true" />
                                  </tooltip>
                               </Label>
-                              <TextField fx:id="timingsGridField" promptText="ms" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <TextField fx:id="timingsGridField" onAction="#checkInt" promptText="ms" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                               <Label text="Sichtbarkeit Rasterlinien" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                                  <tooltip>
                                     <Tooltip text="ob die Linien des Rasters sichtbar sein sollen" wrapText="true" />
@@ -175,31 +183,25 @@
                                     <Tooltip text="wie viele Durchläufe mit korrekter Antwort absolviert werden müssen" wrapText="true" />
                                  </tooltip>
                               </Label>
-                              <TextField fx:id="iterationsField" promptText="int" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="iterationsField" onAction="#checkInt" promptText="int" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Label text="maximale Tiefe" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
                                  <tooltip>
                                     <Tooltip text="wie oft ein Raster maximal unterteilt werden sollte" wrapText="true" />
                                  </tooltip>
                               </Label>
-                              <TextField fx:id="maxDepthField" promptText="int" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <TextField fx:id="maxDepthField" onAction="#checkInt" promptText="int" GridPane.columnIndex="3" GridPane.rowIndex="6" />
                               <Label text="horizontale Unterteilungen" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
                                  <tooltip>
                                     <Tooltip text="wie oft ein Raster bei der relativen Größenänderung horizontal unterteilt werden soll (≤0 für dynamische Änderung)" wrapText="true" />
                                  </tooltip>
                               </Label>
-                              <TextField fx:id="horizontalSplitField" promptText="int" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <TextField fx:id="horizontalSplitField" onAction="#checkInt" promptText="int" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                               <Label text="vertikale Unterteilungen" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
                                  <tooltip>
                                     <Tooltip text="wie oft ein Raster bei der relativen Größenänderung vertikal unterteilt werden soll (≤0 für dynamische Änderung)" wrapText="true" />
                                  </tooltip>
                               </Label>
-                              <TextField fx:id="verticalSplitField" promptText="int" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                              <TextField fx:id="initialSizeFieldY" prefWidth="50.0" promptText="Y" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                              <Label text="CodeCharts-Konfiguration" GridPane.columnSpan="4" GridPane.halignment="CENTER">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
+                              <TextField fx:id="verticalSplitField" onAction="#checkInt" promptText="int" GridPane.columnIndex="3" GridPane.rowIndex="7" />
                            </children>
                         </GridPane>
                         <GridPane fx:id="zoomMapsConfigPane" alignment="CENTER" disable="true" hgap="10.0" layoutX="10.0" layoutY="10.0" prefWidth="700.0" vgap="10.0" visible="false">
@@ -242,10 +244,10 @@
                                     <Tooltip text="bestimmt die Breite des anzuzeigenden Bildes in Pixeln" />
                                  </tooltip>
                               </Label>
-                              <TextField fx:id="speedField" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                              <TextField fx:id="imageViewWidthField" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                              <TextField fx:id="imageViewHeightField" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                               <TextField fx:id="questionField" promptText="string" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextField fx:id="speedField" onAction="#checkDouble" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <TextField fx:id="imageViewWidthField" onAction="#checkDouble" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TextField fx:id="imageViewHeightField" onAction="#checkDouble" promptText="double" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                            </children>
                         </GridPane>
                      </children>

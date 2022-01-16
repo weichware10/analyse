@@ -1,12 +1,13 @@
 package github.weichware10.analyse.gui.admin;
 
+import github.weichware10.analyse.gui.admin.Configurator.Mode;
 import github.weichware10.analyse.gui.general.FunctionChooser;
 import github.weichware10.util.Logger;
 import github.weichware10.util.ToolType;
 import github.weichware10.util.gui.AbsSceneController;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.Observable;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -29,7 +30,7 @@ public class ConfiguratorController extends AbsSceneController {
     @FXML
     protected Label configHeading;
     @FXML
-    protected Label configIdLabel;
+    protected Label configSubHeading;
     @FXML
     protected Button dataBaseSaveButton;
     @FXML
@@ -88,13 +89,55 @@ public class ConfiguratorController extends AbsSceneController {
     }
 
     @FXML
+    private void checkInt(ActionEvent event) {
+        Logger.debug("checking int");
+        if (!(event.getSource() instanceof TextField)) {
+            Logger.debug("wrong");
+            return;
+        }
+        checkInt((TextField) event.getSource(), true);
+    }
+
+    private void checkInt(TextField intField, boolean force) {
+        if ((intField.isFocused() && !force) || intField.getText().length() == 0) {
+            return;
+        }
+        try {
+            intField.setText(Integer.toString(
+                    (int) Math.round(Double.valueOf(intField.getText()))));
+            intField.setText(Integer.toString(Integer.valueOf(intField.getText())));
+        } catch (NumberFormatException e) {
+            intField.setText("1");
+        }
+    }
+
+    @FXML
+    private void checkDouble(ActionEvent event) {
+        if (!(event.getSource() instanceof TextField)) {
+            return;
+        }
+        checkDouble((TextField) event.getSource(), true);
+    }
+
+    private void checkDouble(TextField doubleField, boolean force) {
+        if ((doubleField.isFocused() && !force) || doubleField.getText().length() == 0) {
+            return;
+        }
+        try {
+            doubleField.setText(Double.toString(Double.valueOf(doubleField.getText())));
+        } catch (NumberFormatException e) {
+            doubleField.setText("1.0");
+        }
+    }
+
+    @FXML
     protected void initialize() {
         assert codeChartsConfigPane != null
                 : "fx:id=\"codeChartsConfigPane\" not injected: check 'Configurator.fxml'.";
         assert configHeading != null
                 : "fx:id=\"configHeading\" not injected: check 'Configurator.fxml'.";
-        assert configIdLabel != null
-                : "fx:id=\"configIdLabel\" not injected: check 'Configurator.fxml'.";
+        assert configSubHeading != null
+                : "fx:id=\"configSubHeading\" not injected: check 'Configurator.fxml'.";
         assert dataBaseSaveButton != null
                 : "fx:id=\"dataBaseSaveButton\" not injected: check 'Configurator.fxml'.";
         assert horizontalSplitField != null
@@ -147,10 +190,36 @@ public class ConfiguratorController extends AbsSceneController {
                 : "fx:id=\"zoomMapsConfigPane\" not injected: check 'Configurator.fxml'.";
 
         toolTypeBox.getItems().addAll(ToolType.CODECHARTS, ToolType.ZOOMMAPS, null);
-        toolTypeBox.valueProperty().addListener((o) -> setConfigType(o));
+        toolTypeBox.valueProperty().addListener((o) -> setConfigType());
+        Configurator.mode.addListener((o) -> setTitle());
+
+        // Integer fields
+        TextField[] intFields = new TextField[] {
+            initialSizeFieldX,
+            initialSizeFieldY,
+            timingsImgField,
+            timingsGridField,
+            iterationsField,
+            maxDepthField,
+            horizontalSplitField,
+            verticalSplitField
+        };
+        for (TextField intField : intFields) {
+            intField.focusedProperty().addListener((o) -> checkInt(intField, false));
+        }
+
+        // Double Fields
+        TextField[] doubleFields = new TextField[] {
+            speedField,
+            imageViewWidthField,
+            imageViewHeightField
+        };
+        for (TextField doubleField : doubleFields) {
+            doubleField.focusedProperty().addListener((o) -> checkDouble(doubleField, false));
+        }
     }
 
-    private void setConfigType(Observable o) {
+    private void setConfigType() {
         if (toolTypeBox.getValue() == ToolType.ZOOMMAPS) {
             zoomMapsConfigPane.setVisible(true);
             zoomMapsConfigPane.setDisable(false);
@@ -162,6 +231,33 @@ public class ConfiguratorController extends AbsSceneController {
         } else {
             codeChartsConfigPane.setDisable(true);
             zoomMapsConfigPane.setDisable(true);
+        }
+    }
+
+    private void setTitle() {
+        switch (Configurator.mode.get()) {
+            case JSONVIEW:
+                configHeading.setText("Konfiguration");
+                configSubHeading.setText("aus JSON geladen");
+                break;
+            case JSONEDIT:
+                configHeading.setText("neue Konfiguration");
+                configSubHeading.setText("basierend auf JSON");
+                break;
+            case DBVIEW:
+                configHeading.setText("Konfiguration");
+                configSubHeading.setText(
+                        String.format("aus Datenbank, ID: %s", Configurator.configId));
+                break;
+            case DBEDIT:
+                configHeading.setText("neue Konfiguration");
+                configSubHeading.setText(
+                        String.format("basierend auf Datenbank, (ID: %s)", Configurator.configId));
+                break;
+            default: // NEW
+                configHeading.setText("neue Konfiguration");
+                configSubHeading.setText("");
+                break;
         }
     }
 
@@ -190,6 +286,7 @@ public class ConfiguratorController extends AbsSceneController {
         randomStringsBox.setSelected(false);
         timingsImgField.setText(null);
         timingsGridField.setText(null);
-        configHeading.setText("neue Konfiguration");
+
+        Configurator.mode.set(Mode.NEW);
     }
 }
