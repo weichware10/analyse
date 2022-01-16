@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 /**
  * Kontroller für {@link Analyzer}.
@@ -23,6 +24,8 @@ public class AnalyzerController extends AbsSceneController {
     protected ImageView analysedImage;
     @FXML
     protected Button backButton;
+    @FXML
+    protected Pane chartPane;
     @FXML
     protected Button configButton;
     @FXML
@@ -129,6 +132,8 @@ public class AnalyzerController extends AbsSceneController {
                 : "fx:id=\"analysedImage\" not injected: check 'Analyzer.fxml'.";
         assert backButton != null
                 : "fx:id=\"backButton\" was injected: check 'Analyzer.fxml'.";
+        assert chartPane != null
+                : "fx:id=\"chartPane\" was injected: check 'Analyzer.fxml'.";
         assert configButton != null
                 : "fx:id=\"configButton\" not injected: check 'Analyzer.fxml'.";
         assert errorLabel != null
