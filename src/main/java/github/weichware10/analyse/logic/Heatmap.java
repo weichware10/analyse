@@ -31,13 +31,14 @@ public class Heatmap {
         Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
 
         // Bild laden für Bildbreite und -höhe
-        String imageUrl = null;
+        String imageUrl = Analyse.saveImage(config.getImageUrl());
+        Image image = null;
         try {
-            imageUrl = Files.saveImage(config.getImageUrl());
-        } catch (IllegalArgumentException | IOException e) {
-            Logger.error("Failed to save img", e, true);
+            image = new Image(imageUrl);
+        } catch (Exception e) {
+            Logger.error("Failed to save the image", e, true);
+            return null;
         }
-        Image image = new Image(imageUrl);
         int width = (int) image.getWidth();
         int height = (int) image.getHeight();
 
@@ -75,10 +76,8 @@ public class Heatmap {
             // Rechtecke der Zooms setzen
             for (DataPoint dataPoint : trial.getData()) {
                 // Relative Tiefe berechnen
-                double stepWidth = dataPoint.viewport.getWidth();
-                double stepHeight = dataPoint.viewport.getHeight();
-                double relDepth = Analyse.calcRelDepthZm(
-                            stepWidth, stepHeight, width, height, maxDepth);
+                double relDepth = Analyse.calcRelDepthZm(dataPoint.viewport, width,
+                        height, maxDepth);
 
                 // Prüfen ob herausgezoomt wurde
                 if (oldRelDepth > relDepth) {
@@ -93,7 +92,8 @@ public class Heatmap {
                         ? 0 : (int) dataPoint.viewport.getMinX());
                 int minY = (dataPoint.viewport.getMinY() < 0.0f
                         ? 0 : (int) dataPoint.viewport.getMinY());
-                graphic.fillRect(minX, minY, (int) stepWidth, (int) stepHeight);
+                graphic.fillRect(minX, minY, (int) dataPoint.viewport.getWidth(),
+                        (int) dataPoint.viewport.getHeight());
             }
         } else if (trial.toolType == ToolType.CODECHARTS) {
             // Tiefe 0 setzten
