@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -13,7 +12,7 @@
 
 <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.analyse.AnalyzerController">
    <children>
-      <HBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="200.0" spacing="15.0">
+      <HBox alignment="TOP_CENTER" prefHeight="38.0" prefWidth="680.0" spacing="15.0">
          <children>
             <HBox prefHeight="46.0" prefWidth="543.0" spacing="15.0">
                <children>
@@ -23,8 +22,7 @@
                       <MenuItem mnemonicParsing="false" onAction="#setHeatmap" text="Heatmap" />
                       <MenuItem mnemonicParsing="false" onAction="#setCompHeatmap" text="Heatmap Vergleich" />
                         <MenuItem mnemonicParsing="false" onAction="#setVerlauf" text="Verlauf" />
-                        <MenuItem mnemonicParsing="false" onAction="#setRelFrqImgArea" text="Häufigkeitsverteilung Bildbereiche" />
-                        <MenuItem mnemonicParsing="false" onAction="#setViewTimeDistr" text="Verteilung Betrachtungszeit" />
+                        <MenuItem mnemonicParsing="false" onAction="#setRelDepthDistr" text="Verteilung Relative Tiefe" />
                     </items>
                   </MenuButton>
                   <Button fx:id="configButton" disable="true" mnemonicParsing="false" onAction="#setConfig" text="Konfiguration" />
@@ -41,7 +39,7 @@
             <Insets />
          </VBox.margin>
       </HBox>
-      <HBox alignment="TOP_CENTER" prefHeight="18.0" prefWidth="680.0">
+      <HBox alignment="CENTER" prefHeight="29.0" prefWidth="680.0">
          <children>
             <Label fx:id="errorLabel" alignment="CENTER" text="error" textAlignment="CENTER" textFill="RED" visible="false">
                <font>
@@ -50,13 +48,17 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="347.0" prefWidth="555.0">
+      <HBox alignment="CENTER" prefHeight="505.0" prefWidth="680.0">
          <children>
-            <ImageView fx:id="analysedImage" fitHeight="203.0" fitWidth="324.0" pickOnBounds="true" preserveRatio="true" />
-            <Pane fx:id="chartPane" prefHeight="347.0" prefWidth="356.0" />
+            <Pane fx:id="analysePane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="405.0" prefWidth="680.0" />
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="90.0" prefWidth="200.0" spacing="15.0">
+      <HBox alignment="CENTER" prefHeight="22.0" prefWidth="680.0">
+         <children>
+            <Label fx:id="statusLabel" text="status" textAlignment="CENTER" textFill="#2400ff" visible="false" />
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="29.0" prefWidth="680.0" spacing="15.0">
          <children>
             <HBox alignment="BOTTOM_LEFT" prefHeight="90.0" prefWidth="246.0" spacing="15.0">
                <children>

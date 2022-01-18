@@ -13,11 +13,13 @@ import github.weichware10.util.gui.AbsScene;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.LineChart;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -35,8 +37,8 @@ public class Analyzer extends AbsScene {
     private static TrialData trialComp;
     private static HeatmapConfig hmConfig = new HeatmapConfig();
     private static DiagramConfig diaConfig = new DiagramConfig();
-    private static String analysedImage;
-    private static LineChart<Number, Number> lineChartSeries;
+    private static String heatmapImage;
+    private static LineChart<Number, Number> verlaufLineChart;
 
     /**
      * Startet die App.
@@ -68,12 +70,12 @@ public class Analyzer extends AbsScene {
         diaConfig = new DiagramConfig();
 
         controller.errorLabel.setVisible(false);
-        controller.analysedImage.setImage(null);
+        controller.statusLabel.setVisible(false);
         controller.exportButton.setDisable(true);
         controller.exportRawButton.setDisable(true);
-        controller.chartPane.getChildren().clear();
-        analysedImage = null;
-        lineChartSeries = null;
+        controller.analysePane.getChildren().clear();
+        heatmapImage = null;
+        verlaufLineChart = null;
 
         if (Analyzer.analyseType != AnalyseType.COMPHEATMAP) {
             trialComp = null;
@@ -105,12 +107,12 @@ public class Analyzer extends AbsScene {
                 controller.selectCompTrialButton.setVisible(false);
                 controller.analyseTypMenuButton.setText("Analyse-Typ");
                 controller.errorLabel.setVisible(false);
-                controller.analysedImage.setImage(null);
+                controller.statusLabel.setVisible(false);
                 controller.exportButton.setDisable(true);
                 controller.exportRawButton.setDisable(true);
-                controller.chartPane.getChildren().clear();
-                analysedImage = null;
-                lineChartSeries = null;
+                controller.analysePane.getChildren().clear();
+                heatmapImage = null;
+                verlaufLineChart = null;
                 hmConfig = new HeatmapConfig();
                 diaConfig = new DiagramConfig();
             }
@@ -141,13 +143,13 @@ public class Analyzer extends AbsScene {
      */
     public static void setConfig() {
         controller.errorLabel.setVisible(false);
+        controller.statusLabel.setVisible(false);
 
         if (analyseType == AnalyseType.COMPHEATMAP
                 || analyseType == AnalyseType.HEATPMAP) {
             HeatmapConfigurator.start(hmConfig);
             Logger.info("Start Heatmap Configurator");
-        } else if (analyseType == AnalyseType.RELFRQIMGAREA
-                || analyseType == AnalyseType.VIEWTIMEDISTR) {
+        } else if (analyseType == AnalyseType.RELDEPTHDISTR) {
             DiagramConfigurator.start(diaConfig, analyseType);
             Logger.info("Start Diagram Configurator");
         }
@@ -166,33 +168,46 @@ public class Analyzer extends AbsScene {
                 diaConfig.toString());
         Logger.info(output);
 
-        controller.errorLabel.setVisible(false);
+        controller.statusLabel.setVisible(false);
 
         switch (analyseType) {
             case HEATPMAP:
-                analysedImage = Heatmap.createHeatmap(trial, hmConfig);
+                heatmapImage = Heatmap.createHeatmap(trial, hmConfig);
                 break;
             case COMPHEATMAP:
-                analysedImage = Heatmap.createHeatmapComp(trial, trialComp, hmConfig);
+                heatmapImage = Heatmap.createHeatmapComp(trial, trialComp, hmConfig);
                 break;
             case VERLAUF:
-                lineChartSeries = Verlauf.createVerlauf(trial);
+                verlaufLineChart = Verlauf.createVerlauf(trial);
                 break;
-            case RELFRQIMGAREA:
-                break;
-            case VIEWTIMEDISTR:
+            case RELDEPTHDISTR:
                 break;
             default:
                 // sollte niemals eintreten
                 break;
         }
-        if (analysedImage != null) {
-            controller.analysedImage.setImage(new Image(analysedImage));
+        if (heatmapImage != null) {
+            // Pane leeren
+            controller.analysePane.getChildren().clear();
+
+            // ImageView mit Heatmap setzen
+            ImageView imageView = new ImageView(new Image(heatmapImage));
+            imageView.setFitWidth(680.0f);
+            imageView.setFitHeight(405.0f);
+            imageView.setPreserveRatio(true);
+            controller.analysePane.getChildren().addAll(imageView);
+
+            // Export aktivieren
             controller.exportButton.setDisable(false);
             controller.exportRawButton.setDisable(false);
-        } else if (lineChartSeries != null) {
-            controller.chartPane.getChildren().clear();
-            controller.chartPane.getChildren().addAll(lineChartSeries);
+        } else if (verlaufLineChart != null) {
+            // Pane leeren
+            controller.analysePane.getChildren().clear();
+
+            // LineChart vom Verlauf setzen
+            controller.analysePane.getChildren().addAll(verlaufLineChart);
+
+            // Export aktivieren
             controller.exportButton.setDisable(false);
             controller.exportRawButton.setDisable(false);
         }
@@ -238,7 +253,7 @@ public class Analyzer extends AbsScene {
     private static boolean saveImage(String location) {
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File(analysedImage));
+            image = ImageIO.read(new File(heatmapImage));
             ImageIO.write(image, "png", new File(location));
         } catch (IOException e) {
             Logger.error("Failed to save image", e, true);
@@ -256,7 +271,7 @@ public class Analyzer extends AbsScene {
      * @return Erfolgsboolean
      */
     private static boolean saveAsPng(String location) {
-        WritableImage image = controller.chartPane.snapshot(new SnapshotParameters(), null);
+        WritableImage image = controller.analysePane.snapshot(new SnapshotParameters(), null);
 
         File file = new File(location);
 
@@ -270,6 +285,35 @@ public class Analyzer extends AbsScene {
     }
 
     /**
+     * Export von Raw-Daten des Versuchs.
+     */
+    public static void exportRaw() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Versuchs-Daten speichern unter");
+        fileChooser.getExtensionFilters().add(
+                new ExtensionFilter("JSON File", "*.json"));
+
+        // Dateipfad als String speichern und json laden
+        String location = fileChooser.showSaveDialog(Main.primaryStage).getAbsolutePath();
+        if (location != null) {
+            Thread taskThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if (TrialData.toJson(location, trial)) {
+                        Platform.runLater(() -> controller.setExportStatus(
+                                String.format("Versuchs-Daten unter %s gespeichert", location)));
+                    } else {
+                        Platform.runLater(() -> controller.setExportStatus(
+                                "Versuchs-Daten konnten nicht gespeichert werden"));
+                    }
+                }
+            });
+            taskThread.start();
+        }
+
+    }
+
+    /**
      * Setzt Analyse zurück.
      */
     public static void reset() {
@@ -279,17 +323,17 @@ public class Analyzer extends AbsScene {
         controller.exportButton.setDisable(true);
         controller.exportRawButton.setDisable(true);
         controller.selectCompTrialButton.setVisible(false);
-        controller.analysedImage.setImage(null);
         controller.exportButton.setDisable(true);
         controller.exportRawButton.setDisable(true);
         controller.errorLabel.setVisible(false);
-        controller.chartPane.getChildren().clear();
+        controller.statusLabel.setVisible(false);
+        controller.analysePane.getChildren().clear();
         Analyzer.analyseType = null;
         Analyzer.trial = null;
         Analyzer.trialComp = null;
         Analyzer.hmConfig = new HeatmapConfig();
         Analyzer.diaConfig = new DiagramConfig();
-        Analyzer.analysedImage = null;
-        Analyzer.lineChartSeries = null;
+        Analyzer.heatmapImage = null;
+        Analyzer.verlaufLineChart = null;
     }
 }

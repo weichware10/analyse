@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -19,13 +18,11 @@ public class AnalyzerController extends AbsSceneController {
     @FXML
     protected Button analyseButton;
     @FXML
+    protected Pane analysePane;
+    @FXML
     protected MenuButton analyseTypMenuButton;
     @FXML
-    protected ImageView analysedImage;
-    @FXML
     protected Button backButton;
-    @FXML
-    protected Pane chartPane;
     @FXML
     protected Button configButton;
     @FXML
@@ -36,6 +33,8 @@ public class AnalyzerController extends AbsSceneController {
     protected Button exportRawButton;
     @FXML
     protected Button selectCompTrialButton;
+    @FXML
+    protected Label statusLabel;
 
     @FXML
     protected void analyze(ActionEvent event) {
@@ -54,7 +53,7 @@ public class AnalyzerController extends AbsSceneController {
 
     @FXML
     void exportRaw(ActionEvent event) {
-        // TODO: ExportRaw (Was sollte hier ausgegeben werden?)
+        Analyzer.exportRaw();
     }
 
     @FXML
@@ -91,12 +90,12 @@ public class AnalyzerController extends AbsSceneController {
     }
 
     @FXML
-    protected void setRelFrqImgArea(ActionEvent event) {
+    protected void setRelDepthDistr(ActionEvent event) {
         configButton.setDisable(false);
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
-        Analyzer.setAnalyseType(AnalyseType.RELFRQIMGAREA);
-        analyseTypMenuButton.setText("Häufigkeitsverteilung Bildbereiche");
+        Analyzer.setAnalyseType(AnalyseType.RELDEPTHDISTR);
+        analyseTypMenuButton.setText("Verteilung Relative Tiefe");
     }
 
     @FXML
@@ -108,18 +107,9 @@ public class AnalyzerController extends AbsSceneController {
         analyseTypMenuButton.setText("Verlauf");
     }
 
-    @FXML
-    protected void setViewTimeDistr(ActionEvent event) {
-        configButton.setDisable(false);
-        analyseButton.setDisable(false);
-        selectCompTrialButton.setVisible(false);
-        Analyzer.setAnalyseType(AnalyseType.VIEWTIMEDISTR);
-        analyseTypMenuButton.setText("Verteilung Betrachtungszeit");
-    }
-
     protected void setExportStatus(String text) {
-        errorLabel.setText(text);
-        errorLabel.setVisible(true);
+        statusLabel.setText(text);
+        statusLabel.setVisible(true);
     }
 
     @FXML
@@ -128,11 +118,9 @@ public class AnalyzerController extends AbsSceneController {
                 : "fx:id=\"analyseButton\" not injected: check 'Analyzer.fxml'.";
         assert analyseTypMenuButton != null
                 : "fx:id=\"analyseTypMenuButton\" not injected: check 'Analyzer.fxml'.";
-        assert analysedImage != null
-                : "fx:id=\"analysedImage\" not injected: check 'Analyzer.fxml'.";
         assert backButton != null
                 : "fx:id=\"backButton\" was injected: check 'Analyzer.fxml'.";
-        assert chartPane != null
+        assert analysePane != null
                 : "fx:id=\"chartPane\" was injected: check 'Analyzer.fxml'.";
         assert configButton != null
                 : "fx:id=\"configButton\" not injected: check 'Analyzer.fxml'.";
@@ -144,6 +132,8 @@ public class AnalyzerController extends AbsSceneController {
                 : "fx:id=\"exportRawButton\" not injected: check 'Analyzer.fxml'.";
         assert selectCompTrialButton != null
                 : "fx:id=\"selectCompTrialButton\" not injected: check 'Analyzer.fxml'.";
+        assert statusLabel != null
+                : "fx:id=\"statusLabel\" not injected: check 'Analyzer.fxml'.";
     }
 
 }
