@@ -40,7 +40,11 @@ public class Verlauf {
         // Liniendiagramm erstellen
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Zeit in s");
+        if (trial.toolType == ToolType.ZOOMMAPS) {
+            xAxis.setLabel("Zeit in ms");
+        } else {
+            xAxis.setLabel("Zeit in s");
+        }
         yAxis.setLabel("relDepth");
         final LineChart<Number, Number> lineChart =
                 new LineChart<Number, Number>(xAxis, yAxis);
@@ -51,6 +55,7 @@ public class Verlauf {
         series.setName(trial.getTrialId());
 
         if (trial.toolType == ToolType.ZOOMMAPS) {
+            lineChart.setCreateSymbols(false);
             // Maximale Tiefe ermitteln
             double maxDepth = Analyse.findMaxDepth(trial.getData(), width, height);
             for (DataPoint dataPoint : trial.getData()) {
