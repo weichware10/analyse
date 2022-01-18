@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.analyse.AnalyzerController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.analyse.AnalyzerController">
    <children>
-      <HBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="200.0" spacing="15.0">
+      <HBox alignment="TOP_CENTER" prefHeight="38.0" prefWidth="680.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#selectTrial" text="Auswahl Trial" />
-            <MenuButton fx:id="analyseTypMenuButton" disable="true" mnemonicParsing="false" text="Analyse-Typ">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#setHeatmap" text="Heatmap" />
-                <MenuItem mnemonicParsing="false" onAction="#setCompHeatmap" text="Heatmap Vergleich" />
-                  <MenuItem mnemonicParsing="false" onAction="#setVerlauf" text="Verlauf" />
-                  <MenuItem mnemonicParsing="false" onAction="#setRelFrqImgArea" text="Häufigkeitsverteilung Bildbereiche" />
-                  <MenuItem mnemonicParsing="false" onAction="#setViewTimeDistr" text="Verteilung Betrachtungszeit" />
-              </items>
-            </MenuButton>
-            <Button fx:id="configButton" disable="true" mnemonicParsing="false" onAction="#setConfig" text="Konfiguration" />
-            <Button fx:id="selectCompTrialButton" mnemonicParsing="false" onAction="#selectTrialForComp" text="Auswahl Vergleichs-Trial" visible="false" />
-            <Button fx:id="analyseButton" disable="true" mnemonicParsing="false" onAction="#analyze" text="Analyse" />
+            <HBox prefHeight="46.0" prefWidth="543.0" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#selectTrial" text="Auswahl Trial" />
+                  <MenuButton fx:id="analyseTypMenuButton" disable="true" mnemonicParsing="false" text="Analyse-Typ">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#setHeatmap" text="Heatmap" />
+                      <MenuItem mnemonicParsing="false" onAction="#setCompHeatmap" text="Heatmap Vergleich" />
+                        <MenuItem mnemonicParsing="false" onAction="#setVerlauf" text="Verlauf" />
+                        <MenuItem mnemonicParsing="false" onAction="#setRelDepthDistr" text="Verteilung Relative Tiefe" />
+                    </items>
+                  </MenuButton>
+                  <Button fx:id="configButton" disable="true" mnemonicParsing="false" onAction="#setConfig" text="Konfiguration" />
+                  <Button fx:id="selectCompTrialButton" mnemonicParsing="false" onAction="#selectTrialForComp" text="Auswahl Vergleichs-Trial" visible="false" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="46.0" prefWidth="133.0">
+               <children>
+                  <Button fx:id="analyseButton" disable="true" mnemonicParsing="false" onAction="#analyze" text="Analyse" />
+               </children>
+            </HBox>
          </children>
          <VBox.margin>
             <Insets />
          </VBox.margin>
       </HBox>
-      <HBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="29.0" prefWidth="680.0">
          <children>
             <Label fx:id="errorLabel" alignment="CENTER" text="error" textAlignment="CENTER" textFill="RED" visible="false">
                <font>
@@ -43,22 +48,24 @@
             </Label>
          </children>
       </HBox>
-      <BarChart title="Beispiel">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="90.0" prefWidth="200.0" spacing="15.0">
+      <HBox alignment="CENTER" prefHeight="505.0" prefWidth="680.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="183.0" spacing="15.0">
+            <StackPane fx:id="analysePane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="405.0" prefWidth="680.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="22.0" prefWidth="680.0">
+         <children>
+            <Label fx:id="statusLabel" text="status" textAlignment="CENTER" textFill="#2400ff" visible="false" />
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="29.0" prefWidth="680.0" spacing="15.0">
+         <children>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="90.0" prefWidth="246.0" spacing="15.0">
                <children>
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Zurück" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="337.0" spacing="15.0">
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="90.0" prefWidth="428.0" spacing="15.0">
                <children>
                   <Button fx:id="exportRawButton" disable="true" mnemonicParsing="false" onAction="#exportRaw" text="ExportRaw" />
                   <Button fx:id="exportButton" disable="true" mnemonicParsing="false" onAction="#export" text="Export" />

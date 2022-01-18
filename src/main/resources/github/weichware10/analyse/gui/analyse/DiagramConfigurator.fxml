@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.HBox?>
@@ -15,12 +14,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
-         <children>
-            <Label alignment="CENTER" text="Anzahl Bereiche" />
-            <ComboBox fx:id="amountAreas" prefWidth="75.0" />
-         </children>
-      </HBox>
+      <HBox prefHeight="0.0" prefWidth="280.0" />
       <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
          <children>
             <Label text="Minimale Zeit" />

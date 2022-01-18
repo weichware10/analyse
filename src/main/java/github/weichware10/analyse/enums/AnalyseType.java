@@ -7,6 +7,5 @@ public enum AnalyseType {
     HEATPMAP,
     COMPHEATMAP,
     VERLAUF,
-    RELFRQIMGAREA,
-    VIEWTIMEDISTR
+    RELDEPTHDISTR
 }

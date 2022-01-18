@@ -1,50 +1,145 @@
 package github.weichware10.analyse.logic;
 
+import github.weichware10.analyse.Main;
 import github.weichware10.analyse.config.HeatmapConfig;
+import github.weichware10.util.Files;
+import github.weichware10.util.Logger;
+import github.weichware10.util.config.Configuration;
+import github.weichware10.util.data.DataPoint;
 import github.weichware10.util.data.TrialData;
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import javax.imageio.ImageIO;
 
 /**
  * verantwortlich für die Erstellung der Heatmap.
  */
-@SuppressWarnings("unused")
-public class Heatmap extends Analyse {
-    private final TrialData data;
-    private final HeatmapConfig confHm;
-    private List<List<Float>> heatmap;
+public class Heatmap {
+
+    private static DataPointComparator comparator = new DataPointComparator();
+    private static final float ALPHA = .75f;
 
     /**
-     * verantwortlich für die Erstellung der Heatmap.
+     * Erstellt Heatmap.
      *
-     * @param data   - Daten die zur Erstellung der Heatmaps benötigt werden
-     * @param confHm - Konfiguration der Heatmap
+     * @param hmConfig - Konfiguration
+     * @return ?
      */
-    public Heatmap(TrialData data, HeatmapConfig confHm) {
-        this.data = data;
-        this.confHm = confHm;
+    public static String createHeatmap(TrialData trial, HeatmapConfig hmConfig) {
+        Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
+
+        // Bild laden für Bildbreite und -höhe
+        String sourceImgLocation = Analyse.saveImage(config.getImageUrl());
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File(sourceImgLocation));
+        } catch (Exception e) {
+            Logger.error("Failed to save the image", e, true);
+            return null;
+        }
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+
+        // Heatmap Bild erstellen
+        BufferedImage heatmap = null;
+
+        heatmap = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D heatmapGraphics = heatmap.createGraphics();
+        heatmapGraphics.setBackground(new java.awt.Color(1, 1, 1, 0));
+        heatmapGraphics.clearRect(0, 0, width, height);
+
+        // so sortieren, dass immer weiter reingezoomt wird
+        List<DataPoint> sortedDataPoints = trial.getData().stream()
+                .sorted(comparator).collect(Collectors.toList());
+
+        createHeatmapFromData(heatmapGraphics, hmConfig, sortedDataPoints, width, height);
+        heatmapGraphics.dispose();
+
+        // Generierte Heatmap-Bild speichern
+        String heatmapLocation = null;
+        try {
+            heatmapLocation = Files.saveGeneratedImage(heatmap, "HEATMAP" + trial.trialId + ".png");
+        } catch (IllegalArgumentException | IOException e) {
+            Logger.error("Failed to save the image", e, true);
+        }
+
+        if (image == null || !hmConfig.isImage()) {
+            return heatmapLocation;
+        }
+
+        Graphics2D imageGraphics = image.createGraphics();
+        AlphaComposite acomp = AlphaComposite.getInstance(
+                AlphaComposite.SRC_OVER, ALPHA);
+        imageGraphics.setComposite(acomp);
+        imageGraphics.drawImage(heatmap, 0, 0, null);
+        imageGraphics.dispose();
+
+        String imgLocation = null;
+        try {
+            imgLocation = Files.saveGeneratedImage(image, "IMGHEATMAP" + trial.trialId + ".png");
+        } catch (IllegalArgumentException | IOException e) {
+            Logger.error("Failed to save the image", e, true);
+        }
+
+        return imgLocation;
+    }
+
+    private static void createHeatmapFromData(Graphics2D graphic, HeatmapConfig hmConfig,
+            List<DataPoint> sortedDataPoints, double imageWidth, double imageHeight) {
+
+        if (sortedDataPoints.size() == 0) {
+            return;
+        }
+
+        DataPoint minDataPoint = sortedDataPoints.get(0);
+        DataPoint maxDataPoint = sortedDataPoints.get(sortedDataPoints.size() - 1);
+
+        double minDepth = Analyse.calculateDepth(minDataPoint, imageWidth, imageHeight, null, null);
+        double maxDepth = Analyse.calculateDepth(maxDataPoint, imageWidth, imageHeight, null, null);
+
+
+        for (DataPoint dataPoint : sortedDataPoints) {
+            double relDepth = Analyse.calculateDepth(
+                    dataPoint, imageWidth, imageHeight, minDepth, maxDepth);
+            graphic.setColor(HeatmapConfig.fxToAwtColor(hmConfig.getMinColorDiff()
+                    .interpolate(hmConfig.getMaxColorDiff(), relDepth)));
+            graphic.fillRect(
+                    (int) dataPoint.viewport.getMinX(),
+                    (int) dataPoint.viewport.getMinY(),
+                    (int) dataPoint.viewport.getWidth(),
+                    (int) dataPoint.viewport.getHeight());
+        }
     }
 
     /**
-     * erstellt die Heatmap, welche die relativen Häufigkeiten der betrachteten
-     * Bildkoordinaten darstellt.
+     * Erstellt Heatmap-Vergleich.
      *
-     * @return Pfad des Bildes der erstellten Heatmap
+     * @param trial     - 1. Versuch
+     * @param trialComp - 2. Versuch
+     * @param hmConfig  - Konfiguration
+     * @return ?
      */
-    public String createHeatmap() {
-        return ".../heatmap/HEATMAP_" + this.data.toolType.toString()
-            + "_" + this.data.trialId + ".jpg";
+    public static String createHeatmapComp(TrialData trial,
+            TrialData trialComp, HeatmapConfig hmConfig) {
+        return null;
     }
 
     /**
-     * vergleicht zwei Heatmaps und erstellt aus dem Vergleich eine Heatmap.
-     *
-     * @param heatmap1 - erste Heatmap für den Vergleich
-     * @param heatmap2 - zweite Heatmap für den Vergleich
-     * @return Pfad des Bildes der erstellten Heatmap
+     * DataPointComparator.
      */
-    public static String compHeatmaps(Heatmap heatmap1, Heatmap heatmap2) {
-        return ".../heatmap/COMPHEATMAP_" + heatmap1.data.toolType.toString()
-            + "_" + heatmap1.data.trialId + "_" + heatmap2.data.toolType.toString()
-            + "_" + heatmap2.data.trialId + ".jpg";
+    private static class DataPointComparator implements Comparator<DataPoint> {
+
+        @Override
+        public int compare(DataPoint dp1, DataPoint dp2) {
+            int area1 = (int) (dp1.viewport.getWidth() * dp1.viewport.getHeight());
+            int area2 = (int) (dp2.viewport.getWidth() * dp2.viewport.getHeight());
+            return area2 - area1;
+        }
     }
 }

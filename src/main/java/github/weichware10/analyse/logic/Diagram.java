@@ -1,7 +1,6 @@
 package github.weichware10.analyse.logic;
 
 import github.weichware10.analyse.config.DiagramConfig;
-import github.weichware10.analyse.enums.DiagrammType;
 import github.weichware10.util.data.TrialData;
 import java.util.List;
 
@@ -25,23 +24,13 @@ public class Diagram extends Analyse {
     }
 
     /**
-     * erstellt Diagramm, welches die relativen Häufigkeiten pro Bildbereich
-     * darstellt.
-     *
-     * @return Pfad des Bildes des erstellten Diagramms
-     */
-    public String createRelFreqImgArea() {
-        return drawDiagramm(null, DiagrammType.RELFRQIMGAREA);
-    }
-
-    /**
      * erstellt Diagramm, welches die relativen Häufigkeiten der Blickedauer bzw.
      * Zoomstärken darstellt.
      *
      * @return Pfad des Bildes des erstellten Diagramms
      */
     public String createViewTimeDistr() {
-        return drawDiagramm(null, DiagrammType.VIEWTIMEDISTR);
+        return drawDiagramm(null);
     }
 
     /**
@@ -62,9 +51,8 @@ public class Diagram extends Analyse {
      * @param type         - Diagramm-Typ des zu erstellenden Diagramms
      * @return Pfad des Bildes des erstellten Diagramms
      */
-    private String drawDiagramm(List<Float> diagrammData, DiagrammType type) {
-        return ".../diagramm/" + type + "_" + this.data.toolType.toString()
-                + "_" + this.data.trialId + ".jpg";
+    private String drawDiagramm(List<Float> diagrammData) {
+        return null;
     }
 
 }
