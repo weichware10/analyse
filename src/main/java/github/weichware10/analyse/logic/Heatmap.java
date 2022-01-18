@@ -1,14 +1,16 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.logic;
 
+import github.weichware10.analyse.config.HeatmapConfig;
 import github.weichware10.util.data.TrialData;
 import java.util.List;
 
 /**
  * verantwortlich für die Erstellung der Heatmap.
  */
+@SuppressWarnings("unused")
 public class Heatmap extends Analyse {
     private final TrialData data;
-    private final ConfigHeatmap confHm;
+    private final HeatmapConfig confHm;
     private List<List<Float>> heatmap;
 
     /**
@@ -17,7 +19,7 @@ public class Heatmap extends Analyse {
      * @param data   - Daten die zur Erstellung der Heatmaps benötigt werden
      * @param confHm - Konfiguration der Heatmap
      */
-    public Heatmap(TrialData data, ConfigHeatmap confHm) {
+    public Heatmap(TrialData data, HeatmapConfig confHm) {
         this.data = data;
         this.confHm = confHm;
     }

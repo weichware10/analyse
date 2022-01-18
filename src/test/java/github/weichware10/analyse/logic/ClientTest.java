@@ -1,9 +1,10 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.logic;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import github.weichware10.util.Enums.ToolType;
+import github.weichware10.analyse.enums.AnalyseType;
+import github.weichware10.util.ToolType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

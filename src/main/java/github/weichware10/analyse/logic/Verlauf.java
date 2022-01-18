@@ -1,4 +1,4 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.logic;
 
 import github.weichware10.util.data.TrialData;
 import java.util.List;

@@ -1,8 +1,8 @@
-package github.weichware10.analyse;
+package github.weichware10.analyse.logic;
 
 import static org.junit.Assert.assertEquals;
 
-import github.weichware10.util.Enums.ToolType;
+import github.weichware10.util.ToolType;
 import github.weichware10.util.data.TrialData;
 import org.junit.Test;
 
