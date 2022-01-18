@@ -37,45 +37,20 @@ public class DiagramConfigurator extends AbsScene {
         stage.getIcons().add(
                 new Image(Main.class.getResource("app-icon.png").toString()));
 
-        InitResult ir =
-                initialize(DiagramConfigurator.class.getResource("DiagramConfigurator.fxml"));
+        InitResult ir = initialize(
+                DiagramConfigurator.class.getResource("DiagramConfigurator.fxml"));
         root = (VBox) ir.root;
         controller = (DiagramConfiguratorController) ir.controller;
 
-        // Sichtbarkeitseinstellungen
-        if (analyseType == AnalyseType.RELFRQIMGAREA) {
-            controller.amountAreas.setDisable(false);
-            controller.minTimeSlider.setDisable(true);
-            controller.maxTimeSlider.setDisable(true);
-            controller.stepsSlider.setDisable(true);
-            controller.minTimeLabel.setVisible(false);
-            controller.maxTimeLabel.setVisible(false);
-            controller.stepsLabel.setVisible(false);
-        } else if (analyseType == AnalyseType.VIEWTIMEDISTR) {
-            controller.amountAreas.setDisable(true);
-            controller.minTimeSlider.setDisable(false);
-            controller.maxTimeSlider.setDisable(false);
-            controller.stepsSlider.setDisable(false);
-            controller.minTimeLabel.setVisible(true);
-            controller.maxTimeLabel.setVisible(true);
-            controller.stepsLabel.setVisible(true);
-        }
-
         // Beim erneueten Aufrufen bereits gesetzte Konfiguration wieder setzten
-        controller.initAmountBox(diaConfig.getAmountAreas());
         controller.initMinTimeSlider(diaConfig.getMinTime());
         controller.initMaxTimeSlider(diaConfig.getMaxTime());
         controller.initStepsSlider(diaConfig.getStepsBetween());
 
-
         final Button ok = (Button) configDialog.getDialogPane().lookupButton(applyButtonType);
         ok.addEventFilter(ActionEvent.ACTION, applyEvent -> {
-            if (analyseType == AnalyseType.RELFRQIMGAREA) {
-                diaConfig.setAmountAreas(controller.getAmountAreas());
-            } else if (analyseType == AnalyseType.VIEWTIMEDISTR) {
-                diaConfig.setNewTime(controller.getMinTime(), controller.getMaxTime());
-                diaConfig.setStepsBetween(controller.getSteps());
-            }
+            diaConfig.setNewTime(controller.getMinTime(), controller.getMaxTime());
+            diaConfig.setStepsBetween(controller.getSteps());
         });
         configDialog.getDialogPane().setContent(root);
         configDialog.showAndWait();
