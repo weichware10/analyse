@@ -23,7 +23,6 @@ public class Heatmap {
     /**
      * Erstellt Heatmap.
      *
-     * @param trial    - Versuch
      * @param hmConfig - Konfiguration
      * @return ?
      */
@@ -182,4 +181,5 @@ public class Heatmap {
             TrialData trialComp, HeatmapConfig hmConfig) {
         return null;
     }
+
 }
