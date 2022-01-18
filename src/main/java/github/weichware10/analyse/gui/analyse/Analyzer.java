@@ -226,12 +226,19 @@ public class Analyzer extends AbsScene {
         String location = fileChooser.showSaveDialog(Main.primaryStage).getAbsolutePath();
         if (location != null) {
             if (analyseType.equals(AnalyseType.HEATPMAP)) {
-                if (saveImage(location)) {
-                    controller.setExportStatus(
-                            String.format("Bild unter %s gesepeichert", location));
-                } else {
-                    controller.setExportStatus("Bild konnte nicht gespeichert werden");
-                }
+                Thread taskThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (saveImage(location)) {
+                            Platform.runLater(() -> controller.setExportStatus(
+                                    String.format("Bild unter %s gesepeichert", location)));
+                        } else {
+                            Platform.runLater(() -> controller.setExportStatus(
+                                    "Bild konnte nicht gespeichert werden"));
+                        }
+                    }
+                });
+                taskThread.start();
             } else if (analyseType.equals(AnalyseType.VERLAUF)) {
                 if (saveAsPng(location)) {
                     controller.setExportStatus(String.format(
