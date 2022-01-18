@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 public class Heatmap {
 
     private static DataPointComparator comparator = new DataPointComparator();
-
+    private static final float ALPHA = .75f;
 
     /**
      * Erstellt Heatmap.
@@ -75,7 +75,7 @@ public class Heatmap {
 
         Graphics2D imageGraphics = image.createGraphics();
         AlphaComposite acomp = AlphaComposite.getInstance(
-                AlphaComposite.SRC_OVER, .5f);
+                AlphaComposite.SRC_OVER, ALPHA);
         imageGraphics.setComposite(acomp);
         imageGraphics.drawImage(heatmap, 0, 0, null);
         imageGraphics.dispose();
@@ -103,12 +103,10 @@ public class Heatmap {
         double minDepth = Analyse.calculateDepth(minDataPoint, imageWidth, imageHeight, null, null);
         double maxDepth = Analyse.calculateDepth(maxDataPoint, imageWidth, imageHeight, null, null);
 
-        Logger.debug(Double.toString(minDepth) + " ... " + Double.toString(maxDepth));
 
         for (DataPoint dataPoint : sortedDataPoints) {
             double relDepth = Analyse.calculateDepth(
                     dataPoint, imageWidth, imageHeight, minDepth, maxDepth);
-            Logger.debug(Double.toString(relDepth));
             graphic.setColor(HeatmapConfig.fxToAwtColor(hmConfig.getMinColorDiff()
                     .interpolate(hmConfig.getMaxColorDiff(), relDepth)));
             graphic.fillRect(

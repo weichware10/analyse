@@ -70,7 +70,6 @@ public class Analyse {
 
         // relative Tiefe berechnen
         double relDepth = tempRelDepth / maxDepth;
-        // Logger.debug(relDepth + " " + tempRelDepth);
 
         return relDepth;
     }
