@@ -85,4 +85,27 @@ public class Analyse {
     protected static double calcRelDepthCc(double depth, double maxDepth) {
         return depth / maxDepth;
     }
+
+    /**
+     * Berechnet die Tiefe eines Viewports. Falls min-/maxDepth nicht gegeben sind,
+     * wird die unkorrigierte Tiefe zurückgegeben (Zur Berechnug von min / max Depth)
+     *
+     * @param dataPoint - der betroffene DataPoint
+     * @param imageWidth - die Größe des Bildes
+     * @param imageHeight - die Höhe des Bildes
+     * @param minDepth - die minimale Tiefe, oder {@code null}, falls diese berechnet werden soll
+     * @param maxDepth - die maximale Tiefe, oder {@code null}, falls diese berechnet werden soll
+     * @return die berechnete Tiefe
+     */
+    protected static double calculateDepth(DataPoint dataPoint,
+            double imageWidth, double imageHeight, Double minDepth, Double maxDepth) {
+        double localDepth = 1 - ((dataPoint.viewport.getWidth() * dataPoint.viewport.getHeight())
+                / (imageWidth * imageHeight));
+
+        if (minDepth == null || maxDepth == null) {
+            return localDepth;
+        } else {
+            return (Math.pow(100, (localDepth - minDepth) / (maxDepth - minDepth)) - 1) / 99;
+        }
+    }
 }
