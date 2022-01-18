@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 /**
  * Kontroller für {@link Analyzer}.
@@ -18,7 +18,7 @@ public class AnalyzerController extends AbsSceneController {
     @FXML
     protected Button analyseButton;
     @FXML
-    protected Pane analysePane;
+    protected StackPane analysePane;
     @FXML
     protected MenuButton analyseTypMenuButton;
     @FXML
