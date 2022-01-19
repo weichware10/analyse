@@ -264,7 +264,7 @@
                   <ButtonBar prefHeight="40.0" prefWidth="700.0">
                     <buttons>
                         <Button layoutX="54.0" layoutY="10.0" mnemonicParsing="false" onAction="#reset" text="reset" ButtonBar.buttonData="LEFT" />
-                        <Button fx:id="dataBaseSaveButton" disable="true" layoutX="370.0" layoutY="42.0" mnemonicParsing="false" text="in Datenbank speichern" />
+                        <Button fx:id="dataBaseSaveButton" disable="true" layoutX="370.0" layoutY="42.0" mnemonicParsing="false" onAction="#writeToDataBase" text="in Datenbank speichern" />
                       <Button fx:id="jsonSaveButton" disable="true" mnemonicParsing="false" onAction="#writeToJson" text="als JSON speichern" />
                     </buttons>
                      <padding>

@@ -270,6 +270,22 @@ public class Configurator extends AbsScene {
     }
 
     /**
+     * Schreibt eine Konfiguration in die Datenbank.
+     */
+    protected static void writeToDataBase() {
+        Configuration configuration = getConfiguration();
+
+        String newConfigId = Main.dataBaseClient.configurations.set(configuration);
+        if (newConfigId != null) {
+            configId = newConfigId;
+            mode.set(Mode.DBVIEW);
+            controller.configIdField.setText(configId);
+            controller.problemArea.setText(String.format(
+                    "In Datenbank abgespeichert, Konfigurations-ID: %s", configId));
+        }
+    }
+
+    /**
      * Updated die String-Liste, auf die stringId achtend / mit einer gerade
      * importierten Liste.
      *

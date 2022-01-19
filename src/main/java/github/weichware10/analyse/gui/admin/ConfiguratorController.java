@@ -112,6 +112,12 @@ public class ConfiguratorController extends AbsSceneController {
     }
 
     @FXML
+    private void writeToDataBase() {
+        Logger.info("configurator:content Writing to DataBase");
+        Configurator.writeToDataBase();
+    }
+
+    @FXML
     private void checkInt(ActionEvent event) {
         if (!(event.getSource() instanceof TextField)) {
             Logger.debug("wrong");
