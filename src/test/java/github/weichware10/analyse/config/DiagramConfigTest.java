@@ -10,27 +10,6 @@ import org.junit.Test;
  * Unit Test für Klasse ConfigDiagramm.
  */
 public class DiagramConfigTest {
-    /**
-     * Testet, ob Anzahl Felder gesetzt wird.
-     */
-    @Test
-    public void amountAreasShouldBeSet() {
-        DiagramConfig confDia1 = new DiagramConfig();
-        assertEquals("getAmountAreas sollte 4 sein", 4, confDia1.getAmountAreas());
-
-        DiagramConfig confDia2 = new DiagramConfig();
-        assertTrue("setAmountAreas sollte True zurückgeben", confDia2.setAmountAreas(6));
-
-        DiagramConfig confDia3 = new DiagramConfig();
-        confDia3.setAmountAreas(2);
-        assertEquals("getAmountAreas sollte 2 sein", 2, confDia3.getAmountAreas());
-
-        DiagramConfig confDia4 = new DiagramConfig();
-        assertFalse("setAmountAreas sollte False zurückgeben", confDia4.setAmountAreas(10));
-
-        DiagramConfig confDia5 = new DiagramConfig();
-        assertFalse("setAmountAreas sollte False zurückgeben", confDia5.setAmountAreas(-2));
-    }
 
     /**
      * Testet, ob minimale Zeit gesetzt wird.

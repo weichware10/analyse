@@ -4,7 +4,6 @@ package github.weichware10.analyse.config;
  * Speicherung der Konfiguration der Diagramm-Analysemethoden.
  */
 public class DiagramConfig {
-    private int amountAreas; // * 2,4,6,8
     private double minTime; // * >= 0 Länge | Zoomstufe
     private double maxTime; // * <= 10 Länge | Zoomstufe
     private int stepsBetween; // * [1,10], minTime=maxTime: steps = 0
@@ -13,36 +12,9 @@ public class DiagramConfig {
      * Speicherung der Konfiguration der Diagramm-Analysemethoden.
      */
     public DiagramConfig() {
-        this.amountAreas = 4;
         this.minTime = 0.0f;
         this.maxTime = 10.0f;
         this.stepsBetween = 4;
-    }
-
-    /**
-     * setzt neue Anzahl der Felder.
-     *
-     * @param amountAreas - neue Anzahl der Felder
-     * @return
-     *         true, falls neue Anzahl erfolgreich gesetzt wurde;
-     *         false, falls neue Anzahl nicht gesetzt wurde
-     */
-    public boolean setAmountAreas(int amountAreas) {
-        if (amountAreas % 2 == 0 && amountAreas >= 2 && amountAreas <= 8) {
-            this.amountAreas = amountAreas;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * gibt die Anzahl der Felder zurück.
-     *
-     * @return Anzahl der Felder
-     */
-    public int getAmountAreas() {
-        return amountAreas;
     }
 
     /**
@@ -120,13 +92,11 @@ public class DiagramConfig {
     public String toString() {
         return String.format("""
                 DiagramConfig: {
-                    amountAreas: %d
                     minTime: %f
                     maxTime: %f
                     stepsBetween: %d
                 }
                 """,
-                amountAreas,
                 minTime,
                 maxTime,
                 stepsBetween);
