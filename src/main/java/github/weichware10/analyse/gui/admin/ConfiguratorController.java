@@ -90,7 +90,6 @@ public class ConfiguratorController extends AbsSceneController {
 
     @FXML
     private void checkInt(ActionEvent event) {
-        Logger.debug("checking int");
         if (!(event.getSource() instanceof TextField)) {
             Logger.debug("wrong");
             return;
@@ -103,8 +102,9 @@ public class ConfiguratorController extends AbsSceneController {
             return;
         }
         try {
+            String possibleInt = intField.getText().replaceAll("[^\\d.]", "");
             intField.setText(Integer.toString(
-                    (int) Math.round(Double.valueOf(intField.getText()))));
+                    (int) Math.round(Double.valueOf(possibleInt))));
             intField.setText(Integer.toString(Integer.valueOf(intField.getText())));
         } catch (NumberFormatException e) {
             intField.setText("1");
@@ -124,7 +124,8 @@ public class ConfiguratorController extends AbsSceneController {
             return;
         }
         try {
-            doubleField.setText(Double.toString(Double.valueOf(doubleField.getText())));
+            String possibleDouble = doubleField.getText().replaceAll("[^\\d.]", "");
+            doubleField.setText(Double.toString(Double.valueOf(possibleDouble)));
         } catch (NumberFormatException e) {
             doubleField.setText("1.0");
         }
