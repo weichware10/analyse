@@ -135,7 +135,7 @@
                                  </tooltip>
                               </Label>
                               <TextField fx:id="stringIdField" promptText="string" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button fx:id="stringIdButton" mnemonicParsing="false" text="..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Button fx:id="stringIdButton" disable="true" mnemonicParsing="false" text="..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <Label text="Rastergröße X" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                                  <tooltip>
                                     <Tooltip text="Ausgangsunterteilung des Rasters (horizontal)" wrapText="true" />
@@ -256,7 +256,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <TextArea fx:id="problemArea" editable="false" focusTraversable="false" maxHeight="40.0" minHeight="40.0" mouseTransparent="true" prefHeight="40.0" prefWidth="700.0" promptText="keine Probleme erkannt." wrapText="true" />
+                  <TextArea fx:id="problemArea" editable="false" focusTraversable="false" maxHeight="45.0" minHeight="45.0" mouseTransparent="true" prefHeight="45.0" prefWidth="700.0" promptText="keine Probleme erkannt." style="-fx-text-fill: DA3633;" wrapText="true" />
                </children>
             </HBox>
             <HBox alignment="CENTER">
@@ -264,8 +264,8 @@
                   <ButtonBar prefHeight="40.0" prefWidth="700.0">
                     <buttons>
                         <Button layoutX="54.0" layoutY="10.0" mnemonicParsing="false" onAction="#reset" text="reset" ButtonBar.buttonData="LEFT" />
-                        <Button fx:id="dataBaseSaveButton" layoutX="370.0" layoutY="42.0" mnemonicParsing="false" text="in Datenbank speichern" />
-                      <Button fx:id="jsonSaveButton" mnemonicParsing="false" text="als JSON speichern" />
+                        <Button fx:id="dataBaseSaveButton" disable="true" layoutX="370.0" layoutY="42.0" mnemonicParsing="false" text="in Datenbank speichern" />
+                      <Button fx:id="jsonSaveButton" disable="true" mnemonicParsing="false" onAction="#writeToJson" text="als JSON speichern" />
                     </buttons>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

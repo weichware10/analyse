@@ -98,6 +98,12 @@ public class ConfiguratorController extends AbsSceneController {
     }
 
     @FXML
+    private void writeToJson() {
+        Logger.info("configurator:content Writing to JSON");
+        Configurator.writeToJson();
+    }
+
+    @FXML
     private void checkInt(ActionEvent event) {
         if (!(event.getSource() instanceof TextField)) {
             Logger.debug("wrong");
@@ -269,13 +275,19 @@ public class ConfiguratorController extends AbsSceneController {
             zoomMapsConfigPane.setVisible(true);
             zoomMapsConfigPane.setDisable(false);
             codeChartsConfigPane.setVisible(false);
+            jsonSaveButton.setDisable(false);
+            dataBaseSaveButton.setDisable(false);
         } else if (toolTypeBox.getValue() == ToolType.CODECHARTS) {
             codeChartsConfigPane.setVisible(true);
             codeChartsConfigPane.setDisable(false);
             zoomMapsConfigPane.setVisible(false);
+            jsonSaveButton.setDisable(false);
+            dataBaseSaveButton.setDisable(false);
         } else {
             codeChartsConfigPane.setDisable(true);
             zoomMapsConfigPane.setDisable(true);
+            jsonSaveButton.setDisable(true);
+            dataBaseSaveButton.setDisable(true);
         }
     }
 
@@ -334,5 +346,6 @@ public class ConfiguratorController extends AbsSceneController {
 
         Configurator.mode.set(Mode.NEW);
         Configurator.updateStringList(null);
+        Configurator.configId = null;
     }
 }
