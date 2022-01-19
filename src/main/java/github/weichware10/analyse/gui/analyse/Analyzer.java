@@ -255,7 +255,6 @@ public class Analyzer extends AbsScene {
         }
     }
 
-    // TODO: in util verschieben?(ja -> analysedImage als Paramter dazu)
     /**
      * Speichert Bild unter location.
      *
@@ -275,7 +274,6 @@ public class Analyzer extends AbsScene {
         return true;
     }
 
-    // TODO: in util verschieben?
     /**
      * Speichert Diagramm als Bild unter location.
      *
