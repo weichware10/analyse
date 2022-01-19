@@ -44,14 +44,12 @@ public class HeatmapConfigurator extends AbsScene {
         // Beim erneueten Aufrufen bereits gesetzte Konfiguration wieder setzten
         controller.setMinColorDiff(hmConfig.getMinColorDiff());
         controller.setMaxColorDiff(hmConfig.getMaxColorDiff());
-        controller.setShowGrid(hmConfig.isGrid());
         controller.setShowImage(hmConfig.isImage());
 
         final Button ok = (Button) configDialog.getDialogPane().lookupButton(applyButtonType);
         ok.addEventFilter(ActionEvent.ACTION, applyEvent -> {
             hmConfig.setMinColorDiff(controller.getMinColorDiff());
             hmConfig.setMaxColorDiff(controller.getMaxColorDiff());
-            hmConfig.setGrid(controller.getShowGrid());
             hmConfig.setImage(controller.getShowImage());
         });
         configDialog.getDialogPane().setContent(root);

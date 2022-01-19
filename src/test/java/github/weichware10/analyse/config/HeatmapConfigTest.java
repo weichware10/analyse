@@ -70,23 +70,6 @@ public class HeatmapConfigTest {
     }
 
     /**
-     * Testet, ob Raster aktiviert oder deaktiviert wird.
-     */
-    @Test
-    public void gridShouldBeSet() {
-        HeatmapConfig confHm1 = new HeatmapConfig();
-        assertTrue("isGrid sollte true zurückgeben", confHm1.isGrid());
-
-        HeatmapConfig confHm2 = new HeatmapConfig();
-        confHm2.setGrid(false);
-        assertFalse("isGrid sollte false zurückgeben", confHm2.isGrid());
-
-        HeatmapConfig confHm3 = new HeatmapConfig();
-        confHm3.setGrid(true);
-        assertTrue("isGrid sollte true zurückgeben", confHm3.isGrid());
-    }
-
-    /**
      * Testet, ob Bild aktiviert oder deaktiviert wird.
      */
     @Test
