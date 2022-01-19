@@ -28,8 +28,9 @@ public class Heatmap {
     /**
      * Erstellt Heatmap.
      *
+     * @param trial - Versuch
      * @param hmConfig - Konfiguration
-     * @return ?
+     * @return Pfad des Heatmap-Bilds
      */
     public static String createHeatmap(TrialData trial, HeatmapConfig hmConfig) {
         Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
