@@ -333,5 +333,6 @@ public class ConfiguratorController extends AbsSceneController {
         timingsGridField.setText(null);
 
         Configurator.mode.set(Mode.NEW);
+        Configurator.updateStringList(null);
     }
 }

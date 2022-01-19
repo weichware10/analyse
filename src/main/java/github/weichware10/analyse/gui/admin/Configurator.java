@@ -9,6 +9,8 @@ import github.weichware10.util.config.Configuration;
 import github.weichware10.util.config.ZoomMapsConfiguration;
 import github.weichware10.util.gui.AbsScene;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Parent;
 import javafx.stage.FileChooser;
@@ -20,6 +22,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class Configurator extends AbsScene {
     private static Parent root;
     private static ConfiguratorController controller;
+    private static List<String> strings = new ArrayList<>();
     protected static SimpleObjectProperty<Mode> mode = new SimpleObjectProperty<>(Mode.NEW);
     protected static String configId = null;
 
@@ -82,6 +85,7 @@ public class Configurator extends AbsScene {
                         Integer.toString(ccConfig.getDefaultHorizontal()));
                 controller.verticalSplitField.setText(
                         Integer.toString(ccConfig.getDefaultVertical()));
+                updateStringList(ccConfig.getStrings());
                 break;
             case ZOOMMAPS:
                 ZoomMapsConfiguration zmConfig = configuration.getZoomMapsConfiguration();
@@ -135,7 +139,33 @@ public class Configurator extends AbsScene {
         fillGui(configuration, Mode.JSONVIEW);
     }
 
+    /**
+     * Updated die String-Liste, auf die stringId achtend / mit einer gerade importierten Liste.
+     *
+     * @param newStrings - die neue String-Liste
+     */
+    protected static void updateStringList(List<String> newStrings) {
+        String stringId = controller.stringIdField.getText();
+        if (stringId.length() == 0) {
+            controller.stringIdButton.setText("...");
+            controller.stringIdButton.setDisable(true);
+        }
+        controller.stringIdButton.setDisable(false);
+        if (newStrings == null || newStrings.size() == 0) {
+            strings = Main.dataBaseClient.strings.get(stringId);
+        } else {
+            strings = newStrings;
+        }
+        if (strings == null || strings.size() == 0) {
+            controller.stringIdButton.setText("Liste mit dieser ID erstellen");
+        } else {
+            controller.stringIdButton.setText("Liste anzeigen");
+        }
+    }
 
+    /**
+     * updated den Konfigurator-Modus.
+     */
     protected static void changeToEdit() {
         switch (mode.get()) {
             case JSONVIEW:
