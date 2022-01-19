@@ -143,7 +143,7 @@ public class TrialSelector extends AbsScene {
 
     protected static void loadFromJson(ActionEvent jsonEvent) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("JSON Config auswählen");
+        fileChooser.setTitle("JSON Trial auswählen");
         fileChooser.getExtensionFilters().add(
                 new ExtensionFilter("JSON Dateien", "*.json"));
         File jsonFile = fileChooser.showOpenDialog(
