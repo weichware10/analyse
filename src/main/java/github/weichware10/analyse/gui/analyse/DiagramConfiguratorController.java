@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
@@ -17,8 +16,6 @@ public class DiagramConfiguratorController extends AbsSceneController {
     private double maxTime;
     private double minTime;
     private int steps;
-    @FXML
-    protected ComboBox<Integer> amountAreas;
     @FXML
     protected Slider maxTimeSlider;
     @FXML
@@ -32,13 +29,6 @@ public class DiagramConfiguratorController extends AbsSceneController {
     @FXML
     protected Label stepsLabel;
 
-    protected void initAmountBox(int current) {
-        for (Integer i = 2; i <= 8; i += 2) {
-            amountAreas.getItems().add(i);
-        }
-        amountAreas.setValue(current);
-    }
-
     protected void initMaxTimeSlider(double current) {
         maxTimeSlider.adjustValue(current);
     }
@@ -49,10 +39,6 @@ public class DiagramConfiguratorController extends AbsSceneController {
 
     protected void initStepsSlider(int current) {
         stepsSlider.adjustValue(current);
-    }
-
-    public int getAmountAreas() {
-        return amountAreas.getValue();
     }
 
     public double getMaxTime() {
@@ -69,8 +55,6 @@ public class DiagramConfiguratorController extends AbsSceneController {
 
     @FXML
     protected void initialize() {
-        assert amountAreas != null
-                : "fx:id=\"amountAreas\" not injected: check 'DiagramConfigurator.fxml'.";
         assert maxTimeSlider != null
                 : "fx:id=\"maxTime\" not injected: check 'DiagramConfigurator.fxml'.";
         assert maxTimeLabel != null

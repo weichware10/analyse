@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- shoutout to https://github.com/wiverson/maven-jpackage-template -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.weichware10</groupId>
   <artifactId>analyse</artifactId>
-  <version>v0.2-SNAPSHOT</version>
+  <version>v1.0-SNAPSHOT</version>
 
   <name>${app.name}</name>
   <url>https://github.com/weichware10/analyse</url>
@@ -75,12 +74,19 @@
       <version>${javafx.version}</version>
       <classifier>${platform}</classifier>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-swing -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-swing</artifactId>
+      <version>11-ea+24</version>
+    </dependency>
+
 
     <!-- UTIL -->
     <dependency>
       <groupId>com.github.weichware10</groupId>
       <artifactId>util</artifactId>
-      <version>v3.2</version>
+      <version>v3.3</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
     <dependency>
@@ -306,15 +312,15 @@
         <artifactId>coveralls-maven-plugin</artifactId>
         <version>4.3.0</version>
         <configuration>
-            <!-- <repoToken></repoToken> -->
+          <!-- <repoToken></repoToken> -->
         </configuration>
         <dependencies>
           <dependency>
-             <groupId>javax.xml.bind</groupId>
-             <artifactId>jaxb-api</artifactId>
-             <version>2.2.3</version>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.2.3</version>
           </dependency>
-       </dependencies>
+        </dependencies>
       </plugin>
       <!-- UPDATE VERSION-->
       <plugin>
@@ -334,7 +340,7 @@
             <phase>validate</phase>
             <configuration>
               <target>
-                <mkdir dir="${platform}-javafx/javafx-jmods-${javafx.version}"/>
+                <mkdir dir="${platform}-javafx/javafx-jmods-${javafx.version}" />
                 <get src="https://raw.githubusercontent.com/weichware10/javafx-jmods/main/${platform}-javafx/javafx-jmods-${javafx.version}/javafx.base.jmod" dest="${platform}-javafx/javafx-jmods-${javafx.version}/javafx.base.jmod" skipexisting="true" />
                 <get src="https://raw.githubusercontent.com/weichware10/javafx-jmods/main/${platform}-javafx/javafx-jmods-${javafx.version}/javafx.controls.jmod" dest="${platform}-javafx/javafx-jmods-${javafx.version}/javafx.controls.jmod" skipexisting="true" />
                 <get src="https://raw.githubusercontent.com/weichware10/javafx-jmods/main/${platform}-javafx/javafx-jmods-${javafx.version}/javafx.fxml.jmod" dest="${platform}-javafx/javafx-jmods-${javafx.version}/javafx.fxml.jmod" skipexisting="true" />

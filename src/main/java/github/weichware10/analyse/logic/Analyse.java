@@ -1,31 +1,110 @@
 package github.weichware10.analyse.logic;
 
-import github.weichware10.util.data.TrialData;
+import github.weichware10.util.Files;
+import github.weichware10.util.Logger;
+import github.weichware10.util.data.DataPoint;
+import java.io.IOException;
 import java.util.List;
+import javafx.geometry.Rectangle2D;
 
 /**
  * beinhaltet Methoden die zur Analyse benötigt werden.
  */
-public abstract class Analyse {
+public class Analyse {
 
     /**
-     * berechnet die relativen Häufigkeiten der Bildkoordinaten.
+     * Speichert das Versuchs-Bild.
      *
-     * @return Liste mit den relativen Häufigkeiten der Bildkoordinaten
+     * @param imageUrl - URL des Versuchs-Bilds
+     * @return Pfad zum gespeicherten Bild
      */
-    protected List<List<Float>> calcRelFreq(TrialData data) {
-        return null;
+    public static String saveImage(String imageUrl) {
+        String imageLocation = null;
+        try {
+            imageLocation = Files.saveImage(imageUrl);
+        } catch (IllegalArgumentException | IOException e) {
+            Logger.error("Failed to save img", e, true);
+        }
+        return imageLocation;
     }
 
     /**
-     * erstellt eine Tabelle mit den Zeitpunkten und dazugehörigen Bildkoordinaten
-     * bzw. Zoomstärken
+     * Berechnet maximale Tiefe eines ZoomMaps-Versuchs.
      *
-     * @return Tabelle mit Zeitpunkten und dazugehörigen Bildkoordinaten bzw.
-     *         Zoomstärken
+     * @param data - Datenpunkte des Versuchs
+     * @param width - Breite des verwendeten Bilds
+     * @param height - Höhe des verwendeten Bilds
+     * @return maximale Tiefe des Versuchs
      */
-    protected List<List<Float>> createTimeTable(TrialData data) {
-        return null;
+    protected static double findMaxDepth(List<DataPoint> data, double width, double height) {
+        double maxDepth = Float.MAX_VALUE;
+        for (DataPoint dataPoint : data) {
+            double currentWidth = dataPoint.viewport.getWidth();
+            double currentHeight = dataPoint.viewport.getHeight();
+            double depth = (currentWidth * currentHeight) / (width * height);
+            if (depth < maxDepth) {
+                maxDepth = depth;
+            }
+        }
+        return java.lang.Math.log10(1 / maxDepth);
     }
 
+    /**
+     * Berechnet die relative Tiefe eines Datenpunktes (ZoomMaps).
+     *
+     * @param viewport - Viewport des Datenpunktes
+     * @param imageWidth - Breite Versuchs-Bild
+     * @param imageHeight - Höhe Versuchs-Bild
+     * @param maxDepth - maximale Tiefe des Versuchs
+     * @return relative Tiefe des Datenpunkts
+     */
+    protected static double calcRelDepthZm(Rectangle2D viewport, double imageWidth,
+            double imageHeight, double maxDepth) {
+        // Tiefe berechnen
+        double currentWidth = viewport.getWidth();
+        double currentHeight = viewport.getHeight();
+        double tempRelDepth = 1 / ((currentWidth * currentHeight) / (imageWidth * imageHeight));
+
+        // Logarithmus der Tiefe für linearen Verlauf
+        tempRelDepth = java.lang.Math.log10(tempRelDepth);
+
+        // relative Tiefe berechnen
+        double relDepth = tempRelDepth / maxDepth;
+
+        return relDepth;
+    }
+
+    /**
+     * Berechnet die relative Tiefe eines Datenpunktes (CodeCharts).
+     *
+     * @param depth - Tiefe des Datenpunktes
+     * @param maxDepth - Maximale Tiefe des Versuchs
+     * @return relative Tiefe des Datenpunkts
+     */
+    protected static double calcRelDepthCc(double depth, double maxDepth) {
+        return depth / maxDepth;
+    }
+
+    /**
+     * Berechnet die Tiefe eines Viewports. Falls min-/maxDepth nicht gegeben sind,
+     * wird die unkorrigierte Tiefe zurückgegeben (Zur Berechnug von min / max Depth)
+     *
+     * @param dataPoint - der betroffene DataPoint
+     * @param imageWidth - die Größe des Bildes
+     * @param imageHeight - die Höhe des Bildes
+     * @param minDepth - die minimale Tiefe, oder {@code null}, falls diese berechnet werden soll
+     * @param maxDepth - die maximale Tiefe, oder {@code null}, falls diese berechnet werden soll
+     * @return die berechnete Tiefe
+     */
+    protected static double calculateDepth(DataPoint dataPoint,
+            double imageWidth, double imageHeight, Double minDepth, Double maxDepth) {
+        double localDepth = 1 - ((dataPoint.viewport.getWidth() * dataPoint.viewport.getHeight())
+                / (imageWidth * imageHeight));
+
+        if (minDepth == null || maxDepth == null) {
+            return localDepth;
+        } else {
+            return (Math.pow(100, (localDepth - minDepth) / (maxDepth - minDepth)) - 1) / 99;
+        }
+    }
 }
