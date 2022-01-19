@@ -111,7 +111,7 @@ public class ConfiguratorController extends AbsSceneController {
             return;
         }
         try {
-            String possibleInt = intField.getText().replaceAll("[^\\d.-]", "");
+            String possibleInt = intField.getText().replaceAll("[^\\d.,-]", "");
             intField.setText(Integer.toString(
                     (int) Math.round(Double.valueOf(possibleInt))));
             intField.setText(Integer.toString(Integer.valueOf(intField.getText())));
@@ -133,10 +133,10 @@ public class ConfiguratorController extends AbsSceneController {
             return;
         }
         try {
-            String possibleDouble = doubleField.getText().replaceAll("[^\\d.-]", "");
+            String possibleDouble = doubleField.getText().replaceAll("[^\\d.,-]", "");
             doubleField.setText(Double.toString(Double.valueOf(possibleDouble)));
         } catch (NumberFormatException e) {
-            doubleField.setText("1.0");
+            doubleField.setText(Double.toString(1.0));
         }
     }
 
