@@ -25,7 +25,7 @@ public class Main extends Application {
     public static DataBaseClient dataBaseClient;
     public static String databaseUrl;
     public static final int MINWIDTH = 800;
-    public static final int MINHEIGHT = 800;
+    public static final int MINHEIGHT = 850;
 
     /**
      * Einstiegspunkt der Analyse.

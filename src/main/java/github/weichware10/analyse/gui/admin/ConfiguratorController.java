@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -81,11 +82,19 @@ public class ConfiguratorController extends AbsSceneController {
     protected TextField questionField;
     @FXML
     protected GridPane zoomMapsConfigPane;
+    @FXML
+    protected TextArea problemArea;
 
     @FXML
     private void startFunctionChooser() {
         Logger.info("configurator:content Returning to FunctionChooser");
         FunctionChooser.start();
+    }
+
+    @FXML
+    private void loadFromJson() {
+        Logger.info("configurator:content Loading from JSON");
+        Configurator.loadFromJson();
     }
 
     @FXML
@@ -189,6 +198,8 @@ public class ConfiguratorController extends AbsSceneController {
                 : "fx:id=\"questionField\" not injected: check 'Configurator.fxml'.";
         assert zoomMapsConfigPane != null
                 : "fx:id=\"zoomMapsConfigPane\" not injected: check 'Configurator.fxml'.";
+        assert problemArea != null
+                : "fx:id=\"problemArea\" not injected: check 'Configurator.fxml'.";
 
         toolTypeBox.getItems().addAll(ToolType.CODECHARTS, ToolType.ZOOMMAPS, null);
         toolTypeBox.valueProperty().addListener((o) -> setConfigType());
@@ -217,6 +228,38 @@ public class ConfiguratorController extends AbsSceneController {
         };
         for (TextField doubleField : doubleFields) {
             doubleField.focusedProperty().addListener((o) -> checkDouble(doubleField, false));
+        }
+
+        TextField[] changeableFields = new TextField[] {
+            horizontalSplitField,
+            imageViewHeightField,
+            imageViewWidthField,
+            imgUrlField,
+            initialSizeFieldX,
+            initialSizeFieldY,
+            introField,
+            iterationsField,
+            maxDepthField,
+            outroField,
+            speedField,
+            stringIdField,
+            timingsGridField,
+            timingsImgField,
+            verticalSplitField,
+            questionField
+        };
+        CheckBox[] changeableBoxes = new CheckBox[] {
+            showGridBox,
+            relativeSizeBox,
+            randomStringsBox,
+            tutorialBox
+        };
+        toolTypeBox.valueProperty().addListener((o) -> Configurator.changeToEdit());
+        for (TextField field : changeableFields) {
+            field.textProperty().addListener((o) -> Configurator.changeToEdit());
+        }
+        for (CheckBox box : changeableBoxes) {
+            box.selectedProperty().addListener((o) -> Configurator.changeToEdit());
         }
     }
 
