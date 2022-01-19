@@ -13,6 +13,7 @@ import github.weichware10.util.gui.AbsScene;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Parent;
@@ -146,7 +147,7 @@ public class Analyzer extends AbsScene {
         controller.statusLabel.setVisible(false);
 
         if (analyseType == AnalyseType.COMPHEATMAP
-                || analyseType == AnalyseType.HEATPMAP) {
+                || analyseType == AnalyseType.HEATMAP) {
             HeatmapConfigurator.start(hmConfig);
             Logger.info("Start Heatmap Configurator");
         } else if (analyseType == AnalyseType.RELDEPTHDISTR) {
@@ -171,14 +172,17 @@ public class Analyzer extends AbsScene {
         controller.statusLabel.setVisible(false);
 
         switch (analyseType) {
-            case HEATPMAP:
+            case HEATMAP:
                 heatmapImage = Heatmap.createHeatmap(trial, hmConfig);
                 break;
             case COMPHEATMAP:
                 heatmapImage = Heatmap.createHeatmapComp(trial, trialComp, hmConfig);
                 break;
             case VERLAUF:
-                verlaufLineChart = Verlauf.createVerlauf(trial);
+                verlaufLineChart = Verlauf.createVerlauf(Arrays.asList(trial));
+                break;
+            case COMPVERLAUF:
+                verlaufLineChart = Verlauf.createVerlauf(Arrays.asList(trial, trialComp));
                 break;
             case RELDEPTHDISTR:
                 break;
@@ -225,7 +229,7 @@ public class Analyzer extends AbsScene {
         // Dateipfad als String speichern
         String location = fileChooser.showSaveDialog(Main.primaryStage).getAbsolutePath();
         if (location != null) {
-            if (analyseType.equals(AnalyseType.HEATPMAP)) {
+            if (analyseType == AnalyseType.HEATMAP || analyseType == AnalyseType.COMPHEATMAP) {
                 Thread taskThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -239,7 +243,8 @@ public class Analyzer extends AbsScene {
                     }
                 });
                 taskThread.start();
-            } else if (analyseType.equals(AnalyseType.VERLAUF)) {
+            } else if (analyseType == AnalyseType.VERLAUF
+                    || analyseType == AnalyseType.COMPVERLAUF) {
                 if (saveAsPng(location)) {
                     controller.setExportStatus(String.format(
                             "Diagramm unter %s gesepeichert", location));
@@ -280,6 +285,10 @@ public class Analyzer extends AbsScene {
     private static boolean saveAsPng(String location) {
         WritableImage image = controller.analysePane.snapshot(new SnapshotParameters(), null);
 
+        // Behebt Bug, dass Elemente nach Snapshot verschoben werden
+        Main.primaryStage.setWidth(Main.primaryStage.getWidth() + 0.0001f);
+        Main.primaryStage.setHeight(Main.primaryStage.getHeight() + 0.0001f);
+
         File file = new File(location);
 
         try {
@@ -292,9 +301,19 @@ public class Analyzer extends AbsScene {
     }
 
     /**
-     * Export von Raw-Daten des Versuchs.
+     * Entscheidet ob eine oder zwei Versuche exportiert werden (Raw-Daten).
      */
     public static void exportRaw() {
+        exportRaw(trial);
+        if (analyseType == AnalyseType.COMPVERLAUF || analyseType == AnalyseType.COMPHEATMAP) {
+            exportRaw(trialComp);
+        }
+    }
+
+    /**
+     * Export von Raw-Daten des Versuchs.
+     */
+    private static void exportRaw(TrialData trial) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Versuchs-Daten speichern unter");
         fileChooser.getExtensionFilters().add(

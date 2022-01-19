@@ -42,17 +42,17 @@ public class AnalyzerController extends AbsSceneController {
     }
 
     @FXML
-    void back(ActionEvent event) {
+    protected void back(ActionEvent event) {
         FunctionChooser.start();
     }
 
     @FXML
-    void export(ActionEvent event) {
+    protected void export(ActionEvent event) {
         Analyzer.export();
     }
 
     @FXML
-    void exportRaw(ActionEvent event) {
+    protected void exportRaw(ActionEvent event) {
         Analyzer.exportRaw();
     }
 
@@ -76,6 +76,15 @@ public class AnalyzerController extends AbsSceneController {
     }
 
     @FXML
+    protected void setCompVerlauf(ActionEvent event) {
+        configButton.setDisable(true);
+        analyseButton.setDisable(true);
+        selectCompTrialButton.setVisible(true);
+        Analyzer.setAnalyseType(AnalyseType.COMPVERLAUF);
+        analyseTypMenuButton.setText("Verlauf Vergleich");
+    }
+
+    @FXML
     protected void setConfig(ActionEvent event) {
         Analyzer.setConfig();
     }
@@ -85,7 +94,7 @@ public class AnalyzerController extends AbsSceneController {
         configButton.setDisable(false);
         analyseButton.setDisable(false);
         selectCompTrialButton.setVisible(false);
-        Analyzer.setAnalyseType(AnalyseType.HEATPMAP);
+        Analyzer.setAnalyseType(AnalyseType.HEATMAP);
         analyseTypMenuButton.setText("Heatmap");
     }
 
