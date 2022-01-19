@@ -2,6 +2,7 @@ package github.weichware10.analyse.gui.admin;
 
 import github.weichware10.analyse.Main;
 import github.weichware10.analyse.gui.general.MainMenuBar;
+import github.weichware10.util.ToolType;
 import github.weichware10.util.config.CodeChartsConfiguration;
 import github.weichware10.util.config.ConfigLoader;
 import github.weichware10.util.config.Configuration;
@@ -39,6 +40,12 @@ public class Configurator extends AbsScene {
         controller = (ConfiguratorController) ir.controller;
     }
 
+    /**
+     * befüllt die GUI mit den Wrten aus der Konfiguration.
+     *
+     * @param configuration - die Konfiguration mit den Werten
+     * @param nextMode - welcher Modus nach dem befüllen ausgewählt werden soll
+     */
     private static void fillGui(Configuration configuration, Mode nextMode) {
         // allgemeine Konfiguration
         controller.toolTypeBox.setValue(configuration.getToolType());
@@ -91,6 +98,21 @@ public class Configurator extends AbsScene {
                 break;
         }
         mode.set(nextMode);
+    }
+
+    /**
+     * konvertiert die Eingaben in eine Konfiguration.
+     *
+     * @return die erstellte Konfiguration
+     */
+    private static Configuration getConfiguration() {
+        Configuration configuration = null;
+
+        if (controller.toolTypeBox.getValue() == ToolType.CODECHARTS) {
+            ;
+        }
+
+        return configuration;
     }
 
     /**
