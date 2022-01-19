@@ -205,6 +205,7 @@ public class ConfiguratorController extends AbsSceneController {
         toolTypeBox.valueProperty().addListener((o) -> setConfigType());
         Configurator.mode.addListener((o) -> setTitle());
 
+        // VALIDIERUNG
         // Integer fields
         TextField[] intFields = new TextField[] {
             initialSizeFieldX,
@@ -219,7 +220,6 @@ public class ConfiguratorController extends AbsSceneController {
         for (TextField intField : intFields) {
             intField.focusedProperty().addListener((o) -> checkInt(intField, false));
         }
-
         // Double Fields
         TextField[] doubleFields = new TextField[] {
             speedField,
@@ -230,6 +230,7 @@ public class ConfiguratorController extends AbsSceneController {
             doubleField.focusedProperty().addListener((o) -> checkDouble(doubleField, false));
         }
 
+        // ÄNDERN VON VIEW ZU EDIT
         TextField[] changeableFields = new TextField[] {
             horizontalSplitField,
             imageViewHeightField,
