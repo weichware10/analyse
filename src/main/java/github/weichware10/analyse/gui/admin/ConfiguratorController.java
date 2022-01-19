@@ -84,6 +84,8 @@ public class ConfiguratorController extends AbsSceneController {
     protected GridPane zoomMapsConfigPane;
     @FXML
     protected TextArea problemArea;
+    @FXML
+    protected TextField configIdField;
 
     @FXML
     private void startFunctionChooser() {
@@ -101,6 +103,12 @@ public class ConfiguratorController extends AbsSceneController {
     private void writeToJson() {
         Logger.info("configurator:content Writing to JSON");
         Configurator.writeToJson();
+    }
+
+    @FXML
+    private void loadFromDataBase() {
+        Logger.info("configurator:content Loading from DataBase");
+        Configurator.loadFromDataBase();
     }
 
     @FXML
@@ -206,6 +214,8 @@ public class ConfiguratorController extends AbsSceneController {
                 : "fx:id=\"zoomMapsConfigPane\" not injected: check 'Configurator.fxml'.";
         assert problemArea != null
                 : "fx:id=\"problemArea\" not injected: check 'Configurator.fxml'.";
+        assert configIdField != null
+                : "fx:id=\"configIdField\" not injected: check 'Configurator.fxml'.";
 
         toolTypeBox.getItems().addAll(ToolType.CODECHARTS, ToolType.ZOOMMAPS, null);
         toolTypeBox.valueProperty().addListener((o) -> setConfigType());

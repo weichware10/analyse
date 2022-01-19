@@ -31,7 +31,7 @@
                      <buttons>
                         <Button mnemonicParsing="false" onAction="#loadFromJson" text="aus JSON laden" ButtonBar.buttonData="LEFT" />
                         <TextField fx:id="configIdField" promptText="Konfigurations-ID" />
-                        <Button layoutX="370.0" layoutY="42.0" mnemonicParsing="false" text="aus Datenbank laden" />
+                        <Button layoutX="370.0" layoutY="42.0" mnemonicParsing="false" onAction="#loadFromDataBase" text="aus Datenbank laden" />
                      </buttons>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

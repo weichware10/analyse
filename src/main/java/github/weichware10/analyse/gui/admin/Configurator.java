@@ -34,7 +34,7 @@ public class Configurator extends AbsScene {
         InitResult ir = start(Main.primaryStage,
                 Configurator.class.getResource("Configurator.fxml"),
                 root,
-                null,
+                controller,
                 "Analyse - Konfigurator",
                 MainMenuBar.getMenuBar(),
                 null,
@@ -247,6 +247,26 @@ public class Configurator extends AbsScene {
         if (location != null && !ConfigWriter.toJson(location, configuration)) {
             controller.problemArea.setText(String.format("Could not write to \"%s\"", location));
         }
+    }
+
+    /**
+     * Lädt eine Konfiguration aus der Datenbank.
+     */
+    protected static void loadFromDataBase() {
+        String userConfigId = controller.configIdField.getText();
+        if (userConfigId == null || userConfigId.length() == 0) {
+            controller.problemArea.setText(
+                    "Bitte eine Konfigurations-ID zum Laden aus der Datenbank bereitstellen");
+            return;
+        }
+        Configuration configuration = Main.dataBaseClient.configurations.get(userConfigId);
+        if (configuration == null) {
+            controller.problemArea.setText(String.format(
+                    "Konfiguration \"%s\" konnte nicht geladen werden.", userConfigId));
+            return;
+        }
+        configId = configuration.getConfigId();
+        fillGui(configuration, Mode.DBVIEW);
     }
 
     /**
