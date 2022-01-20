@@ -12,7 +12,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
@@ -129,18 +128,5 @@ public class Heatmap {
     public static String createHeatmapComp(TrialData trial,
             TrialData trialComp, HeatmapConfig hmConfig) {
         return null;
-    }
-
-    /**
-     * DataPointComparator.
-     */
-    private static class DataPointComparator implements Comparator<DataPoint> {
-
-        @Override
-        public int compare(DataPoint dp1, DataPoint dp2) {
-            int area1 = (int) (dp1.viewport.getWidth() * dp1.viewport.getHeight());
-            int area2 = (int) (dp2.viewport.getWidth() * dp2.viewport.getHeight());
-            return area2 - area1;
-        }
     }
 }

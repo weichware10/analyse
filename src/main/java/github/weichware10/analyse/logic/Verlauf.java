@@ -6,7 +6,6 @@ import github.weichware10.util.ToolType;
 import github.weichware10.util.config.Configuration;
 import github.weichware10.util.data.DataPoint;
 import github.weichware10.util.data.TrialData;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.scene.chart.LineChart;
@@ -126,19 +125,6 @@ public class Verlauf {
             // Punkt im Diagramm setzen
             series.getData().add(
                     new XYChart.Data<Number, Number>(dataPoint.timeOffset, relDepth));
-        }
-    }
-
-    /**
-     * DataPointComparator.
-     */
-    private static class DataPointComparator implements Comparator<DataPoint> {
-
-        @Override
-        public int compare(DataPoint dp1, DataPoint dp2) {
-            int area1 = (int) (dp1.viewport.getWidth() * dp1.viewport.getHeight());
-            int area2 = (int) (dp2.viewport.getWidth() * dp2.viewport.getHeight());
-            return area2 - area1;
         }
     }
 }
