@@ -1,17 +1,19 @@
 package github.weichware10.analyse.gui.admin;
 
+import github.weichware10.analyse.gui.admin.Configurator.Mode;
 import github.weichware10.analyse.gui.general.FunctionChooser;
 import github.weichware10.util.Logger;
 import github.weichware10.util.ToolType;
 import github.weichware10.util.gui.AbsSceneController;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.Observable;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -29,7 +31,7 @@ public class ConfiguratorController extends AbsSceneController {
     @FXML
     protected Label configHeading;
     @FXML
-    protected Label configIdLabel;
+    protected Label configSubHeading;
     @FXML
     protected Button dataBaseSaveButton;
     @FXML
@@ -80,6 +82,10 @@ public class ConfiguratorController extends AbsSceneController {
     protected TextField questionField;
     @FXML
     protected GridPane zoomMapsConfigPane;
+    @FXML
+    protected TextArea problemArea;
+    @FXML
+    protected TextField configIdField;
 
     @FXML
     private void startFunctionChooser() {
@@ -88,13 +94,85 @@ public class ConfiguratorController extends AbsSceneController {
     }
 
     @FXML
+    private void loadFromJson() {
+        Logger.info("configurator:content Loading from JSON");
+        Configurator.loadFromJson();
+    }
+
+    @FXML
+    private void writeToJson() {
+        Logger.info("configurator:content Writing to JSON");
+        Configurator.writeToJson();
+    }
+
+    @FXML
+    private void loadFromDataBase() {
+        Logger.info("configurator:content Loading from DataBase");
+        Configurator.loadFromDataBase();
+    }
+
+    @FXML
+    private void writeToDataBase() {
+        Logger.info("configurator:content Writing to DataBase");
+        Configurator.writeToDataBase();
+    }
+
+    @FXML
+    private void showStringsDialog() {
+        Logger.info("configurator:content Showing StringsDialog");
+        Configurator.showStringsDialog();
+    }
+
+    @FXML
+    private void checkInt(ActionEvent event) {
+        if (!(event.getSource() instanceof TextField)) {
+            return;
+        }
+        checkInt((TextField) event.getSource(), true);
+    }
+
+    private void checkInt(TextField intField, boolean force) {
+        if ((intField.isFocused() && !force) || intField.getText().length() == 0) {
+            return;
+        }
+        try {
+            String possibleInt = intField.getText().replaceAll("[^\\d.,-]", "");
+            intField.setText(Integer.toString(
+                    (int) Math.round(Double.valueOf(possibleInt))));
+            intField.setText(Integer.toString(Integer.valueOf(intField.getText())));
+        } catch (NumberFormatException e) {
+            intField.setText("1");
+        }
+    }
+
+    @FXML
+    private void checkDouble(ActionEvent event) {
+        if (!(event.getSource() instanceof TextField)) {
+            return;
+        }
+        checkDouble((TextField) event.getSource(), true);
+    }
+
+    private void checkDouble(TextField doubleField, boolean force) {
+        if ((doubleField.isFocused() && !force) || doubleField.getText().length() == 0) {
+            return;
+        }
+        try {
+            String possibleDouble = doubleField.getText().replaceAll("[^\\d.,-]", "");
+            doubleField.setText(Double.toString(Double.valueOf(possibleDouble)));
+        } catch (NumberFormatException e) {
+            doubleField.setText(Double.toString(1.0));
+        }
+    }
+
+    @FXML
     protected void initialize() {
         assert codeChartsConfigPane != null
                 : "fx:id=\"codeChartsConfigPane\" not injected: check 'Configurator.fxml'.";
         assert configHeading != null
                 : "fx:id=\"configHeading\" not injected: check 'Configurator.fxml'.";
-        assert configIdLabel != null
-                : "fx:id=\"configIdLabel\" not injected: check 'Configurator.fxml'.";
+        assert configSubHeading != null
+                : "fx:id=\"configSubHeading\" not injected: check 'Configurator.fxml'.";
         assert dataBaseSaveButton != null
                 : "fx:id=\"dataBaseSaveButton\" not injected: check 'Configurator.fxml'.";
         assert horizontalSplitField != null
@@ -145,23 +223,122 @@ public class ConfiguratorController extends AbsSceneController {
                 : "fx:id=\"questionField\" not injected: check 'Configurator.fxml'.";
         assert zoomMapsConfigPane != null
                 : "fx:id=\"zoomMapsConfigPane\" not injected: check 'Configurator.fxml'.";
+        assert problemArea != null
+                : "fx:id=\"problemArea\" not injected: check 'Configurator.fxml'.";
+        assert configIdField != null
+                : "fx:id=\"configIdField\" not injected: check 'Configurator.fxml'.";
 
         toolTypeBox.getItems().addAll(ToolType.CODECHARTS, ToolType.ZOOMMAPS, null);
-        toolTypeBox.valueProperty().addListener((o) -> setConfigType(o));
+        toolTypeBox.valueProperty().addListener((o) -> setConfigType());
+        Configurator.mode.addListener((o) -> setTitle());
+
+        // VALIDIERUNG
+        // Integer fields
+        TextField[] intFields = new TextField[] {
+            initialSizeFieldX,
+            initialSizeFieldY,
+            timingsImgField,
+            timingsGridField,
+            iterationsField,
+            maxDepthField,
+            horizontalSplitField,
+            verticalSplitField
+        };
+        for (TextField intField : intFields) {
+            intField.focusedProperty().addListener((o) -> checkInt(intField, false));
+        }
+        // Double Fields
+        TextField[] doubleFields = new TextField[] {
+            speedField,
+            imageViewWidthField,
+            imageViewHeightField
+        };
+        for (TextField doubleField : doubleFields) {
+            doubleField.focusedProperty().addListener((o) -> checkDouble(doubleField, false));
+        }
+
+        // ÄNDERN VON VIEW ZU EDIT
+        TextField[] changeableFields = new TextField[] {
+            horizontalSplitField,
+            imageViewHeightField,
+            imageViewWidthField,
+            imgUrlField,
+            initialSizeFieldX,
+            initialSizeFieldY,
+            introField,
+            iterationsField,
+            maxDepthField,
+            outroField,
+            speedField,
+            stringIdField,
+            timingsGridField,
+            timingsImgField,
+            verticalSplitField,
+            questionField
+        };
+        CheckBox[] changeableBoxes = new CheckBox[] {
+            showGridBox,
+            relativeSizeBox,
+            randomStringsBox,
+            tutorialBox
+        };
+        toolTypeBox.valueProperty().addListener((o) -> Configurator.changeToEdit());
+        for (TextField field : changeableFields) {
+            field.textProperty().addListener((o) -> Configurator.changeToEdit());
+        }
+        for (CheckBox box : changeableBoxes) {
+            box.selectedProperty().addListener((o) -> Configurator.changeToEdit());
+        }
+
+        stringIdField.textProperty().addListener(
+                (o) -> Configurator.updateStringList(null).start());
     }
 
-    private void setConfigType(Observable o) {
+    private void setConfigType() {
         if (toolTypeBox.getValue() == ToolType.ZOOMMAPS) {
             zoomMapsConfigPane.setVisible(true);
             zoomMapsConfigPane.setDisable(false);
             codeChartsConfigPane.setVisible(false);
+            jsonSaveButton.setDisable(false);
+            dataBaseSaveButton.setDisable(false);
         } else if (toolTypeBox.getValue() == ToolType.CODECHARTS) {
             codeChartsConfigPane.setVisible(true);
             codeChartsConfigPane.setDisable(false);
             zoomMapsConfigPane.setVisible(false);
+            jsonSaveButton.setDisable(false);
+            dataBaseSaveButton.setDisable(false);
         } else {
             codeChartsConfigPane.setDisable(true);
             zoomMapsConfigPane.setDisable(true);
+            jsonSaveButton.setDisable(true);
+            dataBaseSaveButton.setDisable(true);
+        }
+    }
+
+    private void setTitle() {
+        switch (Configurator.mode.get()) {
+            case JSONVIEW:
+                configHeading.setText("Konfiguration");
+                configSubHeading.setText("aus JSON geladen");
+                break;
+            case JSONEDIT:
+                configHeading.setText("neue Konfiguration");
+                configSubHeading.setText("basierend auf JSON");
+                break;
+            case DBVIEW:
+                configHeading.setText("Konfiguration");
+                configSubHeading.setText(
+                        String.format("aus Datenbank, ID: %s", Configurator.configId));
+                break;
+            case DBEDIT:
+                configHeading.setText("neue Konfiguration");
+                configSubHeading.setText(
+                        String.format("basierend auf Datenbank, (ID: %s)", Configurator.configId));
+                break;
+            default: // NEW
+                configHeading.setText("neue Konfiguration");
+                configSubHeading.setText("");
+                break;
         }
     }
 
@@ -190,6 +367,9 @@ public class ConfiguratorController extends AbsSceneController {
         randomStringsBox.setSelected(false);
         timingsImgField.setText(null);
         timingsGridField.setText(null);
-        configHeading.setText("neue Konfiguration");
+
+        Configurator.mode.set(Mode.NEW);
+        Configurator.updateStringList(null).start();
+        Configurator.configId = null;
     }
 }
