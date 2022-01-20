@@ -12,6 +12,7 @@ import github.weichware10.util.gui.AbsScene;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Parent;
 import javafx.stage.FileChooser;
@@ -24,6 +25,7 @@ public class Configurator extends AbsScene {
     private static Parent root;
     private static ConfiguratorController controller;
     private static List<String> strings = new ArrayList<>();
+    private static boolean stringsExistInDatabase = false;
     protected static SimpleObjectProperty<Mode> mode = new SimpleObjectProperty<>(Mode.NEW);
     protected static String configId = null;
 
@@ -87,7 +89,7 @@ public class Configurator extends AbsScene {
                         Integer.toString(ccConfig.getDefaultHorizontal()));
                 controller.verticalSplitField.setText(
                         Integer.toString(ccConfig.getDefaultVertical()));
-                updateStringList(ccConfig.getStrings());
+                updateStringList(ccConfig.getStrings()).start();
                 break;
             case ZOOMMAPS:
                 ZoomMapsConfiguration zmConfig = configuration.getZoomMapsConfiguration();
@@ -224,9 +226,12 @@ public class Configurator extends AbsScene {
         Configuration configuration = null;
         if (location != null) {
             configuration = ConfigLoader.fromJson(location);
+        } else {
+            return;
         }
         if (configuration == null) {
             controller.problemArea.setText(String.format("Could not load from \"%s\"", location));
+            return;
         }
         fillGui(configuration, Mode.JSONVIEW);
     }
@@ -286,29 +291,49 @@ public class Configurator extends AbsScene {
     }
 
     /**
+     * Zeigt den passenden {@link StringsDialog} an.
+     */
+    protected static void showStringsDialog() {
+        if (stringsExistInDatabase) {
+            new StringsDialog(strings, false).showAndWait();
+        } else {
+            new StringsDialog(strings, true).showAndWait().ifPresent(result -> {
+                updateStringList(result).start();
+            });
+        }
+    }
+
+    /**
      * Updated die String-Liste, auf die stringId achtend / mit einer gerade
      * importierten Liste.
      *
-     * @param newStrings - die neue String-Liste
+     * @param newStr - die neue String-Liste
      */
-    protected static void updateStringList(List<String> newStrings) {
-        String stringId = controller.stringIdField.getText();
-        if (stringId == null || stringId.length() == 0) {
-            controller.stringIdButton.setText("...");
-            controller.stringIdButton.setDisable(true);
-            return;
-        }
-        controller.stringIdButton.setDisable(false);
-        if (newStrings == null || newStrings.size() == 0) {
+    protected static Thread updateStringList(List<String> newStr) {
+        return new Thread(() -> {
+            String stringId = controller.stringIdField.getText();
+            if (stringId == null || stringId.length() == 0) {
+                Platform.runLater(() -> controller.stringIdButton.setText("..."));
+                Platform.runLater(() -> controller.stringIdButton.setDisable(true));
+            }
+
+            Platform.runLater(() -> controller.stringIdButton.setDisable(false));
+
+            // Datenbank Abfrage
             strings = Main.dataBaseClient.strings.get(stringId);
-        } else {
-            strings = newStrings;
-        }
-        if (strings == null || strings.size() == 0) {
-            controller.stringIdButton.setText("Liste mit dieser ID erstellen");
-        } else {
-            controller.stringIdButton.setText("Liste anzeigen");
-        }
+
+            if ((strings == null || strings.size() == 0)) {
+                // existiert nicht in Datenbank
+                stringsExistInDatabase = false;
+                strings = (newStr == null) ? new ArrayList<>() : newStr;
+                Platform.runLater(
+                        () -> controller.stringIdButton.setText("Liste erstellen / bearbeiten"));
+            } else {
+                // existiert bereits in DB
+                stringsExistInDatabase = true;
+                Platform.runLater(() -> controller.stringIdButton.setText("Liste anzeigen"));
+            }
+        });
     }
 
     /**

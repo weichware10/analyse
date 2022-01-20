@@ -135,7 +135,7 @@
                                  </tooltip>
                               </Label>
                               <TextField fx:id="stringIdField" promptText="string" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button fx:id="stringIdButton" disable="true" mnemonicParsing="false" text="..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Button fx:id="stringIdButton" disable="true" mnemonicParsing="false" onAction="#showStringsDialog" text="..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <Label text="Rastergröße X" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                                  <tooltip>
                                     <Tooltip text="Ausgangsunterteilung des Rasters (horizontal)" wrapText="true" />

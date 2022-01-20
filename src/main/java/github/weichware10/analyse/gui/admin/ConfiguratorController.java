@@ -118,9 +118,14 @@ public class ConfiguratorController extends AbsSceneController {
     }
 
     @FXML
+    private void showStringsDialog() {
+        Logger.info("configurator:content Showing StringsDialog");
+        Configurator.showStringsDialog();
+    }
+
+    @FXML
     private void checkInt(ActionEvent event) {
         if (!(event.getSource() instanceof TextField)) {
-            Logger.debug("wrong");
             return;
         }
         checkInt((TextField) event.getSource(), true);
@@ -284,6 +289,9 @@ public class ConfiguratorController extends AbsSceneController {
         for (CheckBox box : changeableBoxes) {
             box.selectedProperty().addListener((o) -> Configurator.changeToEdit());
         }
+
+        stringIdField.textProperty().addListener(
+                (o) -> Configurator.updateStringList(null).start());
     }
 
     private void setConfigType() {
@@ -361,7 +369,7 @@ public class ConfiguratorController extends AbsSceneController {
         timingsGridField.setText(null);
 
         Configurator.mode.set(Mode.NEW);
-        Configurator.updateStringList(null);
+        Configurator.updateStringList(null).start();
         Configurator.configId = null;
     }
 }
