@@ -43,14 +43,14 @@ public class DiagramConfigurator extends AbsScene {
         controller = (DiagramConfiguratorController) ir.controller;
 
         // Beim erneueten Aufrufen bereits gesetzte Konfiguration wieder setzten
-        controller.initMinTimeSlider(diaConfig.getMinTime());
-        controller.initMaxTimeSlider(diaConfig.getMaxTime());
         controller.initStepsSlider(diaConfig.getStepsBetween());
+        controller.setBarChart(diaConfig.isBarChart());
+        controller.setPieChart(!diaConfig.isBarChart());
 
         final Button ok = (Button) configDialog.getDialogPane().lookupButton(applyButtonType);
         ok.addEventFilter(ActionEvent.ACTION, applyEvent -> {
-            diaConfig.setNewTime(controller.getMinTime(), controller.getMaxTime());
             diaConfig.setStepsBetween(controller.getSteps());
+            diaConfig.setBarChart(controller.isBarChart());
         });
         configDialog.getDialogPane().setContent(root);
         configDialog.showAndWait();

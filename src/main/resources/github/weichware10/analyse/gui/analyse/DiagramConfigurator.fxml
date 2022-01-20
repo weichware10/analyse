@@ -2,38 +2,30 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.analyse.DiagramConfiguratorController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.analyse.DiagramConfiguratorController">
    <children>
       <Label alignment="CENTER" text="Konfiguration Diagramm" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <HBox prefHeight="0.0" prefWidth="280.0" />
-      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
-         <children>
-            <Label text="Minimale Zeit" />
-            <Slider fx:id="minTimeSlider" blockIncrement="0.1" majorTickUnit="1.0" max="10.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-            <Label fx:id="minTimeLabel" text="0.00" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
-         <children>
-            <Label text="Maximale Zeit" />
-            <Slider fx:id="maxTimeSlider" blockIncrement="0.1" majorTickUnit="1.0" max="10.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="10.0" />
-            <Label fx:id="maxTimeLabel" text="10.0" />
-         </children>
-      </HBox>
       <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
          <children>
             <Label text="Schritte" />
             <Slider fx:id="stepsSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
             <Label fx:id="stepsLabel" text="1" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <RadioButton fx:id="barChart" mnemonicParsing="false" onAction="#selectBarChart" selected="true" text="Balkendiagramm" />
+            <RadioButton fx:id="pieChart" mnemonicParsing="false" onAction="#selectPieChart" text="Kreisdiagramm" />
          </children>
       </HBox>
    </children>
