@@ -50,7 +50,7 @@ public class Configurator extends AbsScene {
      * befüllt die GUI mit den Werten aus der Konfiguration.
      *
      * @param configuration - die Konfiguration mit den Werten
-     * @param nextMode      - welcher Modus nach dem befüllen ausgewählt werden soll
+     * @param nextMode      - welcher Modus nach dem Befüllen ausgewählt werden soll
      */
     private static void fillGui(Configuration configuration, Mode nextMode) {
         // allgemeine Konfiguration
