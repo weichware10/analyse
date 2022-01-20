@@ -47,7 +47,7 @@ public class Configurator extends AbsScene {
     }
 
     /**
-     * befüllt die GUI mit den Wrten aus der Konfiguration.
+     * befüllt die GUI mit den Werten aus der Konfiguration.
      *
      * @param configuration - die Konfiguration mit den Werten
      * @param nextMode      - welcher Modus nach dem befüllen ausgewählt werden soll
