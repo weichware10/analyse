@@ -1,58 +1,213 @@
 package github.weichware10.analyse.logic;
 
+import github.weichware10.analyse.Main;
 import github.weichware10.analyse.config.DiagramConfig;
+import github.weichware10.util.Logger;
+import github.weichware10.util.config.Configuration;
+import github.weichware10.util.data.DataPoint;
 import github.weichware10.util.data.TrialData;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.image.Image;
 
 /**
  * verantwortlich für die Erstellung der Diagramm-Diagramme.
  */
-@SuppressWarnings("unused")
-public class Diagram extends Analyse {
-    private final TrialData data;
-    private final DiagramConfig confDia;
+public class Diagram {
+
+    private static DataPointComparator comparator = new DataPointComparator();
 
     /**
-     * verantwortlich für die Erstellung der Diagramm-Diagramme.
+     * Erstellt Balkendiagramm über die Relative Tiefenverteilung der Datenpunkte.
      *
-     * @param data    - Daten die zur Erstellung der Diagramme benötigt werden
-     * @param confDia - Konfigurationen für die Diagrammarten
+     * @param trial - Versuch
+     * @param diaConfig - Konfiguration
+     * @return erstelltes Balkendiagramm
      */
-    public Diagram(TrialData data, DiagramConfig confDia) {
-        this.data = data;
-        this.confDia = confDia;
+    public static BarChart<String, Number> createDiagramBarChart(
+            TrialData trial, DiagramConfig diaConfig) {
+        Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
+
+        // Bild laden für Bildbreite und -höhe
+        String imageUrl = Analyse.saveImage(config.getImageUrl());
+        Image image = null;
+        try {
+            image = new Image(imageUrl);
+        } catch (Exception e) {
+            Logger.error("Failed to save the image", e, true);
+            return null;
+        }
+
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+
+        double[][] pixels = new double[width][height];
+
+        List<DataPoint> sortedDataPoints = trial.getData().stream()
+                .sorted(comparator).collect(Collectors.toList());
+
+        fillPixelsWithRelDepth(width, height, pixels, sortedDataPoints);
+
+        int amountSteps = diaConfig.getStepsBetween();
+        double stepWidth = 1.0f / (double) amountSteps;
+        List<Double> diagramData = new ArrayList<Double>();
+
+        allocatePixels(pixels, amountSteps, stepWidth, diagramData);
+
+        calcRelFreqPerStep(width, height, diagramData);
+
+        Logger.info(diagramData.toString());
+
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        final BarChart<String, Number> barChart = new BarChart<String, Number>(xAxis, yAxis);
+        barChart.setTitle(String.format("Balkendiagramm %s", trial.toolType.toString()));
+        xAxis.setLabel("relative Tiefe");
+        yAxis.setLabel("relative Häufigkeit in %");
+
+        XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
+        series.setName(trial.getTrialId());
+
+        for (int step = 0; step < diagramData.size(); step++) {
+            double min = step * stepWidth;
+            double max = (step + 1) * stepWidth;
+            String area = String.format(Locale.US, "[%.2f - %.2f]: %.2f %%",
+                    min, max, diagramData.get(step) * 100);
+            series.getData().add(
+                    new XYChart.Data<String, Number>(area, diagramData.get(step) * 100));
+        }
+
+        barChart.getData().add(series);
+
+        return barChart;
     }
 
     /**
-     * erstellt Diagramm, welches die relativen Häufigkeiten der Blickedauer bzw.
-     * Zoomstärken darstellt.
+     * Erstellt Kreisdiagramm über die Relative Tiefenverteilung der Datenpunkte.
      *
-     * @return Pfad des Bildes des erstellten Diagramms
+     * @param trial - Versuch
+     * @param diaConfig - Konfiguration
+     * @return erstelltes Kreisdiagramm
      */
-    public String createViewTimeDistr() {
-        return drawDiagramm(null);
+    public static PieChart createDiagramPieChart(TrialData trial, DiagramConfig diaConfig) {
+        Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
+
+        // Bild laden für Bildbreite und -höhe
+        String imageUrl = Analyse.saveImage(config.getImageUrl());
+        Image image = null;
+        try {
+            image = new Image(imageUrl);
+        } catch (Exception e) {
+            Logger.error("Failed to save the image", e, true);
+            return null;
+        }
+
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+
+        double[][] pixels = new double[width][height];
+
+        List<DataPoint> sortedDataPoints = trial.getData().stream()
+                .sorted(comparator).collect(Collectors.toList());
+
+        fillPixelsWithRelDepth(width, height, pixels, sortedDataPoints);
+
+        int amountSteps = diaConfig.getStepsBetween();
+        double stepWidth = 1.0f / (double) amountSteps;
+        List<Double> diagramData = new ArrayList<Double>();
+
+        allocatePixels(pixels, amountSteps, stepWidth, diagramData);
+
+        calcRelFreqPerStep(width, height, diagramData);
+
+        Logger.info(diagramData.toString());
+
+        final PieChart pieChart = new PieChart();
+        pieChart.setTitle(String.format("Kreisdiagramm %s (relative Häufigkeit in %%)",
+                trial.toolType.toString()));
+
+        for (int step = 0; step < diagramData.size(); step++) {
+            double min = step * stepWidth;
+            double max = (step + 1) * stepWidth;
+            String area = String.format(Locale.US, "[%.2f - %.2f]: %.2f %%",
+                    min, max, diagramData.get(step) * 100);
+            PieChart.Data slice = new PieChart.Data(area, diagramData.get(step) * 100);
+            pieChart.getData().add(slice);
+        }
+
+        return pieChart;
+    }
+
+    private static void fillPixelsWithRelDepth(int width, int height,
+            double[][] pixels, List<DataPoint> sortedDataPoints) {
+        DataPoint minDataPoint = sortedDataPoints.get(0);
+        DataPoint maxDataPoint = sortedDataPoints.get(sortedDataPoints.size() - 1);
+
+        double minDepth = Analyse.calculateDepth(minDataPoint, width, height, null, null);
+        double maxDepth = Analyse.calculateDepth(maxDataPoint, width, height, null, null);
+
+        // Für jedes Pixel des Bildes endgültige relative Tiefe berechnen
+        for (DataPoint dataPoint : sortedDataPoints) {
+            int xmin = (int) dataPoint.viewport.getMinX();
+            int xmax = (int) dataPoint.viewport.getMaxX();
+            for (; xmin < xmax; xmin++) {
+                int ymin = (int) dataPoint.viewport.getMinY();
+                int ymax = (int) dataPoint.viewport.getMaxY();
+                for (; ymin < ymax; ymin++) {
+                    pixels[xmin][ymin] = Analyse.calculateDepth(
+                            dataPoint, width, height, minDepth, maxDepth);
+                }
+            }
+        }
+    }
+
+    private static void allocatePixels(double[][] pixels, int amountSteps,
+            double stepWidth, List<Double> diagramData) {
+        // Initialisieren
+        for (int i = 0; i < amountSteps; i++) {
+            diagramData.add(0.0);
+        }
+
+        // Pixel nach ihrer relative Tiefe zuordnen
+        for (int x = 0; x < pixels.length; x++) {
+            for (int y = 0; y < pixels[x].length; y++) {
+                for (int i = 1; i <= amountSteps; i++) {
+                    if (pixels[x][y] <= stepWidth * i) {
+                        diagramData.set(i - 1, diagramData.get(i - 1) + 1);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private static void calcRelFreqPerStep(int width, int height, List<Double> diagramData) {
+        long amountPixel = width * height;
+
+        for (int step = 0; step < diagramData.size(); step++) {
+            double relFreq = diagramData.get(step) / amountPixel;
+            diagramData.set(step, relFreq);
+        }
     }
 
     /**
-     * berechnet die relativen Häufigkeiten der Blickdauer bzw. Zoomstärken
-     *
-     * @param timeTableData - Tabelle mit Zeitpunkt und Bildkoordinate bzw.
-     *                      Zoomstärke
-     * @return Daten für die Erstellung des Diagramms
+     * DataPointComparator.
      */
-    private List<Float> calcViewTimeDistr(List<List<Float>> timeTableData) {
-        return null;
-    }
+    private static class DataPointComparator implements Comparator<DataPoint> {
 
-    /**
-     * zeichnet das Diagramm.
-     *
-     * @param diagrammData - Daten die zur Erstellung des Diagramms benötigt werden
-     * @param type         - Diagramm-Typ des zu erstellenden Diagramms
-     * @return Pfad des Bildes des erstellten Diagramms
-     */
-    private String drawDiagramm(List<Float> diagrammData) {
-        return null;
+        @Override
+        public int compare(DataPoint dp1, DataPoint dp2) {
+            int area1 = (int) (dp1.viewport.getWidth() * dp1.viewport.getHeight());
+            int area2 = (int) (dp2.viewport.getWidth() * dp2.viewport.getHeight());
+            return area2 - area1;
+        }
     }
-
 }

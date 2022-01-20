@@ -5,6 +5,7 @@ import github.weichware10.analyse.config.DiagramConfig;
 import github.weichware10.analyse.config.HeatmapConfig;
 import github.weichware10.analyse.enums.AnalyseType;
 import github.weichware10.analyse.gui.general.MainMenuBar;
+import github.weichware10.analyse.logic.Diagram;
 import github.weichware10.analyse.logic.Heatmap;
 import github.weichware10.analyse.logic.Verlauf;
 import github.weichware10.util.Logger;
@@ -18,7 +19,9 @@ import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -40,6 +43,8 @@ public class Analyzer extends AbsScene {
     private static DiagramConfig diaConfig = new DiagramConfig();
     private static String heatmapImage;
     private static LineChart<Number, Number> verlaufLineChart;
+    private static BarChart<String, Number> diagramBarChart;
+    private static PieChart diagramPieChart;
 
     /**
      * Startet die App.
@@ -77,6 +82,8 @@ public class Analyzer extends AbsScene {
         controller.analysePane.getChildren().clear();
         heatmapImage = null;
         verlaufLineChart = null;
+        diagramBarChart = null;
+        diagramPieChart = null;
 
         if (Analyzer.analyseType != AnalyseType.COMPHEATMAP) {
             trialComp = null;
@@ -114,6 +121,8 @@ public class Analyzer extends AbsScene {
                 controller.analysePane.getChildren().clear();
                 heatmapImage = null;
                 verlaufLineChart = null;
+                diagramBarChart = null;
+                diagramPieChart = null;
                 hmConfig = new HeatmapConfig();
                 diaConfig = new DiagramConfig();
             }
@@ -170,6 +179,10 @@ public class Analyzer extends AbsScene {
         Logger.info(output);
 
         controller.statusLabel.setVisible(false);
+        heatmapImage = null;
+        verlaufLineChart = null;
+        diagramBarChart = null;
+        diagramPieChart = null;
 
         switch (analyseType) {
             case HEATMAP:
@@ -185,6 +198,11 @@ public class Analyzer extends AbsScene {
                 verlaufLineChart = Verlauf.createVerlauf(Arrays.asList(trial, trialComp));
                 break;
             case RELDEPTHDISTR:
+                if (diaConfig.isBarChart()) {
+                    diagramBarChart = Diagram.createDiagramBarChart(trial, diaConfig);
+                } else {
+                    diagramPieChart = Diagram.createDiagramPieChart(trial, diaConfig);
+                }
                 break;
             default:
                 // sollte niemals eintreten
@@ -210,6 +228,26 @@ public class Analyzer extends AbsScene {
 
             // LineChart vom Verlauf setzen
             controller.analysePane.getChildren().addAll(verlaufLineChart);
+
+            // Export aktivieren
+            controller.exportButton.setDisable(false);
+            controller.exportRawButton.setDisable(false);
+        } else if (diagramBarChart != null) {
+            // Pane leeren
+            controller.analysePane.getChildren().clear();
+
+            // BarChart vom Diagram setzen
+            controller.analysePane.getChildren().addAll(diagramBarChart);
+
+            // Export aktivieren
+            controller.exportButton.setDisable(false);
+            controller.exportRawButton.setDisable(false);
+        } else if (diagramPieChart != null) {
+            // Pane leeren
+            controller.analysePane.getChildren().clear();
+
+            // BarChart vom Diagram setzen
+            controller.analysePane.getChildren().addAll(diagramPieChart);
 
             // Export aktivieren
             controller.exportButton.setDisable(false);
@@ -244,7 +282,8 @@ public class Analyzer extends AbsScene {
                 });
                 taskThread.start();
             } else if (analyseType == AnalyseType.VERLAUF
-                    || analyseType == AnalyseType.COMPVERLAUF) {
+                    || analyseType == AnalyseType.COMPVERLAUF
+                    || analyseType == AnalyseType.RELDEPTHDISTR) {
                 if (saveAsPng(location)) {
                     controller.setExportStatus(String.format(
                             "Diagramm unter %s gesepeichert", location));
