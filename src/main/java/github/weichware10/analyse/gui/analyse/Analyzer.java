@@ -324,23 +324,27 @@ public class Analyzer extends AbsScene {
      * Setzt Analyse zurück.
      */
     public static void reset() {
-        controller.analyseButton.setDisable(true);
-        controller.analyseTypMenuButton.setDisable(true);
-        controller.configButton.setDisable(true);
-        controller.exportButton.setDisable(true);
-        controller.exportRawButton.setDisable(true);
-        controller.selectCompTrialButton.setVisible(false);
-        controller.exportButton.setDisable(true);
-        controller.exportRawButton.setDisable(true);
-        controller.errorLabel.setVisible(false);
-        controller.statusLabel.setVisible(false);
-        controller.analysePane.getChildren().clear();
-        Analyzer.analyseType = null;
-        Analyzer.trial = null;
-        Analyzer.trialComp = null;
-        Analyzer.hmConfig = new HeatmapConfig();
-        Analyzer.diaConfig = new DiagramConfig();
-        Analyzer.heatmapImage = null;
-        Analyzer.verlaufLineChart = null;
+        if (controller != null) {
+            Logger.info("analyzer:content Resetting");
+
+            controller.analyseButton.setDisable(true);
+            controller.analyseTypMenuButton.setDisable(true);
+            controller.configButton.setDisable(true);
+            controller.exportButton.setDisable(true);
+            controller.exportRawButton.setDisable(true);
+            controller.selectCompTrialButton.setVisible(false);
+            controller.exportButton.setDisable(true);
+            controller.exportRawButton.setDisable(true);
+            controller.errorLabel.setVisible(false);
+            controller.statusLabel.setVisible(false);
+            controller.analysePane.getChildren().clear();
+            Analyzer.analyseType = null;
+            Analyzer.trial = null;
+            Analyzer.trialComp = null;
+            Analyzer.hmConfig = new HeatmapConfig();
+            Analyzer.diaConfig = new DiagramConfig();
+            Analyzer.heatmapImage = null;
+            Analyzer.verlaufLineChart = null;
+        }
     }
 }
