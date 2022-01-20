@@ -25,6 +25,7 @@ public class Verlauf {
      * Erstellt Verlauf-Liniendiagramm.
      *
      * @param trials - Versuch(e)
+     * @return erstelltes Liniendiagramm
      */
     public static LineChart<Number, Number> createVerlauf(List<TrialData> trials) {
         Configuration config = Main.dataBaseClient.configurations.get(trials.get(0).configId);
