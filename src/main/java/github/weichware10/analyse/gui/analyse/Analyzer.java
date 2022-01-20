@@ -14,6 +14,7 @@ import github.weichware10.util.gui.AbsScene;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -213,7 +214,8 @@ public class Analyzer extends AbsScene {
             controller.analysePane.getChildren().clear();
 
             // ImageView mit Heatmap setzen
-            ImageView imageView = new ImageView(new Image(heatmapImage));
+            ImageView imageView = new ImageView(
+                new Image(Paths.get(heatmapImage).toUri().toString()));
             imageView.setFitWidth(680.0f);
             imageView.setFitHeight(405.0f);
             imageView.setPreserveRatio(true);

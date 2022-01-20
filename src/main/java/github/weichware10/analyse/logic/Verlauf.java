@@ -6,6 +6,7 @@ import github.weichware10.util.ToolType;
 import github.weichware10.util.config.Configuration;
 import github.weichware10.util.data.DataPoint;
 import github.weichware10.util.data.TrialData;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.scene.chart.LineChart;
@@ -33,7 +34,7 @@ public class Verlauf {
         String imageUrl = Analyse.saveImage(config.getImageUrl());
         Image image = null;
         try {
-            image = new Image(imageUrl);
+            image = new Image(Paths.get(imageUrl).toUri().toString());
         } catch (Exception e) {
             Logger.error("Failed to save the image", e, true);
             return null;

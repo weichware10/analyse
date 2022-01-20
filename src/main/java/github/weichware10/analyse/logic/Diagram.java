@@ -6,6 +6,7 @@ import github.weichware10.util.Logger;
 import github.weichware10.util.config.Configuration;
 import github.weichware10.util.data.DataPoint;
 import github.weichware10.util.data.TrialData;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -40,7 +41,7 @@ public class Diagram {
         String imageUrl = Analyse.saveImage(config.getImageUrl());
         Image image = null;
         try {
-            image = new Image(imageUrl);
+            image = new Image(Paths.get(imageUrl).toUri().toString());
         } catch (Exception e) {
             Logger.error("Failed to save the image", e, true);
             return null;
@@ -104,7 +105,7 @@ public class Diagram {
         String imageUrl = Analyse.saveImage(config.getImageUrl());
         Image image = null;
         try {
-            image = new Image(imageUrl);
+            image = new Image(Paths.get(imageUrl).toUri().toString());
         } catch (Exception e) {
             Logger.error("Failed to save the image", e, true);
             return null;
