@@ -77,7 +77,7 @@ public class Analyzer extends AbsScene {
         diaConfig = new DiagramConfig();
 
         controller.errorLabel.setVisible(false);
-        controller.statusLabel.setVisible(false);
+        controller.setStatus(null, null, null);
         controller.exportButton.setDisable(true);
         controller.exportRawButton.setDisable(true);
         controller.analysePane.getChildren().clear();
@@ -116,7 +116,7 @@ public class Analyzer extends AbsScene {
                 controller.selectCompTrialButton.setVisible(false);
                 controller.analyseTypMenuButton.setText("Analyse-Typ");
                 controller.errorLabel.setVisible(false);
-                controller.statusLabel.setVisible(false);
+                controller.setStatus(null, null, null);
                 controller.exportButton.setDisable(true);
                 controller.exportRawButton.setDisable(true);
                 controller.analysePane.getChildren().clear();
@@ -154,7 +154,7 @@ public class Analyzer extends AbsScene {
      */
     public static void setConfig() {
         controller.errorLabel.setVisible(false);
-        controller.statusLabel.setVisible(false);
+        controller.setStatus(null, null, null);
 
         if (analyseType == AnalyseType.COMPHEATMAP
                 || analyseType == AnalyseType.HEATMAP) {
@@ -179,7 +179,7 @@ public class Analyzer extends AbsScene {
                 diaConfig.toString());
         Logger.info(output);
 
-        controller.statusLabel.setVisible(false);
+        controller.setStatus(null, null, null);
         heatmapImage = null;
         verlaufLineChart = null;
         diagramBarChart = null;
@@ -209,6 +209,7 @@ public class Analyzer extends AbsScene {
                 // sollte niemals eintreten
                 break;
         }
+
         if (heatmapImage != null) {
             // Pane leeren
             controller.analysePane.getChildren().clear();
@@ -268,17 +269,19 @@ public class Analyzer extends AbsScene {
 
         // Dateipfad als String speichern
         String location = fileChooser.showSaveDialog(Main.primaryStage).getAbsolutePath();
+        controller.setStatus(null, null, null);
         if (location != null) {
+            controller.setStatusIndicator(true);
             if (analyseType == AnalyseType.HEATMAP || analyseType == AnalyseType.COMPHEATMAP) {
                 Thread taskThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         if (saveImage(location)) {
-                            Platform.runLater(() -> controller.setExportStatus(
-                                    String.format("Bild unter %s gesepeichert", location)));
+                            Platform.runLater(() -> controller.setStatus(
+                                    "Bild unter", location, "gespeichert"));
                         } else {
-                            Platform.runLater(() -> controller.setExportStatus(
-                                    "Bild konnte nicht gespeichert werden"));
+                            Platform.runLater(() -> controller.setStatus(
+                                    "Bild konnte nicht gespeichert werden", null, null));
                         }
                     }
                 });
@@ -287,10 +290,9 @@ public class Analyzer extends AbsScene {
                     || analyseType == AnalyseType.COMPVERLAUF
                     || analyseType == AnalyseType.RELDEPTHDISTR) {
                 if (saveAsPng(location)) {
-                    controller.setExportStatus(String.format(
-                            "Diagramm unter %s gesepeichert", location));
+                    controller.setStatus("Diagramm unter", location, "gespeichert");
                 } else {
-                    controller.setExportStatus("Diagramm konnte nicht gespeichert werden");
+                    controller.setStatus("Diagramm konnte nicht gespeichert werden", null, null);
                 }
             }
         }
@@ -360,16 +362,18 @@ public class Analyzer extends AbsScene {
 
         // Dateipfad als String speichern und json laden
         String location = fileChooser.showSaveDialog(Main.primaryStage).getAbsolutePath();
+        controller.setStatus(null, null, null);
         if (location != null) {
+            controller.setStatusIndicator(true);
             Thread taskThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     if (TrialData.toJson(location, trial)) {
-                        Platform.runLater(() -> controller.setExportStatus(
-                                String.format("Versuchs-Daten unter %s gespeichert", location)));
+                        Platform.runLater(() -> controller.setStatus(
+                                "Versuchs-Daten unter", location, "gespeichert"));
                     } else {
-                        Platform.runLater(() -> controller.setExportStatus(
-                                "Versuchs-Daten konnten nicht gespeichert werden"));
+                        Platform.runLater(() -> controller.setStatus(
+                                "Versuchs-Daten konnten nicht gespeichert werden", null, null));
                     }
                 }
             });
@@ -394,7 +398,7 @@ public class Analyzer extends AbsScene {
             controller.exportButton.setDisable(true);
             controller.exportRawButton.setDisable(true);
             controller.errorLabel.setVisible(false);
-            controller.statusLabel.setVisible(false);
+            controller.setStatus(null, null, null);
             controller.analysePane.getChildren().clear();
             Analyzer.analyseType = null;
             Analyzer.trial = null;
