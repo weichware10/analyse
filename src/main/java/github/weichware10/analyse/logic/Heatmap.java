@@ -12,7 +12,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
@@ -28,8 +27,9 @@ public class Heatmap {
     /**
      * Erstellt Heatmap.
      *
+     * @param trial - Versuch
      * @param hmConfig - Konfiguration
-     * @return ?
+     * @return Pfad des Heatmap-Bilds
      */
     public static String createHeatmap(TrialData trial, HeatmapConfig hmConfig) {
         Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
@@ -40,7 +40,7 @@ public class Heatmap {
         try {
             image = ImageIO.read(new File(sourceImgLocation));
         } catch (Exception e) {
-            Logger.error("Failed to save the image", e, true);
+            Logger.error("heatmap:content Failed to save the image", e);
             return null;
         }
         int width = (int) image.getWidth();
@@ -66,7 +66,7 @@ public class Heatmap {
         try {
             heatmapLocation = Files.saveGeneratedImage(heatmap, "HEATMAP" + trial.trialId + ".png");
         } catch (IllegalArgumentException | IOException e) {
-            Logger.error("Failed to save the image", e, true);
+            Logger.error("heatmap:content Failed to save the image", e);
         }
 
         if (image == null || !hmConfig.isImage()) {
@@ -84,7 +84,7 @@ public class Heatmap {
         try {
             imgLocation = Files.saveGeneratedImage(image, "IMGHEATMAP" + trial.trialId + ".png");
         } catch (IllegalArgumentException | IOException e) {
-            Logger.error("Failed to save the image", e, true);
+            Logger.error("heatmap:content Failed to save the image", e);
         }
 
         return imgLocation;
@@ -128,18 +128,5 @@ public class Heatmap {
     public static String createHeatmapComp(TrialData trial,
             TrialData trialComp, HeatmapConfig hmConfig) {
         return null;
-    }
-
-    /**
-     * DataPointComparator.
-     */
-    private static class DataPointComparator implements Comparator<DataPoint> {
-
-        @Override
-        public int compare(DataPoint dp1, DataPoint dp2) {
-            int area1 = (int) (dp1.viewport.getWidth() * dp1.viewport.getHeight());
-            int area2 = (int) (dp2.viewport.getWidth() * dp2.viewport.getHeight());
-            return area2 - area1;
-        }
     }
 }

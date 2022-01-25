@@ -38,7 +38,6 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <CheckBox fx:id="showGrid" alignment="TOP_LEFT" mnemonicParsing="false" selected="true" text="Raster anzeigen" />
             <CheckBox fx:id="showImage" mnemonicParsing="false" selected="true" text="Bild anzeigen" />
          </children>
          <padding>

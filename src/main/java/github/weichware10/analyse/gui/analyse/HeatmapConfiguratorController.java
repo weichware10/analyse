@@ -16,8 +16,6 @@ public class HeatmapConfiguratorController extends AbsSceneController {
     @FXML
     protected ColorPicker minColorDiff;
     @FXML
-    protected CheckBox showGrid;
-    @FXML
     protected CheckBox showImage;
 
     protected Color getMaxColorDiff() {
@@ -26,10 +24,6 @@ public class HeatmapConfiguratorController extends AbsSceneController {
 
     protected Color getMinColorDiff() {
         return minColorDiff.getValue();
-    }
-
-    protected boolean getShowGrid() {
-        return showGrid.isSelected();
     }
 
     protected boolean getShowImage() {
@@ -44,24 +38,18 @@ public class HeatmapConfiguratorController extends AbsSceneController {
         this.minColorDiff.setValue(minColorDiff);
     }
 
-    protected void setShowGrid(boolean showGrid) {
-        this.showGrid.setSelected(showGrid);
-    }
-
     protected void setShowImage(boolean showImage) {
         this.showImage.setSelected(showImage);
     }
 
     @Override
     protected void initialize() {
-        assert maxColorDiff != null :
-            "fx:id=\"maxColorDIff\" not injected: check 'HeatmapConfig.fxml'.";
-        assert minColorDiff != null :
-            "fx:id=\"minColorDiff\" not injected: check 'HeatmapConfig.fxml'.";
-        assert showGrid != null :
-            "fx:id=\"showGrid\" not injected: check 'HeatmapConfig.fxml'.";
-        assert showImage != null :
-            "fx:id=\"showImage\" not injected: check 'HeatmapConfig.fxml'.";
+        assert maxColorDiff != null
+                : "fx:id=\"maxColorDIff\" not injected: check 'HeatmapConfig.fxml'.";
+        assert minColorDiff != null
+                : "fx:id=\"minColorDiff\" not injected: check 'HeatmapConfig.fxml'.";
+        assert showImage != null
+                : "fx:id=\"showImage\" not injected: check 'HeatmapConfig.fxml'.";
 
     }
 

@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 public class HeatmapConfig {
     private Color minColorDiff;
     private Color maxColorDiff;
-    private boolean grid;
     private boolean image;
 
     /**
@@ -17,7 +16,6 @@ public class HeatmapConfig {
     public HeatmapConfig() {
         this.minColorDiff = new Color(0.0f, 0.0f, 1.0f, 1.0f);
         this.maxColorDiff = new Color(1.0f, 0.0f, 0.0f, 1.0f);
-        this.grid = true;
         this.image = true;
     }
 
@@ -39,25 +37,6 @@ public class HeatmapConfig {
 
     public void setMaxColorDiff(Color maxColorDiff) {
         this.maxColorDiff = maxColorDiff;
-    }
-
-
-    /**
-     * aktiviert bzw. deaktiviert die Anzeige des Rasters.
-     *
-     * @param grid - Anzeige Raster aktivieren bzw. deaktivieren
-     */
-    public void setGrid(boolean grid) {
-        this.grid = grid;
-    }
-
-    /**
-     * gibt zurück ob das Raster angezeigt wird.
-     *
-     * @return Wert von grid
-     */
-    public boolean isGrid() {
-        return grid;
     }
 
     /**
@@ -84,7 +63,6 @@ public class HeatmapConfig {
                 HeatmapConfig: {
                     minColorDiff: (%f,%f,%f,%f)
                     maxColorDiff: (%f,%f,%f,%f)
-                    isGrid: %b
                     isImage: %b
                 }
                 """,
@@ -92,7 +70,6 @@ public class HeatmapConfig {
                 minColorDiff.getBlue(), minColorDiff.getOpacity(),
                 maxColorDiff.getRed(), maxColorDiff.getGreen(),
                 maxColorDiff.getBlue(), minColorDiff.getOpacity(),
-                isGrid(),
                 isImage());
     }
 
