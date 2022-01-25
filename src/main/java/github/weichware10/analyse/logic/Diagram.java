@@ -8,7 +8,6 @@ import github.weichware10.util.data.DataPoint;
 import github.weichware10.util.data.TrialData;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -196,19 +195,6 @@ public class Diagram {
         for (int step = 0; step < diagramData.size(); step++) {
             double relFreq = diagramData.get(step) / amountPixel;
             diagramData.set(step, relFreq);
-        }
-    }
-
-    /**
-     * DataPointComparator.
-     */
-    private static class DataPointComparator implements Comparator<DataPoint> {
-
-        @Override
-        public int compare(DataPoint dp1, DataPoint dp2) {
-            int area1 = (int) (dp1.viewport.getWidth() * dp1.viewport.getHeight());
-            int area2 = (int) (dp2.viewport.getWidth() * dp2.viewport.getHeight());
-            return area2 - area1;
         }
     }
 }
