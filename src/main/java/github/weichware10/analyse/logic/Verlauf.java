@@ -36,7 +36,7 @@ public class Verlauf {
         try {
             image = new Image(Paths.get(imageUrl).toUri().toString());
         } catch (Exception e) {
-            Logger.error("Failed to save the image", e, true);
+            Logger.error("verlauf:content Failed to save the image", e);
             return null;
         }
 

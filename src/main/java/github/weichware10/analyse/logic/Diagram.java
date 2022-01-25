@@ -42,7 +42,7 @@ public class Diagram {
         try {
             image = new Image(Paths.get(imageUrl).toUri().toString());
         } catch (Exception e) {
-            Logger.error("Failed to save the image", e, true);
+            Logger.error("diagram:content Failed to save the image", e);
             return null;
         }
 
@@ -63,8 +63,6 @@ public class Diagram {
         allocatePixels(pixels, amountSteps, stepWidth, diagramData);
 
         calcRelFreqPerStep(width, height, diagramData);
-
-        Logger.info(diagramData.toString());
 
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
@@ -106,7 +104,7 @@ public class Diagram {
         try {
             image = new Image(Paths.get(imageUrl).toUri().toString());
         } catch (Exception e) {
-            Logger.error("Failed to save the image", e, true);
+            Logger.error("diagram:content Failed to save the image", e);
             return null;
         }
 
@@ -127,8 +125,6 @@ public class Diagram {
         allocatePixels(pixels, amountSteps, stepWidth, diagramData);
 
         calcRelFreqPerStep(width, height, diagramData);
-
-        Logger.info(diagramData.toString());
 
         final PieChart pieChart = new PieChart();
         pieChart.setTitle(String.format("Kreisdiagramm %s (relative Häufigkeit in %%)",

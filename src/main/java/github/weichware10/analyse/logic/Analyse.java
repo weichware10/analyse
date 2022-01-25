@@ -21,7 +21,7 @@ public class Analyse {
         try {
             imageLocation = Files.saveImage(imageUrl);
         } catch (IllegalArgumentException | IOException e) {
-            Logger.error("Failed to save img", e, true);
+            Logger.error("analyse:content Failed to save img", e);
         }
         return imageLocation;
     }

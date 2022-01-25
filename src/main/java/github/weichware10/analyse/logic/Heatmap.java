@@ -40,7 +40,7 @@ public class Heatmap {
         try {
             image = ImageIO.read(new File(sourceImgLocation));
         } catch (Exception e) {
-            Logger.error("Failed to save the image", e, true);
+            Logger.error("heatmap:content Failed to save the image", e);
             return null;
         }
         int width = (int) image.getWidth();
@@ -66,7 +66,7 @@ public class Heatmap {
         try {
             heatmapLocation = Files.saveGeneratedImage(heatmap, "HEATMAP" + trial.trialId + ".png");
         } catch (IllegalArgumentException | IOException e) {
-            Logger.error("Failed to save the image", e, true);
+            Logger.error("heatmap:content Failed to save the image", e);
         }
 
         if (image == null || !hmConfig.isImage()) {
@@ -84,7 +84,7 @@ public class Heatmap {
         try {
             imgLocation = Files.saveGeneratedImage(image, "IMGHEATMAP" + trial.trialId + ".png");
         } catch (IllegalArgumentException | IOException e) {
-            Logger.error("Failed to save the image", e, true);
+            Logger.error("heatmap:content Failed to save the image", e);
         }
 
         return imgLocation;

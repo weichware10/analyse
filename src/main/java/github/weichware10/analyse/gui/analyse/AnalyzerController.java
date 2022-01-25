@@ -133,7 +133,8 @@ public class AnalyzerController extends AbsSceneController {
             try {
                 Desktop.getDesktop().open(new File(filename));
             } catch (Exception e) {
-                Logger.error("Error occured while opening exported file", e, false);
+                Logger.error(
+                        "analyzercontroller:content error occured while opening exported file", e);
             }
         }
     }

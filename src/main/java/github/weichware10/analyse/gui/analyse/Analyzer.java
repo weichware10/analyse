@@ -89,8 +89,6 @@ public class Analyzer extends AbsScene {
         if (Analyzer.analyseType != AnalyseType.COMPVERLAUF) {
             trialComp = null;
         }
-
-        Logger.info("analyseType set to " + analyseType);
     }
 
     /**
@@ -104,7 +102,7 @@ public class Analyzer extends AbsScene {
         try {
             trial = TrialSelector.getTrialData(null);
         } catch (NullPointerException e) {
-            Logger.error("Null Trial returned", e, true);
+            Logger.error("analyzer:content Null Trial returned", e);
         }
 
         if (trial != null) {
@@ -128,7 +126,6 @@ public class Analyzer extends AbsScene {
                 diaConfig = new DiagramConfig();
             }
             controller.analyseTypMenuButton.setDisable(false);
-            Logger.info("trialId set to " + trial.trialId);
         }
     }
 
@@ -140,7 +137,6 @@ public class Analyzer extends AbsScene {
         if (!trialComp.getTrialId().equals(trial.getTrialId())) {
             controller.analyseButton.setDisable(false);
             controller.errorLabel.setVisible(false);
-            Logger.info("trialIdComp set to " + trialComp.trialId);
         } else {
             controller.analyseButton.setDisable(true);
             controller.errorLabel.setText(
@@ -158,10 +154,10 @@ public class Analyzer extends AbsScene {
 
         if (analyseType == AnalyseType.HEATMAP) {
             HeatmapConfigurator.start(hmConfig);
-            Logger.info("Start Heatmap Configurator");
+            Logger.info("analyzer:content Showing Heatmap configurator");
         } else if (analyseType == AnalyseType.RELDEPTHDISTR) {
             DiagramConfigurator.start(diaConfig, analyseType);
-            Logger.info("Start Diagram Configurator");
+            Logger.info("analyzer:content Showing Diagram configurator");
         }
     }
 
@@ -169,15 +165,6 @@ public class Analyzer extends AbsScene {
      * Start Analyse.
      */
     public static void analyse() {
-        String output = String.format(
-                "analyseType: %s \ntrial: %s \ntrialComp: %s \nhmConfig: %s \ndiaConfig: %s",
-                analyseType != null ? analyseType : "null",
-                trial != null ? trial.toString() : "null",
-                trialComp != null ? trialComp.toString() : "null",
-                hmConfig.toString(),
-                diaConfig.toString());
-        Logger.info(output);
-
         controller.setStatus(null, null, null);
         heatmapImage = null;
         verlaufLineChart = null;
@@ -306,10 +293,9 @@ public class Analyzer extends AbsScene {
             image = ImageIO.read(new File(heatmapImage));
             ImageIO.write(image, "png", new File(location));
         } catch (IOException e) {
-            Logger.error("Failed to save image", e, true);
+            Logger.error("analyzer:content Failed to save image", e);
             return false;
         }
-        Logger.info("Image saved: " + location);
         return true;
     }
 
@@ -331,7 +317,7 @@ public class Analyzer extends AbsScene {
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
         } catch (IOException e) {
-            Logger.error("Failed to save Snapshot", e, true);
+            Logger.error("analyzer:content Failed to save Snapshot", e);
             return false;
         }
         return true;
