@@ -86,7 +86,7 @@ public class Analyzer extends AbsScene {
         diagramBarChart = null;
         diagramPieChart = null;
 
-        if (Analyzer.analyseType != AnalyseType.COMPHEATMAP) {
+        if (Analyzer.analyseType != AnalyseType.COMPVERLAUF) {
             trialComp = null;
         }
 
@@ -156,8 +156,7 @@ public class Analyzer extends AbsScene {
         controller.errorLabel.setVisible(false);
         controller.setStatus(null, null, null);
 
-        if (analyseType == AnalyseType.COMPHEATMAP
-                || analyseType == AnalyseType.HEATMAP) {
+        if (analyseType == AnalyseType.HEATMAP) {
             HeatmapConfigurator.start(hmConfig);
             Logger.info("Start Heatmap Configurator");
         } else if (analyseType == AnalyseType.RELDEPTHDISTR) {
@@ -188,9 +187,6 @@ public class Analyzer extends AbsScene {
         switch (analyseType) {
             case HEATMAP:
                 heatmapImage = Heatmap.createHeatmap(trial, hmConfig);
-                break;
-            case COMPHEATMAP:
-                heatmapImage = Heatmap.createHeatmapComp(trial, trialComp, hmConfig);
                 break;
             case VERLAUF:
                 verlaufLineChart = Verlauf.createVerlauf(Arrays.asList(trial));
@@ -272,7 +268,7 @@ public class Analyzer extends AbsScene {
         controller.setStatus(null, null, null);
         if (location != null) {
             controller.setStatusIndicator(true);
-            if (analyseType == AnalyseType.HEATMAP || analyseType == AnalyseType.COMPHEATMAP) {
+            if (analyseType == AnalyseType.HEATMAP) {
                 Thread taskThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -346,7 +342,7 @@ public class Analyzer extends AbsScene {
      */
     public static void exportRaw() {
         exportRaw(trial);
-        if (analyseType == AnalyseType.COMPVERLAUF || analyseType == AnalyseType.COMPHEATMAP) {
+        if (analyseType == AnalyseType.COMPVERLAUF) {
             exportRaw(trialComp);
         }
     }

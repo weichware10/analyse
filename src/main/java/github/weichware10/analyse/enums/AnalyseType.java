@@ -5,7 +5,6 @@ package github.weichware10.analyse.enums;
  */
 public enum AnalyseType {
     HEATMAP,
-    COMPHEATMAP,
     VERLAUF,
     COMPVERLAUF,
     RELDEPTHDISTR

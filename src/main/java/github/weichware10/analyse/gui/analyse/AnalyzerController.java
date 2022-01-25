@@ -133,8 +133,8 @@ public class AnalyzerController extends AbsSceneController {
                 && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
             try {
                 Desktop.getDesktop().open(new File(filename));
-            } catch (IOException e) {
-                Logger.error("error occured while opening documentation", e);
+            } catch (Exception e) {
+                Logger.error("Error occured while opening exported file", e, false);
             }
         }
     }
@@ -147,15 +147,6 @@ public class AnalyzerController extends AbsSceneController {
     @FXML
     protected void selectTrialForComp(ActionEvent event) {
         Analyzer.setTrialIdComp();
-    }
-
-    @FXML
-    protected void setCompHeatmap(ActionEvent event) {
-        configButton.setDisable(false);
-        analyseButton.setDisable(true);
-        selectCompTrialButton.setVisible(true);
-        Analyzer.setAnalyseType(AnalyseType.COMPHEATMAP);
-        analyseTypMenuButton.setText("Heatmap Vergleich");
     }
 
     @FXML
