@@ -7,7 +7,6 @@ import github.weichware10.util.Logger;
 import github.weichware10.util.gui.AbsSceneController;
 import java.awt.Desktop;
 import java.io.File;
-import java.io.IOException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
