@@ -2,6 +2,8 @@ package github.weichware10.analyse.gui.general;
 
 import github.weichware10.analyse.Main;
 import github.weichware10.util.gui.AbsScene;
+import github.weichware10.util.gui.Window;
+import javafx.application.Platform;
 import javafx.scene.Parent;
 
 /**
@@ -23,5 +25,7 @@ public class FunctionChooser extends AbsScene {
                 null,
                 null,
                 null).root;
+
+        // Window.refresh(Main.primaryStage);
     }
 }

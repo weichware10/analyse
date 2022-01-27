@@ -7,7 +7,11 @@ import github.weichware10.util.Logger;
 import github.weichware10.util.db.DataBaseClient;
 import github.weichware10.util.gui.Log;
 import io.github.cdimascio.dotenv.Dotenv;
+import java.util.List;
+import java.util.stream.Collectors;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -56,6 +60,38 @@ public class Main extends Application {
         primaryStage.setHeight(Math.max((int) screenBounds.getHeight() / 2, Main.MINHEIGHT));
         primaryStage.show();
         primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, e -> keyBindings(e));
+        primaryStage.sceneProperty().addListener((o) -> refresh());
+    }
+
+    private static void refresh() {
+        Logger.debug("refreshing");
+        ObservableList<Screen> screens = Screen.getScreensForRectangle(
+                primaryStage.getX(),
+                primaryStage.getY(),
+                primaryStage.getWidth(),
+                primaryStage.getHeight());
+
+        List<Screen> weirdDpiScreens = screens.stream().filter(
+                p -> (p.getOutputScaleX() * p.getOutputScaleY()) != 1).collect(Collectors.toList());
+
+        if (weirdDpiScreens.size() == 0) {
+            Logger.debug("size return");
+            return;
+        }
+
+        boolean maximized = primaryStage.isMaximized();
+        Runnable r;
+        if (maximized) {
+            primaryStage.setMaximized(false);
+            r = () -> Platform.runLater(() -> primaryStage.setMaximized(true));
+        } else {
+            // primaryStage.setWidth(primaryStage.getWidth() + 1);
+            primaryStage.hide();
+            // r = () -> Platform.runLater(() ->
+            //         primaryStage.setWidth(primaryStage.getWidth() - 1));
+            r = () -> Platform.runLater(() -> primaryStage.show());
+        }
+        new Thread(r).start();
     }
 
     private void keyBindings(KeyEvent keyEvent) {

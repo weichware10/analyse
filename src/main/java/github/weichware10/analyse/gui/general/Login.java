@@ -4,6 +4,7 @@ import github.weichware10.analyse.Main;
 import github.weichware10.util.Logger;
 import github.weichware10.util.db.DataBaseClient;
 import github.weichware10.util.gui.AbsScene;
+import github.weichware10.util.gui.Window;
 import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -36,6 +37,7 @@ public class Login extends AbsScene {
                 null,
                 null,
                 null).root;
+        // Window.refresh(Main.primaryStage);
     }
 
     /**

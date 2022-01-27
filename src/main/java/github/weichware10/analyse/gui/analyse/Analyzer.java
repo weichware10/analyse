@@ -10,6 +10,7 @@ import github.weichware10.analyse.logic.Verlauf;
 import github.weichware10.util.Logger;
 import github.weichware10.util.data.TrialData;
 import github.weichware10.util.gui.AbsScene;
+import github.weichware10.util.gui.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -55,6 +56,7 @@ public class Analyzer extends AbsScene {
                 null);
         root = ir.root;
         controller = (AnalyzerController) ir.controller;
+        // Window.refresh(Main.primaryStage);
     }
 
     /**

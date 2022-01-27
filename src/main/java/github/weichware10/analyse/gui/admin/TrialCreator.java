@@ -3,6 +3,8 @@ package github.weichware10.analyse.gui.admin;
 import github.weichware10.analyse.Main;
 import github.weichware10.util.Logger;
 import github.weichware10.util.gui.AbsScene;
+import github.weichware10.util.gui.Window;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -35,6 +37,7 @@ public class TrialCreator extends AbsScene {
                 null);
         root = ir.root;
         controller = (TrialCreatorController) ir.controller;
+        // Window.refresh(Main.primaryStage);
     }
 
     protected static void createTrials() {

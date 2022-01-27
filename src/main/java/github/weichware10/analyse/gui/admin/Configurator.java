@@ -9,6 +9,8 @@ import github.weichware10.util.config.ConfigWriter;
 import github.weichware10.util.config.Configuration;
 import github.weichware10.util.config.ZoomMapsConfiguration;
 import github.weichware10.util.gui.AbsScene;
+import github.weichware10.util.gui.Window;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,7 @@ public class Configurator extends AbsScene {
                 null);
         root = ir.root;
         controller = (ConfiguratorController) ir.controller;
+        // Window.refresh(Main.primaryStage);
     }
 
     /**
