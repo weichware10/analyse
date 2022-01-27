@@ -25,6 +25,7 @@
     <!-- modules for custom JVM image -->
     <!-- JAVAFX: media, controls, fxml -->
     <!-- UTIL: sql, management, security.sasl -->
+    <!-- ANALYSE: swing -->
     <jvm.modules>javafx.media,javafx.controls,javafx.fxml,javafx.swing,java.logging,java.sql,java.management,java.security.sasl,jdk.crypto.ec</jvm.modules>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
