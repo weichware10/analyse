@@ -116,17 +116,4 @@ public class Heatmap {
                     (int) dataPoint.viewport.getHeight());
         }
     }
-
-    /**
-     * Erstellt Heatmap-Vergleich.
-     *
-     * @param trial     - 1. Versuch
-     * @param trialComp - 2. Versuch
-     * @param hmConfig  - Konfiguration
-     * @return ?
-     */
-    public static String createHeatmapComp(TrialData trial,
-            TrialData trialComp, HeatmapConfig hmConfig) {
-        return null;
-    }
 }
