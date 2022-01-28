@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -31,10 +32,19 @@
                   <Button defaultButton="true" mnemonicParsing="false" onAction="#startAnalyzer" text="Analyse" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Button fx:id="trialCreatorButton" mnemonicParsing="false" onAction="#startTrialCreator" text="Trials erstellen" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#logOut" text="LogOut" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
-                  <Label text="Analyse Erklärung" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-                  <Label text="Trials Erstellen Erklärung" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+                  <Label text="Analyse" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <tooltip>
+                        <Tooltip text="Hier kann die Analyse mit den verschiedenen Analysemethoden durchgeführt werden." />
+                     </tooltip></Label>
+                  <Label text="Trials Erstellen" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                     <tooltip>
+                        <Tooltip text="Hier können neue Trials zu einer Konfiguration erstellt werden." />
+                     </tooltip></Label>
                   <Button fx:id="configuratorButton" mnemonicParsing="false" onAction="#startConfigurator" text="Konfigurator" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                  <Label text="Konfigurator Erklärung" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label text="Konfigurator" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <tooltip>
+                        <Tooltip text="Hier kann eine neue Konfiguration erstellt werden." />
+                     </tooltip></Label>
                </children>
             </GridPane>
          </children>
