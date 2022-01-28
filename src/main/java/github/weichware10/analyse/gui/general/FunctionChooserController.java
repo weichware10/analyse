@@ -20,26 +20,26 @@ public class FunctionChooserController extends AbsSceneController {
     private Button configuratorButton;
 
     @FXML
-    void logOut() {
+    protected void logOut() {
         Analyzer.reset();
         Logger.info("functionchooser:content Logging out");
         Login.logOut();
     }
 
     @FXML
-    void startAnalyzer() {
+    protected void startAnalyzer() {
         Logger.info("functionchooser:content Starting analzyzer");
         Analyzer.start();
     }
 
     @FXML
-    void startConfigurator() {
+    protected void startConfigurator() {
         Logger.info("functionchooser:content Starting Configurator");
         Configurator.start();
     }
 
     @FXML
-    void startTrialCreator() {
+    protected void startTrialCreator() {
         Logger.info("functionchooser:content Starting TrialCreator");
         TrialCreator.start();
     }
