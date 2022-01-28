@@ -16,7 +16,7 @@ public class Analyse {
      * @param imageUrl - URL des Versuchs-Bilds
      * @return Pfad zum gespeicherten Bild
      */
-    public static String saveImage(String imageUrl) {
+    protected static String saveImage(String imageUrl) {
         String imageLocation = null;
         try {
             imageLocation = Files.saveImage(imageUrl);
