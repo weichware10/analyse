@@ -35,7 +35,7 @@ public class Heatmap {
         Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
 
         // Bild laden für Bildbreite und -höhe
-        String sourceImgLocation = Analyse.saveImage(config.getImageUrl());
+        String sourceImgLocation = Analysis.saveImage(config.getImageUrl());
         BufferedImage image = null;
         try {
             image = ImageIO.read(new File(sourceImgLocation));
@@ -100,12 +100,14 @@ public class Heatmap {
         DataPoint minDataPoint = sortedDataPoints.get(0);
         DataPoint maxDataPoint = sortedDataPoints.get(sortedDataPoints.size() - 1);
 
-        double minDepth = Analyse.calculateDepth(minDataPoint, imageWidth, imageHeight, null, null);
-        double maxDepth = Analyse.calculateDepth(maxDataPoint, imageWidth, imageHeight, null, null);
+        double minDepth = Analysis.calculateDepth(
+                minDataPoint, imageWidth, imageHeight, null, null);
+        double maxDepth = Analysis.calculateDepth(
+                maxDataPoint, imageWidth, imageHeight, null, null);
 
 
         for (DataPoint dataPoint : sortedDataPoints) {
-            double relDepth = Analyse.calculateDepth(
+            double relDepth = Analysis.calculateDepth(
                     dataPoint, imageWidth, imageHeight, minDepth, maxDepth);
             graphic.setColor(HeatmapConfig.fxToAwtColor(hmConfig.getMinColorDiff()
                     .interpolate(hmConfig.getMaxColorDiff(), relDepth)));

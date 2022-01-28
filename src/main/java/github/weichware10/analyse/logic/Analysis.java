@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * beinhaltet Methoden die zur Analyse benötigt werden.
  */
-public class Analyse {
+public class Analysis {
 
     /**
      * Speichert das Versuchs-Bild.
