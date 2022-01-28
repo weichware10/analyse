@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.analyse.TrialSelectorController">
+<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.weichware10.analyse.gui.analyse.TrialSelectorController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
@@ -53,7 +53,7 @@
             </HBox>
             <StackPane VBox.vgrow="ALWAYS">
                <children>
-                  <TableView fx:id="resultTable" focusTraversable="false" prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="resultTable" focusTraversable="false" prefHeight="150.0" prefWidth="200.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
