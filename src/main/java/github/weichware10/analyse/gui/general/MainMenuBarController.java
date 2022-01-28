@@ -17,7 +17,7 @@ public class MainMenuBarController extends AbsSceneController {
     private MenuItem logsMenu;
 
     @FXML
-    void logOut() {
+    protected void logOut() {
         Logger.info(":menubar Logging out");
         Login.logOut();
     }
@@ -43,7 +43,7 @@ public class MainMenuBarController extends AbsSceneController {
     }
 
     @FXML
-    void toggleLogs() {
+    protected void toggleLogs() {
         Logger.info("app:menu Toggling logs");
         if (Log.visible.get()) {
             Log.hide();
@@ -52,7 +52,7 @@ public class MainMenuBarController extends AbsSceneController {
         }
     }
 
-    void setLogText(ObservableBooleanValue visible) {
+    private void setLogText(ObservableBooleanValue visible) {
         if (visible.get()) {
             logsMenu.setText("hide logs");
         } else {
