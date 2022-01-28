@@ -5,7 +5,7 @@
 
   <groupId>com.github.weichware10</groupId>
   <artifactId>analyse</artifactId>
-  <version>v1.0.1</version>
+  <version>v1.1-SNAPSHOT</version>
 
   <name>${app.name}</name>
   <url>https://github.com/weichware10/analyse</url>
