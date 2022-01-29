@@ -337,7 +337,7 @@ public class Configurator extends AbsScene {
     }
 
     /**
-     * updated den Konfigurator-Modus.
+     * aktualisiert den Konfigurator-Modus.
      */
     protected static void changeToEdit() {
         switch (mode.get()) {
@@ -353,7 +353,7 @@ public class Configurator extends AbsScene {
     }
 
     /**
-     * mode of configurator.
+     * Modus vom Konfigurator.
      */
     protected enum Mode {
         JSONVIEW, JSONEDIT, DBVIEW, DBEDIT, NEW

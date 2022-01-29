@@ -37,7 +37,7 @@ public class Diagram {
         Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
 
         // Bild laden für Bildbreite und -höhe
-        String imageUrl = Analyse.saveImage(config.getImageUrl());
+        String imageUrl = Analysis.saveImage(config.getImageUrl());
         Image image = null;
         try {
             image = new Image(Paths.get(imageUrl).toUri().toString());
@@ -99,7 +99,7 @@ public class Diagram {
         Configuration config = Main.dataBaseClient.configurations.get(trial.configId);
 
         // Bild laden für Bildbreite und -höhe
-        String imageUrl = Analyse.saveImage(config.getImageUrl());
+        String imageUrl = Analysis.saveImage(config.getImageUrl());
         Image image = null;
         try {
             image = new Image(Paths.get(imageUrl).toUri().toString());
@@ -147,8 +147,8 @@ public class Diagram {
         DataPoint minDataPoint = sortedDataPoints.get(0);
         DataPoint maxDataPoint = sortedDataPoints.get(sortedDataPoints.size() - 1);
 
-        double minDepth = Analyse.calculateDepth(minDataPoint, width, height, null, null);
-        double maxDepth = Analyse.calculateDepth(maxDataPoint, width, height, null, null);
+        double minDepth = Analysis.calculateDepth(minDataPoint, width, height, null, null);
+        double maxDepth = Analysis.calculateDepth(maxDataPoint, width, height, null, null);
 
         // Für jedes Pixel des Bildes endgültige relative Tiefe berechnen
         for (DataPoint dataPoint : sortedDataPoints) {
@@ -158,7 +158,7 @@ public class Diagram {
                 int ymin = (int) dataPoint.viewport.getMinY();
                 int ymax = (int) dataPoint.viewport.getMaxY();
                 for (; ymin < ymax; ymin++) {
-                    pixels[xmin][ymin] = Analyse.calculateDepth(
+                    pixels[xmin][ymin] = Analysis.calculateDepth(
                             dataPoint, width, height, minDepth, maxDepth);
                 }
             }
