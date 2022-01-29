@@ -31,7 +31,7 @@ public class Verlauf {
         Configuration config = Main.dataBaseClient.configurations.get(trials.get(0).configId);
 
         // Bild laden für Bildbreite und -höhe
-        String imageUrl = Analyse.saveImage(config.getImageUrl());
+        String imageUrl = Analysis.saveImage(config.getImageUrl());
         Image image = null;
         try {
             image = new Image(Paths.get(imageUrl).toUri().toString());
@@ -116,11 +116,11 @@ public class Verlauf {
         DataPoint minDataPoint = sortedDataPoints.get(0);
         DataPoint maxDataPoint = sortedDataPoints.get(sortedDataPoints.size() - 1);
 
-        double minDepth = Analyse.calculateDepth(minDataPoint, width, height, null, null);
-        double maxDepth = Analyse.calculateDepth(maxDataPoint, width, height, null, null);
+        double minDepth = Analysis.calculateDepth(minDataPoint, width, height, null, null);
+        double maxDepth = Analysis.calculateDepth(maxDataPoint, width, height, null, null);
         for (DataPoint dataPoint : dataPoints) {
             // Relative Tiefe berechnen
-            double relDepth = Analyse.calculateDepth(
+            double relDepth = Analysis.calculateDepth(
                     dataPoint, width, height, minDepth, maxDepth);
 
             // Punkt im Diagramm setzen

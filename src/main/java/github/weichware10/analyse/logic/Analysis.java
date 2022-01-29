@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * beinhaltet Methoden die zur Analyse benötigt werden.
  */
-public class Analyse {
+public class Analysis {
 
     /**
      * Speichert das Versuchs-Bild.
@@ -16,7 +16,7 @@ public class Analyse {
      * @param imageUrl - URL des Versuchs-Bilds
      * @return Pfad zum gespeicherten Bild
      */
-    public static String saveImage(String imageUrl) {
+    protected static String saveImage(String imageUrl) {
         String imageLocation = null;
         try {
             imageLocation = Files.saveImage(imageUrl);
