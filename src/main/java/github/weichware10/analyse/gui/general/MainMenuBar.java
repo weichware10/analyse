@@ -37,7 +37,6 @@ public class MainMenuBar extends AbsScene {
         if (Desktop.isDesktopSupported()
                 && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             try {
-                //TODO: Dokumentation richtig setzt bei help drücken
                 Desktop.getDesktop().browse(new URI("https://weichware10.github.io/dokumente/analyse/"));
             } catch (IOException | URISyntaxException e) {
                 Logger.error("error occured while opening documentation", e);
