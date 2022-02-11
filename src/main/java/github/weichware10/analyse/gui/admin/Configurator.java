@@ -174,7 +174,6 @@ public class Configurator extends AbsScene {
 
                 configuration = new Configuration(
                         configId,
-                        null,
                         imageUrl,
                         intro,
                         outro,
